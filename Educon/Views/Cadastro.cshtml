@@ -1,0 +1,88 @@
+﻿@Styles.Render("~/Content/css")
+@Scripts.Render("~/Content/js")
+<head>
+    <style>
+        .input-hidden {
+            position: absolute;
+            left: -9999px;
+        }
+
+        input[type=radio] + label > img {
+            height: 50px;
+            width: 50px;
+            transition: 500ms all;
+        }
+
+        input[type=radio]:checked + label > img {
+            transform: scaleX(1.2) scaleY(1.2);
+        }
+    </style>
+    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
+    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href='https://fonts.googleapis.com/css?family=Dancing+Script|Roboto' rel='stylesheet' type='text/css'>
+</head>
+<body style="background-image: url(http://imageshack.com/a/img924/9477/OXk9f5.jpg); background-repeat: repeat;">
+    <div class="blurred" style=" width:100%; height:100vh; ">
+        <center>
+            <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width: 450px; height: 620px; top:20px;">
+                <center>
+
+                    <div class="row" style="background-color:rebeccapurple; height:8%; top:0; width:100%;"></div>
+                    <div class="form" style="top: 220px;">
+                        <div class="form-group" style="height: 10%;">
+                            <img src="~/Content/largeicon.png" style="width:100px;height:100px;" ; />
+                        </div>
+                        <br />
+                        <br />
+                        <br />
+                      
+                        <div class="row" style="height:20%;">
+                                <input type="radio" name="icon" id="icon2" class="input-hidden" />
+                                <label for="icon2"><img src="~/Content/largeicon.png" /></label>
+
+                                <input type="radio" name="icon" id="icon3" class="input-hidden" />
+                                <label for="icon3"><img src="~/Content/raposa.png" /></label>
+
+                                <input type="radio" name="icon" id="icon1" class="input-hidden" />
+                                <label for="icon1"><img src="~/Content/coala.png" /></label>
+
+                                <input type="radio" name="icon" id="icon4" class="input-hidden" />
+                                <label for="icon4"><img src="~/Content/coelho.png" /></label>
+                            </div>
+
+                            <br />
+
+                            <div class="form-group" style=" height:10%;">
+                                <input class="custominput" type="text" placeholder="Nome" style="border-radius:10px; background-color:#3399ff; margin: 0 auto;" />
+                            </div>
+                            <div class="form-group" style=" height:13%;">
+                                <select class="form-control" id="sel1" style="background-color: #ff1a75;color:white; font-size: 1.5em; margin:0 auto; width:265px; height:50px; border-radius:10px; text-align:center;">
+                                    <option value="" selected disabled hidden>Faixa Etária</option>
+                                    <option>7 a 9 anos</option>
+                                    <option>10 a 12 anos</option>
+                                    <option>13 a 15 anos</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style=" height:10%;">
+                                <input class="custominput" type="text" placeholder="Usuário" style="border-radius:10px; background-color:#00b300; margin: 0 auto;" />
+                            </div>
+                            <div class="form-group" style=" height:10%;">
+                                <input class="custominput" type="password" placeholder="Senha" style="border-radius:10px; background-color:#ffd11a; margin: 0 auto;" />
+                            </div>
+                            <div class="form-group" style=" height:10%;">
+                                <input class="custominput" type="password" placeholder="Confirme a Senha" style="border-radius:10px; background-color:#3399ff; margin: 0 auto;" />
+                            </div>
+
+                            <div class="form-group" style="height:10%">
+                                <button class="action-button shadow animate custombutton" style="background-color:rebeccapurple; border-bottom: 5px solid rebeccapurple; text-shadow: 0px -2px rebeccapurple; width:265px;  margin: 0 auto;" type="submit">cadastrar</button>
+                            </div>
+                    </div>
+                    <div style="position: absolute;background-color:rebeccapurple; height:8%; bottom:0; width:100%;"></div>
+
+                </center>
+            </div>
+        </center>
+    </div>
+    <br><br>
+</body>

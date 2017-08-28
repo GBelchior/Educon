@@ -7,14 +7,15 @@ using System.Threading.Tasks;
 
 namespace Educon.Data.Interfaces
 {
-    public interface IEduconRepositoryBase<T>
+    public interface IEduconRepositoryBase<T> : IDisposable where T : class, new()
     {
         void Add(T Entity);
         void Edit(T Entity);
         void Delete(T Entity);
-        void Get(int Id);
-        void FindBy(Expression<Func<T, bool>> Expr);
-        void Count(Expression<Func<T, bool>> Expr);
+        T Get(int Id);
+        T Get(params object[] keyValues);
+        List<T> FindBy(Expression<Func<T, bool>> Expr);
+        int Count(Expression<Func<T, bool>> Expr);
         void Save();
     }
 }

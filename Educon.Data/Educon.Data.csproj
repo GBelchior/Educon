@@ -47,11 +47,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EduconContext.cs" />
+    <Compile Include="EduconRepositoryBase.cs" />
+    <Compile Include="Mappings\QuestionMap.cs" />
+    <Compile Include="Mappings\UserMap.cs" />
+    <Compile Include="Migrations\201708280005123_Initial.cs" />
+    <Compile Include="Migrations\201708280005123_Initial.Designer.cs">
+      <DependentUpon>201708280005123_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Educon.Data.Interfaces\Educon.Data.Interfaces.csproj">
+      <Project>{B6C91F70-B2E1-4CA8-BD9E-2DBC7EA413E3}</Project>
+      <Name>Educon.Data.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Educon.Models\Educon.Models.csproj">
+      <Project>{26726297-07F2-46F7-A57D-575D02606DF4}</Project>
+      <Name>Educon.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201708280005123_Initial.resx">
+      <DependentUpon>201708280005123_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

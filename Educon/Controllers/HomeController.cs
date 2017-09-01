@@ -8,6 +8,10 @@ namespace Educon.Controllers
 {
     public class HomeController : Controller
     {
+        public ActionResult Portal()
+        {
+            return View();
+        }
         public ActionResult Index()
         {
             return View();

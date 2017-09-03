@@ -5,7 +5,7 @@ namespace Educon.Data.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Educon.Data.EduconContext>
+    public sealed class Configuration : DbMigrationsConfiguration<Educon.Data.EduconContext>
     {
         public Configuration()
         {

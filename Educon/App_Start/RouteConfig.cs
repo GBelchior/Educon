@@ -16,7 +16,7 @@ namespace Educon
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Portal", action = "Portal", id = UrlParameter.Optional }
+                defaults: new { controller = "Portal", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

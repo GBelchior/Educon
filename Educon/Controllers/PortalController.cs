@@ -9,11 +9,9 @@ namespace Educon.Controllers
     public class PortalController : Controller
     {
         // GET: Portal
-        public ActionResult Portal()
+        public ActionResult Index()
         {
             return View();
         }
-
-        
     }
 }

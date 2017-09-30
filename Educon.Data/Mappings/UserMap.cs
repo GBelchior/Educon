@@ -18,15 +18,6 @@ namespace Educon.Data.Mappings
             Property(u => u.DesPassword).HasMaxLength(32);
             Property(u => u.DesEmail).HasMaxLength(256);
             HasMany(u => u.UserQuestions);
-            HasMany(u => u.Friends)
-                .WithMany()
-                .Map(m =>
-                {
-                    m.MapLeftKey("NidUser");
-                    m.MapRightKey("NidFriend");
-                    m.ToTable("UserFriends");
-                });
-
             ToTable("User");
         }
     }

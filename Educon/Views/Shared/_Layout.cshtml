@@ -26,17 +26,18 @@
 
     </header>
     <!-- Panel Content -->
-    <div class="mdl-layout__drawer">
-        <div class="row bar"></div>
+    <div class="mdl-layout__drawer" style="overflow-x:hidden; overflow-y:hidden;">
+        @*<div class="row bar"></div>*@
         <div class="row bar"></div>
         <div class="row profile">
             
             <div class="circle"></div>
+            @*<img class="imgIcon" src="~/Content/Images/camera-icon.png" />*@
             <div class="textBar row">
 
                 <label class="nameText">Marianne</label>
                 <br />
-                <label style="font-family: 'Segoe UI';">marikell.silva@gmail.com</label>
+                <label class="emailText" style="font-family: 'Segoe UI';">marikell.silva@gmail.com</label>
             </div>
 
 
@@ -44,6 +45,21 @@
 
         </div>
         <div class="row bar"></div>
+
+        <div class="menu">
+
+            <div class="row">
+                <label class="nameText">Pontos</label>
+            </div>
+            <div class="row">
+                <label class="nameText" style="color:black; font-size:2.5em;">15</label>
+            </div>
+           <div class="row">
+               <button class="buttonSair mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="margin-top:60px;">
+                   Sair
+               </button>
+           </div>
+        </div>
 
     </div>
 

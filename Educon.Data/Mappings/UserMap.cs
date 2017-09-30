@@ -14,10 +14,10 @@ namespace Educon.Data.Mappings
         {
             HasKey(u => u.NidUser);
             Property(u => u.NamPerson).HasMaxLength(128);
-            Property(u => u.NamUser).HasMaxLength(64);
+            Property(u => u.NamUser).HasMaxLength(32);
             Property(u => u.DesPassword).HasMaxLength(32);
             Property(u => u.DesEmail).HasMaxLength(256);
-
+            HasMany(u => u.UserQuestions);
             ToTable("User");
         }
     }

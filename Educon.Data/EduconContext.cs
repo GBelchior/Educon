@@ -30,6 +30,7 @@ namespace Educon.Data
 
             modelBuilder.Configurations.Add(new UserMap());
             modelBuilder.Configurations.Add(new QuestionMap());
+            modelBuilder.Configurations.Add(new UserQuestionMap());
         }
     }
 }

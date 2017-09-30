@@ -20,16 +20,30 @@
     color: rebeccapurple;
 }
 
+
 .mdl-layout__drawer-button {
 background-color:white;
+color: white;
 }
 .bar {
     background-color: rebeccapurple;
-    height: 8%;
+    height: 6%;
     width: 100%;
     padding: 0;
     margin: 0;
     position: relative;
+}
+
+.buttonSair{
+    width:98%;
+    height:100%;
+    font-weight: bold;
+    font-size:larger;
+}
+
+.menu{
+    background-color: white;
+    height:38%;
 }
 
 .textBar {
@@ -44,18 +58,36 @@ background-color:white;
 .nameText{
     font-size: 4em;
     font-family: 'Bebas Neue';
-    color: white;
+    color: mediumvioletred;
     width:100%;
     height:auto;
     text-align: center;
     margin-top: 50px;
 }
 
+.emailText {
+
+    font-size:1.5em;
+    color: black;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.imgIcon {
+    height: 150px;
+    width: 150px;
+    position: relative;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
 .circle {
     height: 150px;
     width: 150px;
     border-radius: 100px;
-    background-color: white;
+    background-color: rebeccapurple;
     margin: 0 auto;
     margin-top: 20px;
     position: relative;
@@ -69,9 +101,10 @@ background-color:white;
 
 .profile {
     width: 100%;
-    height: 35%;
+    height: 50%;
     padding: 0;
     margin: 0;
     position: relative;
-    background-image: url(http://www.smashingapps.com/wp-content/uploads/2014/03/freevectorbackground13b.jpg);
+    background-image: url(http://imageshack.com/a/img924/5299/Pk7Llx.jpg);
+    background-size: 500px;
 }

@@ -1,1 +1,12 @@
-﻿
+﻿        .input-hidden {
+            position: absolute;
+            left: -9999px;
+        }
+        input[type=radio] + label > img {
+            height: 50px;
+            width: 50px;
+            transition: 500ms all;
+        }
+        input[type=radio]:checked + label > img {
+            transform: scaleX(1.2) scaleY(1.2);
+        }

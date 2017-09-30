@@ -7,13 +7,13 @@ namespace Educon.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Novas_Modificacoes : IMigrationMetadata
+    public sealed partial class Initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Novas_Modificacoes));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201709301828558_Novas_Modificacoes"; }
+            get { return "201709302221040_Initial"; }
         }
         
         string IMigrationMetadata.Source

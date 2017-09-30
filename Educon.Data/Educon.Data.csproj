@@ -52,13 +52,9 @@
     <Compile Include="Mappings\QuestionMap.cs" />
     <Compile Include="Mappings\UserMap.cs" />
     <Compile Include="Mappings\UserQuestionMap.cs" />
-    <Compile Include="Migrations\201708280005123_Initial.cs" />
-    <Compile Include="Migrations\201708280005123_Initial.Designer.cs">
-      <DependentUpon>201708280005123_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709301828558_Novas_Modificacoes.cs" />
-    <Compile Include="Migrations\201709301828558_Novas_Modificacoes.Designer.cs">
-      <DependentUpon>201709301828558_Novas_Modificacoes.cs</DependentUpon>
+    <Compile Include="Migrations\201709302221040_Initial.cs" />
+    <Compile Include="Migrations\201709302221040_Initial.Designer.cs">
+      <DependentUpon>201709302221040_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,11 +74,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201708280005123_Initial.resx">
-      <DependentUpon>201708280005123_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709301828558_Novas_Modificacoes.resx">
-      <DependentUpon>201709301828558_Novas_Modificacoes.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709302221040_Initial.resx">
+      <DependentUpon>201709302221040_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

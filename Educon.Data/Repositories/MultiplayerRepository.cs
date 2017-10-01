@@ -48,5 +48,10 @@ namespace Educon.Data
         {
             return QuestionRepository.GetQuestionsForAgeGroup(FContext, AAgeGroup);
         }
+
+        public void Save()
+        {
+            FContext.SaveChanges();
+        }
     }
 }

@@ -71,6 +71,7 @@ namespace Educon.Core
             if (LQuestion.NumCorrectAnswer == ANumAnswer)
             {
                 FRepository.ComputeAnswer(ANidUser, ANidQuestion);
+                FRepository.Save();
                 return true;
             }
 

@@ -11,5 +11,6 @@ namespace Educon.Data.Interfaces
         ICollection<Question> GetQuestionsForAgeGroup(AgeGroup AAgeGroup);
         void ComputeAnswer(int ANidUser, int ANidQuestion);
         int GetCorrectAnswer(int ANidQuestion);
+        void Save();
     }
 }

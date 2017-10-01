@@ -63,6 +63,7 @@
     <Compile Include="EduconCoreBase.cs" />
     <Compile Include="MultiplayerCore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserCore.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Educon.Data.Interfaces\Educon.Data.Interfaces.csproj">

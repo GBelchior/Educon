@@ -7,7 +7,7 @@ namespace Educon.Core
 {
     public abstract class EduconCoreBase<TEntity> : IEduconCoreBase<TEntity> where TEntity : class, new()
     {
-        private IEduconRepositoryBase<TEntity> FRepository;
+        protected IEduconRepositoryBase<TEntity> FRepository;
 
         public EduconCoreBase(IEduconRepositoryBase<TEntity> ARepository)
         {

@@ -28,5 +28,11 @@ namespace Educon.Data
                 case Category.Recycling: LUser.NumRecyclingAnswers++; break;
             }
         }
+
+        public User GetUserByName(string AUserName)
+        {
+            return FContext.Users
+                .SingleOrDefault(u => u.NamUser.Equals(AUserName, StringComparison.InvariantCultureIgnoreCase));
+        }
     }
 }

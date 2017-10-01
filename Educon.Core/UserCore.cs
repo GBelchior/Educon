@@ -1,0 +1,34 @@
+﻿using Educon.Data.Interfaces;
+using Educon.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Educon.Core
+{
+    public class UserCore : EduconCoreBase<User>
+    {
+        public IUserRepository Repository { get { return (IUserRepository)FRepository; } }
+
+        public UserCore() : base(DependencyResolver.Resolve<IUserRepository>()) { }
+
+        public User GetUserByName(string AUserName)
+        {
+            return Repository.GetUserByName(AUserName);
+        }
+
+        public void SetUserOnline(User AUser)
+        {
+            AUser.IsOnline = true;
+            Repository.Save();
+        }
+
+        public void SetUserOffline(User AUser)
+        {
+            AUser.IsOnline = false;
+            Repository.Save();
+        }
+    }
+}

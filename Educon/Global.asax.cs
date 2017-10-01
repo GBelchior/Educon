@@ -1,4 +1,6 @@
-﻿using Educon.Data;
+﻿using Educon.Core;
+using Educon.Data;
+using Educon.Data.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -19,7 +21,16 @@ namespace Educon
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
+            RegisterDependencies();
+
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<EduconContext, Data.Migrations.Configuration>());
+        }
+
+        private void RegisterDependencies()
+        {
+            Core.DependencyResolver.Register<IMultiplayerRepository, MultiplayerRepository>();
+            Core.DependencyResolver.Register<IQuestionRepository, QuestionRepository>();
+            Core.DependencyResolver.Register<IUserRepository, UserRepository>();
         }
     }
 }

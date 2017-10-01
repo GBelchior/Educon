@@ -40,8 +40,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IEduconCoreBase.cs" />
     <Compile Include="IEduconRepositoryBase.cs" />
+    <Compile Include="IMultiplayerRepository.cs" />
+    <Compile Include="IQuestionRepository.cs" />
+    <Compile Include="IUserQuestionRepository.cs" />
+    <Compile Include="IUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Educon.Models\Educon.Models.csproj">
+      <Project>{26726297-07F2-46F7-A57D-575D02606DF4}</Project>
+      <Name>Educon.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

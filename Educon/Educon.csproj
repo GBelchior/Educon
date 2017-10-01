@@ -220,6 +220,14 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Educon.Core\Educon.Core.csproj">
+      <Project>{df1a78c5-8d04-4b50-a899-49e63afbfb67}</Project>
+      <Name>Educon.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Educon.Data.Interfaces\Educon.Data.Interfaces.csproj">
+      <Project>{B6C91F70-B2E1-4CA8-BD9E-2DBC7EA413E3}</Project>
+      <Name>Educon.Data.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Educon.Data\Educon.Data.csproj">
       <Project>{19423926-1652-490A-AF8F-91A8828BD09E}</Project>
       <Name>Educon.Data</Name>

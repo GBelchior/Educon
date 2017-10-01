@@ -20,6 +20,7 @@ namespace Educon.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<Question> Questions { get; set; }
+        public DbSet<UserQuestion> UserQuestions { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

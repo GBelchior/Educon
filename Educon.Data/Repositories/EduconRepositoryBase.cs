@@ -14,6 +14,8 @@ namespace Educon.Data
         protected EduconContext FContext;
         private DbSet<T> FDbSet;
 
+        public EduconRepositoryBase() : this(new EduconContext()) { }
+
         public EduconRepositoryBase(EduconContext AContext)
         {
             FContext = AContext;

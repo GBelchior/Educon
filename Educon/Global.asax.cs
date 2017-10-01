@@ -30,6 +30,7 @@ namespace Educon
         {
             Core.DependencyResolver.Register<IMultiplayerRepository, MultiplayerRepository>();
             Core.DependencyResolver.Register<IQuestionRepository, QuestionRepository>();
+            Core.DependencyResolver.Register<IUserQuestionRepository, UserQuestionRepository>();
             Core.DependencyResolver.Register<IUserRepository, UserRepository>();
         }
     }

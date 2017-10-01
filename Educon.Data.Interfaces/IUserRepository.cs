@@ -10,5 +10,6 @@ namespace Educon.Data.Interfaces
     public interface IUserRepository : IEduconRepositoryBase<User>
     {
         User GetUserByName(string AUserName);
+        ICollection<User> SearchUser(string AUserNameSearch);
     }
 }

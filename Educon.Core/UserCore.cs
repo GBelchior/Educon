@@ -19,6 +19,17 @@ namespace Educon.Core
             return Repository.GetUserByName(AUserName);
         }
 
+        public void AddFriend(User AUser, User ANewFriend)
+        {
+            AUser.Friends.Add(ANewFriend);
+            Repository.Save();
+        }
+
+        public ICollection<User> SearchUser(string AUserNameSearch)
+        {
+            return Repository.SearchUser(AUserNameSearch);
+        }
+
         public void SetUserOnline(User AUser)
         {
             AUser.IsOnline = true;

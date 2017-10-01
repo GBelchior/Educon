@@ -3,6 +3,7 @@ using Educon.Models;
 using System.Data.Entity;
 using System.Linq;
 using System;
+using System.Collections.Generic;
 
 namespace Educon.Data
 {
@@ -33,6 +34,13 @@ namespace Educon.Data
         {
             return FContext.Users
                 .SingleOrDefault(u => u.NamUser.Equals(AUserName, StringComparison.InvariantCultureIgnoreCase));
+        }
+
+        public ICollection<User> SearchUser(string AUserNameSearch)
+        {
+            return FContext.Users
+                .Where(u => u.NamUser.Contains(AUserNameSearch) || u.NamPerson.Contains(AUserNameSearch))
+                .ToList();
         }
     }
 }

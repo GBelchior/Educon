@@ -13,64 +13,80 @@
     <script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
     <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.indigo-pink.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="~/Content/material.min.css" rel="stylesheet" />
 
 </head>
 <body>
 
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <header class="mdl-layout__header">
-        <div class="mdl-layout__header-row">
-            <!-- Title -->
-            <span class="mdl-layout-title">Portal</span>
-        </div>
-
-    </header>
-    <!-- Panel Content -->
-    <div class="mdl-layout__drawer" style="overflow-x:hidden; overflow-y:hidden;">
-        @*<div class="row bar"></div>*@
-        <div class="row bar"></div>
-        <div class="row profile">
-            
-            <div class="circle"></div>
-            @*<img class="imgIcon" src="~/Content/Images/camera-icon.png" />*@
-            <div class="textBar row">
-
-                <label class="nameText">Marianne</label>
-                <br />
-                <label class="emailText" style="font-family: 'Segoe UI';">marikell.silva@gmail.com</label>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header" style="background-color: white;">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title">Portal</span>
             </div>
 
+        </header>
+        <!-- Panel Content -->
+        <div class="mdl-layout__drawer" style="overflow-x:hidden; overflow-y:hidden;">
+            @*<div class="row bar"></div>*@
+            <div class="row bar"></div>
+            <div class="row profile">
+
+                <div class="circle"></div>
+                @*<img class="imgIcon" src="~/Content/Images/camera-icon.png" />*@
+                <div class="textBar row">
+
+                    <label class="nameText">Marianne</label>
+                    <br />
+                    <label class="emailText" style="font-family: 'Segoe UI';">marikell.silva@gmail.com</label>
+                </div>
+            </div>
+            <div class="row bar"></div>
+            <div class="menu">
+                <label class="nameText" style="margin-top:40px;">Nível 44</label>
+            </div>
+            <div class="row bar"></div>
+            <div class="menu">
+
+                @*<div class="row">
+                        <label class="nameText">Pontos</label>
+                    </div>
+                    <div class="row">
+                        <label class="nameText" style="color:black; font-size:2.5em;">15</label>
+                    </div>*@
+                <div class="row">
+                    <button class="textBold buttonSair mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="background-color: #ff3399; font-weight: bold;">
+                        Amigos
+                    </button>
+                </div>
+
+                <div class="row">
+                    <button class="textBold buttonSair mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="background-color:#ffd11a; font-weight: bold;">
+                        Ranking
+                    </button>
+                </div>
+
+                <div class="row">
+                    <button class="textBold buttonSair mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="font-weight: bold;">
+                        Sair
+                    </button>
+                </div>
 
 
+            </div>
+
+            <div class="row bar"></div>
 
         </div>
-        <div class="row bar"></div>
 
-        <div class="menu">
+        <!--Page Content-->
+        <main class="layoutContent mdl-layout__content">
 
-            <div class="row">
-                <label class="nameText">Pontos</label>
-            </div>
-            <div class="row">
-                <label class="nameText" style="color:black; font-size:2.5em;">15</label>
-            </div>
-           <div class="row">
-               <button class="buttonSair mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="margin-top:60px;">
-                   Sair
-               </button>
-           </div>
-        </div>
 
+        </main>
     </div>
 
-    <!--Page Content-->
-    <main class="layoutContent mdl-layout__content">
-        
-        
-    </main>
-</div>
 
 
-   
 </body>
 </html>

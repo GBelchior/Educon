@@ -1,11 +1,8 @@
-﻿@*@Styles.Render("~/Content/css")
-@Scripts.Render("~/Content/js")
-
-@{
-    Layout = null;
-    ViewBag.IsRegister = false;
-}
-
+﻿@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
 
 <head>
 
@@ -20,17 +17,17 @@
 
 <body style="background-image: url(http://imageshack.com/a/img924/9477/OXk9f5.jpg); background-repeat: repeat;">
     <div class="blurred" style=" width:100%; height:100%;">
-
         <center>
             <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width: 450px; height: 620px; top:20px;">
 
                 <div class="row bar"></div>
-                <div class="row" style="height:90%;">                      
+                <div class="row" style="height:90%;">
+                    @RenderBody()
                 </div>
                 <div class="row bar"></div>
 
             </div>
 
         </center>
-            <br><br>
-</body>*@
+        <br><br>
+</body>

@@ -23,4 +23,11 @@ namespace Educon.Models
 
     };
 
+    public enum ErrorType
+    {
+        None,
+        Password,
+        User
+    };
+
 }

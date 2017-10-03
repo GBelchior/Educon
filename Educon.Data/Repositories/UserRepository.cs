@@ -30,6 +30,12 @@ namespace Educon.Data
             }
         }
 
+        public User GetUserByNamePassword(string AUserName, string ADesPassword)
+        {
+            return FContext.Users
+                .SingleOrDefault(u => u.NamUser.Equals(AUserName, StringComparison.InvariantCulture) && u.DesPassword.Equals(ADesPassword));
+        }
+
         public User GetUserByName(string AUserName)
         {
             return FContext.Users

@@ -1,0 +1,113 @@
+﻿@{
+    Layout = "~/Views/Shared/_Initial.cshtml";
+}
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+@*<div class="form-group" style="height: 10%;">
+        </div>
+        <br />
+        <br />
+        <br />
+
+
+    <div class="row" style="height:20%;">
+
+            <input type="radio" name="icon" id="icon2" class="input-hidden" />
+            <div class="circle" style="height:20px; width:20px;"></div>
+
+            @*<input type="radio" name="icon" id="icon2" class="input-hidden" />
+            <label for="icon2"><img src="~/Content/largeicon.png" /></label>
+
+            <input type="radio" name="icon" id="icon3" class="input-hidden" />
+            <label for="icon3"><img src="~/Content/raposa.png" /></label>
+
+            <input type="radio" name="icon" id="icon1" class="input-hidden" />
+            <label for="icon1"><img src="~/Content/coala.png" /></label>
+
+            <input type="radio" name="icon" id="icon4" class="input-hidden" />
+            <label for="icon4"><img src="~/Content/coelho.png" /></label>*@
+<br />
+@*<div class="row" style="height: 40%; background-color: red; margin-bottom: 15px;">
+    @*<div style="width:50px;height:50px; background-color:rebeccapurple;"/>*@
+<div class="form-group" style=" height:5%;">
+    <input id="txtName" class="custominput" type="text" placeholder="Nome" style="border-radius:10px; background-color:#3399ff; margin: 0 auto;" />
+</div>
+<div class="form-group" style=" height:7%;">
+    <select class="form-control" id="selAgeGroup" style="background-color: #ff1a75;color:white; font-size: 1.5em; margin:0 auto; width:265px; height:50px; border-radius:10px; text-align:center;">
+        <option value="" selected disabled hidden>Faixa Etária</option>
+        <option>7 a 9 anos</option>
+        <option>10 a 12 anos</option>
+        <option>13 a 15 anos</option>
+    </select>
+</div>
+<div class="form-group" style=" height:5%;">
+    <input id="txtUserName" class="custominput" type="text" placeholder="Usuário" style="border-radius:10px; background-color:#00b300; margin: 0 auto;" />
+</div>
+<div class="form-group" style=" height:5%;">
+    <input id="txtEmail" class="custominput" type="email" placeholder="Email" style="border-radius:10px; background-color:#00b300; margin: 0 auto;" />
+</div>
+<div class="form-group" style=" height:5%;">
+    <input id="txtDesPassword" class="custominput" type="password" placeholder="Senha" style="border-radius:10px; background-color:#ffd11a; margin: 0 auto;" />
+</div>
+<div class="form-group" style=" height:5%;">
+    <input id="txtDesConfirmPassword" class="custominput" type="password" placeholder="Confirme a Senha" style="border-radius:10px; background-color:#3399ff; margin: 0 auto;" />
+</div>
+
+<div class="form-group" style="height:5%">
+    <button id="btnRegister" class="action-button shadow animate custombutton" onclick="btnRegister_onClick()" style="background-color:rebeccapurple; border-bottom: 5px solid rebeccapurple; text-shadow: 0px -2px rebeccapurple; width:265px;  margin: 0 auto;" type="submit">cadastrar</button>
+</div>
+
+<dialog class="mdl-dialog" id="dialog"> 
+    <h4 class="mdl-dialog__title">Aviso</h4>
+    <div class="mdl-dialog__content">
+        <label id="dialog_text"></label>
+    </div>
+
+</dialog>
+
+<script>
+
+    function btnRegister_onClick() {
+
+        var LName = $('#txtName').val();
+            var LUserName = $('#txtUserName').val();
+            var LAgeGroup = $('#selAgeGroup').select().val();
+            var LDesPassword = $('#txtDesPassword').val();
+            var LDesConfirmPassword = $('#txtDesConfirmPassword').val();
+
+            $.ajax({
+            type: "POST",
+            url: '@Url.Action("Create", "User")',
+            data: {
+                ADesName: LName,
+                ADesUserName: LUserName,
+                ADesAgeGroup: LAgeGroup,
+                ADesPassword : LDesPassword,
+                ADesConfirmPassword : LDesConfirmPassword
+            },
+            dataType: "json",
+            success: function (type) {
+
+                if (type == 'None') {
+
+                    var dialog = document.querySelector('dialog');
+                    //var showDialogButton = document.querySelector('#show-dialog');
+                    if (!dialog.showModal) {
+                        dialogPolyfill.registerDialog(dialog);
+                    }
+                    
+                    //dialog.querySelector('.close').addEventListener('click', function () {
+                    //    dialog.close();
+                    //});
+
+                }
+                
+            },
+            error: function (err) { alert(err.responseText); }
+        });
+
+    }
+
+
+
+</script>

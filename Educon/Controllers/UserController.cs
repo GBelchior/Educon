@@ -10,25 +10,17 @@ using System.Web.Mvc;
 
 namespace Educon.Controllers
 {
-    public class UserController : Controller
+    public class UserController : EduconControllerBase<User>
     {
-        private UserCore FCore;
         private UserCore Core
         {
             get
             {
-                return FCore;
-            }
-            set
-            {
-                FCore = value;
+                return (UserCore)base.FCore;
             }
         }
+        public UserController() : base(new UserCore()) { }
 
-        public UserController()
-        {
-            FCore = new UserCore();
-        }
         public ActionResult Register()
         {
             return View("Register");
@@ -44,7 +36,8 @@ namespace Educon.Controllers
         {
             ErrorType LErrorType = ErrorType.None;
 
-            if (!ADesPassword.Equals(ADesConfirmPassword)) {
+            if (!ADesPassword.Equals(ADesConfirmPassword))
+            {
                 ModelState.AddModelError("Senha", "As senhas não coincidem.");
                 LErrorType = ErrorType.Password;
             }

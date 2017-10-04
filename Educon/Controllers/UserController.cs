@@ -1,4 +1,4 @@
-﻿using Educon.Core;
+﻿using Educon.Core;  
 using Educon.Models;
 using Educon.Utils;
 using System;
@@ -32,7 +32,7 @@ namespace Educon.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(string ADesName, string ADesUserName, string ADesAgeGroup, string ADesPassword, string ADesConfirmPassword)
+        public ActionResult Create(string ADesName, string ADesUserName, int AAgeGroup, string ADesPassword, string ADesConfirmPassword, string ADesEmail)
         {
             ErrorType LErrorType = ErrorType.None;
 
@@ -41,19 +41,26 @@ namespace Educon.Controllers
                 ModelState.AddModelError("Senha", "As senhas não coincidem.");
                 LErrorType = ErrorType.Password;
             }
-            //if (Core.GetUserByName(ADesUserName) != null)
-            //{
-            //    ModelState.AddModelError("Usuário", "O nome de usuário já existe.");
-            //    LErrorType = ErrorType.User;
-            //}           
-
-            User LUser = new Models.User { NamPerson = ADesName, NamUser = ADesUserName, DesPassword = ADesPassword, AgeGroup = GeneralUtils.ConvertToAgeGroup(ADesAgeGroup) };
-
-            if (!ModelState.IsValid)
+            if (Core.GetUserByName(ADesUserName) != null)
             {
-                return View(LUser);
+                ModelState.AddModelError("Usuário", "O nome de usuário já existe.");
+                LErrorType = ErrorType.User;
             }
-            //Core.Add(LUser);
+            if (Core.GetUserByEmail(ADesEmail) != null)
+            {
+                ModelState.AddModelError("Email", "Esse email já foi utilizado.");
+                LErrorType = ErrorType.Email;
+            }
+
+            AgeGroup LAgeGroup = (AgeGroup)Enum.ToObject(typeof(AgeGroup), AAgeGroup)-1;
+
+            User LUser = new Models.User { NamPerson = ADesName, NamUser = ADesUserName, DesEmail = ADesEmail, DesPassword = ADesPassword, AgeGroup = LAgeGroup };
+
+            if (ModelState.IsValid)
+            {
+            Core.Add(LUser);
+                
+            }
 
             return Json(GeneralUtils.ConvertToString(LErrorType), JsonRequestBehavior.AllowGet);
 

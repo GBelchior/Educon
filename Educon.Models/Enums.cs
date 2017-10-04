@@ -27,7 +27,8 @@ namespace Educon.Models
     {
         None,
         Password,
-        User
+        User,
+        Email
     };
 
 }

@@ -48,6 +48,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EduconContext.cs" />
+    <Compile Include="Migrations\201710032011057_Migration_0310.cs" />
+    <Compile Include="Migrations\201710032011057_Migration_0310.Designer.cs">
+      <DependentUpon>201710032011057_Migration_0310.cs</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\EduconRepositoryBase.cs" />
     <Compile Include="Mappings\QuestionMap.cs" />
     <Compile Include="Mappings\UserMap.cs" />
@@ -84,6 +88,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201709302221040_Initial.resx">
       <DependentUpon>201709302221040_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710032011057_Migration_0310.resx">
+      <DependentUpon>201710032011057_Migration_0310.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -33,13 +33,6 @@ namespace Educon.Controllers
             return View();
         }
 
-        public virtual ActionResult Create()
-        {
-            return View();
-        }
-
-
-
         protected ActionResult RedirectToSaveType(String saveType)
         {
             if (saveType.ToLowerInvariant().Equals("savenew"))

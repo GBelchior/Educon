@@ -14,6 +14,11 @@ namespace Educon.Core
 
         public UserCore() : base(DependencyResolver.Resolve<IUserRepository>()) { }
 
+        public User GetUserByEmail(string ADesEmail)
+        {
+            return Repository.GetUserByEmail(ADesEmail);
+        }
+
         public User GetUserByName(string AUserName)
         {
             return Repository.GetUserByName(AUserName);

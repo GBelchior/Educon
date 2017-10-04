@@ -42,6 +42,11 @@ namespace Educon.Data
                 .SingleOrDefault(u => u.NamUser.Equals(AUserName, StringComparison.InvariantCultureIgnoreCase));
         }
 
+        public User GetUserByEmail(string ADesEmail)
+        {
+            return FContext.Users.SingleOrDefault(u => u.DesEmail.Equals(ADesEmail));
+        }
+
         public ICollection<User> SearchUser(string AUserNameSearch)
         {
             return FContext.Users

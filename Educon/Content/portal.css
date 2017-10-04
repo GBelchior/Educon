@@ -113,6 +113,26 @@
     position: relative;
 }
 
+.warning{
+    -webkit-animation: anim 2s linear;
+    /*-webkit-animation-fill-mode: forwards;*/
+}
+
+@keyframes anim{
+
+    0%{
+       transform:scale(1);
+       opacity:1;
+    }
+    50%{
+        transform:scale(1.02);
+    }
+    100% {
+        transform: scale(1.08);
+        opacity:0;
+    }
+}
+
 .layoutContent {
     background-image: url(https://imageshack.com/i/poOXk9f5j);
     width: 100%;

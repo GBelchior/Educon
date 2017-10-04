@@ -25,6 +25,7 @@ namespace Educon.Data
         public virtual void Add(T Entity)
         {
             FDbSet.Add(Entity);
+            Save();
         }
 
         public virtual int Count(Expression<Func<T, bool>> Expr)

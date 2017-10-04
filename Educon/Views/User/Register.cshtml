@@ -27,84 +27,116 @@
             <input type="radio" name="icon" id="icon4" class="input-hidden" />
             <label for="icon4"><img src="~/Content/coelho.png" /></label>*@
 <br />
-@*<div class="row" style="height: 40%; background-color: red; margin-bottom: 15px;">
-    @*<div style="width:50px;height:50px; background-color:rebeccapurple;"/>*@
-<div class="form-group" style=" height:5%;">
-    <input id="txtName" class="custominput" type="text" placeholder="Nome" style="border-radius:10px; background-color:#3399ff; margin: 0 auto;" />
-</div>
-<div class="form-group" style=" height:7%;">
-    <select class="form-control" id="selAgeGroup" style="background-color: #ff1a75;color:white; font-size: 1.5em; margin:0 auto; width:265px; height:50px; border-radius:10px; text-align:center;">
-        <option value="" selected disabled hidden>Faixa Etária</option>
-        <option>7 a 9 anos</option>
-        <option>10 a 12 anos</option>
-        <option>13 a 15 anos</option>
-    </select>
-</div>
-<div class="form-group" style=" height:5%;">
-    <input id="txtUserName" class="custominput" type="text" placeholder="Usuário" style="border-radius:10px; background-color:#00b300; margin: 0 auto;" />
-</div>
-<div class="form-group" style=" height:5%;">
-    <input id="txtEmail" class="custominput" type="email" placeholder="Email" style="border-radius:10px; background-color:#00b300; margin: 0 auto;" />
-</div>
-<div class="form-group" style=" height:5%;">
-    <input id="txtDesPassword" class="custominput" type="password" placeholder="Senha" style="border-radius:10px; background-color:#ffd11a; margin: 0 auto;" />
-</div>
-<div class="form-group" style=" height:5%;">
-    <input id="txtDesConfirmPassword" class="custominput" type="password" placeholder="Confirme a Senha" style="border-radius:10px; background-color:#3399ff; margin: 0 auto;" />
+<div class="row" style="height: 20%;">
+    <div class="circle" style="width:100px;height:100px; background-color:rebeccapurple; margin: 0 auto;"></div>
 </div>
 
-<div class="form-group" style="height:5%">
-    <button id="btnRegister" class="action-button shadow animate custombutton" onclick="btnRegister_onClick()" style="background-color:rebeccapurple; border-bottom: 5px solid rebeccapurple; text-shadow: 0px -2px rebeccapurple; width:265px;  margin: 0 auto;" type="submit">cadastrar</button>
-</div>
-
-<dialog class="mdl-dialog" id="dialog"> 
-    <h4 class="mdl-dialog__title">Aviso</h4>
-    <div class="mdl-dialog__content">
-        <label id="dialog_text"></label>
+<div class="row">
+    <div class="form-group" style=" height:5%;">
+        <input id="txtName" class="custominput" type="text" placeholder="Nome" style="border-radius:10px; background-color:#3399ff; margin: 0 auto;" />
+    </div>
+    <div class="form-group" style=" height:7%;">
+        <select class="form-control" id="selAgeGroup" style="background-color: #ff1a75;color:white; font-size: 1.5em; margin:0 auto; width:265px; height:50px; border-radius:10px; text-align:center;">
+            <option value="" selected disabled hidden>Faixa Etária</option>
+            <option>7 a 9 anos</option>
+            <option>10 a 12 anos</option>
+            <option>13 a 15 anos</option>
+        </select>
+    </div>
+    <div class="form-group" style=" height:5%;">
+        <input id="txtUserName" class="custominput" type="text" placeholder="Usuário" style="border-radius:10px; background-color:#00b300; margin: 0 auto;" />
+    </div>
+    <div class="form-group" style=" height:5%;">
+        <input id="txtEmail" class="custominput" type="email" placeholder="Email" style="border-radius:10px; background-color:#00b300; margin: 0 auto;" />
+    </div>
+    <div class="form-group" style=" height:5%;">
+        <input id="txtDesPassword" class="custominput" type="password" placeholder="Senha" style="border-radius:10px; background-color:#ffd11a; margin: 0 auto;" />
+    </div>
+    <div class="form-group" style=" height:5%;">
+        <input id="txtDesConfirmPassword" class="custominput" type="password" placeholder="Confirme a Senha" style="border-radius:10px; background-color:#3399ff; margin: 0 auto;" />
+    </div>
+    <div class="form-group" style="height:5%">
+        <button id="btnRegister" class="action-button shadow animate custombutton" onclick="btnRegister_onClick()" style="background-color:rebeccapurple; border-bottom: 5px solid rebeccapurple; text-shadow: 0px -2px rebeccapurple; width:265px; margin-bottom:5px; margin: 0 auto;" type="submit">cadastrar</button>
     </div>
 
-</dialog>
+    <div class="form-group" style="height:5%">
+        <button id="btnVoltar" class="action-button shadow animate custombutton" onclick="btnVoltar_onClick()" style="background-color:rebeccapurple; border-bottom: 5px solid rebeccapurple; text-shadow: 0px -2px rebeccapurple; width:265px;  margin: 0 auto; " type="submit">Voltar</button>
+    </div>
+
+    <div class="form-group" style="height:4%;">
+        <label id="warning" class="nameText" style="font-size: 30px;  ">Aviso</label>
+    </div>
+</div>
+@*<dialog class="mdl-dialog" id="dialog">
+        <h4 class="mdl-dialog__title">Aviso</h4>
+        <div class="mdl-dialog__content">
+            <label id="dialog_text"></label>
+        </div>
+
+    </dialog>*@
 
 <script>
+
+    $(document).ready(function () {
+
+        $('#warning').hide();
+
+
+    });
+
+    function btnVoltar_onClick() {
+     window.location.href = '@Url.Action("Login","User")';
+
+    }
 
     function btnRegister_onClick() {
 
         var LName = $('#txtName').val();
             var LUserName = $('#txtUserName').val();
-            var LAgeGroup = $('#selAgeGroup').select().val();
+            var LAgeGroup = $("#selAgeGroup").prop('selectedIndex');
             var LDesPassword = $('#txtDesPassword').val();
             var LDesConfirmPassword = $('#txtDesConfirmPassword').val();
+            var LDesEmail = $('#txtEmail').val();
 
             $.ajax({
-            type: "POST",
-            url: '@Url.Action("Create", "User")',
-            data: {
-                ADesName: LName,
-                ADesUserName: LUserName,
-                ADesAgeGroup: LAgeGroup,
-                ADesPassword : LDesPassword,
-                ADesConfirmPassword : LDesConfirmPassword
-            },
-            dataType: "json",
-            success: function (type) {
-
-                if (type == 'None') {
-
-                    var dialog = document.querySelector('dialog');
-                    //var showDialogButton = document.querySelector('#show-dialog');
-                    if (!dialog.showModal) {
-                        dialogPolyfill.registerDialog(dialog);
+                type: "POST",
+                url: '@Url.Action("Create", "User")',
+                data: {
+                    ADesName: LName,
+                    ADesUserName: LUserName,
+                    AAgeGroup: LAgeGroup,
+                    ADesPassword: LDesPassword,
+                    ADesConfirmPassword: LDesConfirmPassword,
+                    ADesAgeGroup: LAgeGroup,
+                    ADesEmail: LDesEmail
+                },
+                dataType: "json",
+                success: function (type) {
+                    if (type == "Password")
+                    {
+                        $('#warning').text("As senhas não coincidem.");
+                        $('#warning').addClass("warning");
+                        $('#warning').show();
                     }
-                    
-                    //dialog.querySelector('.close').addEventListener('click', function () {
-                    //    dialog.close();
-                    //});
+                    else if (type == "User") {
+                        $('#warning').text("Esse usuário já existe.");
+                        $('#warning').addClass("warning");
+                        $('#warning').show();
+                    }
+                    else if (type == 'Email') {
+                        $('#warning').text("Esse email já foi utilizado.");
+                        $('#warning').addClass("warning");
+                        $('#warning').show();
+                    }
+                    else if (type == 'None') {
+                        window.location.href = '@Url.Action("Login","User")';
+                    }
 
-                }
-                
-            },
-            error: function (err) { alert(err.responseText); }
-        });
+
+                },
+
+                error: function (err) { alert(err.responseText); }
+            });
 
     }
 

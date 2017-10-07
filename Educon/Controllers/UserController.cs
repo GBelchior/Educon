@@ -33,6 +33,13 @@ namespace Educon.Controllers
             AccountHelpers.SignIn(LUser);
             return Json(LUser, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult SignOut()
+        {
+            AccountHelpers.SignOut();
+            return RedirectToAction("Login");
+        }
+
         public ActionResult Login()
         {
             return View("Login");

@@ -3,7 +3,16 @@
 @RenderSection("scripts", required: false)
 @Styles.Render("~/Content/css")
 @Scripts.Render("~/bundles/modernizr")
+<<<<<<< HEAD
 
+=======
+<script type="text/javascript">
+    function signOut() {
+        window.location = '@Url.Action("SignOut", "User")';
+    }
+</script>
+@RenderBody()
+>>>>>>> fde6b604390a96bb1dabf07688cbd4b92c00ae34
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,12 +76,10 @@
                 </div>
 
                 <div class="row">
-                    <button class="textBold buttonSair mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="font-weight: bold;">
+                    <button class="textBold buttonSair mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="font-weight: bold;" onclick="signOut()">
                         Sair
                     </button>
                 </div>
-
-
             </div>
 
             <div class="row bar"></div>

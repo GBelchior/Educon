@@ -1,16 +1,15 @@
 ﻿using Educon.Helpers;
 using Educon.Models;
-﻿using Educon.Core;
-using Educon.Models;
+using Educon.Core;
 using Educon.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Educon.Controllers
 {
+    [Authorize]
     public class PortalController : Controller
     {
         private PortalCore Core = new PortalCore();        
@@ -22,13 +21,25 @@ namespace Educon.Controllers
             return View(LLoggedInUser);
         }
 
-        public ActionResult Quiz()
+        public ActionResult Quiz(Category ACategory = Category.Energy, String ANamUser = "alissongiron")
         {
-            List<Question> LQuizQuestions = Core.GetQuestions(1, AgeGroup.PreTeenager, Category.Energy);
-
-            Session["Questions"] = LQuizQuestions;
+            // TODO: deixar o método GetUserByName estático
             
-            return View(LQuizQuestions);
+            //User LUser = Core.GetUserByName("ANamUser");
+            //List<Question> LQuizQuestions = Core.GetQuestions(LUser.NidUser, LUser.AgeGroup, ACategory);
+
+            List<Question> LQuizQuestions = Core.GetQuestions(1, AgeGroup.PreTeenager, ACategory);
+            Session["Questions"] = LQuizQuestions;
+
+            List<Question> LQuestions = (List<Question>) Session["Questions"];
+
+            Question LQuestion = LQuestions.FirstOrDefault();
+            LQuestions.Remove(LQuestion);
+            Session["Questions"] = LQuestions;
+            
+            QuizViewModel LReturnedQuestion = new QuizViewModel(LQuestion);
+
+            return View(LReturnedQuestion);
         }
     }
 }

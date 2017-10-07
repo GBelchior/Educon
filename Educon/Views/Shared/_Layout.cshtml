@@ -3,7 +3,7 @@
 @RenderSection("scripts", required: false)
 @Styles.Render("~/Content/css")
 @Scripts.Render("~/bundles/modernizr")
-@RenderBody()
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,6 +82,14 @@
         <!--Page Content-->
         <main class="layoutContent mdl-layout__content">
 
+            <div class="row">
+                <div class="col-md-10">
+                    @RenderBody();
+                </div>
+                <div class="col-md-2">
+                    @Html.Partial("_Friends");
+                </div>
+            </div>
 
         </main>
     </div>

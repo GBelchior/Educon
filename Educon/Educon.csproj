@@ -232,6 +232,7 @@
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Shared\_Initial.cshtml" />
     <Content Include="Views\Portal\Quiz.cshtml" />
+    <Content Include="Views\Portal\_Friends.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

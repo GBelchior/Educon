@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title Portal</title>
 
-
     @Scripts.Render("~/bundles/jquery")
 
     <style>
@@ -73,6 +72,8 @@
             color: rgba(0,0,0, 0.54);
         }
     </style>
+
+    @Scripts.Render("~/bundles/jquery")
 </head>
 <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -81,10 +82,10 @@
         <main class="layoutContent mdl-layout__content" style="overflow-y:hidden;">
             <div class="row">
                 <div class="col-md-9">
-                    @RenderBody();
+                    @RenderBody()
                 </div>
                 <div class="col-md-3">
-                    @Html.Partial("_Friends");
+                    @Html.Partial("_Friends")
                 </div>
             </div>
         </main>
@@ -105,6 +106,7 @@
     </dialog>
 
 </body>
+
 @Scripts.Render("~/bundles/bootstrap")
 @Scripts.Render("~/bundles/material")
 @RenderSection("scripts", required: false)

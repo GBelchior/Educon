@@ -1,9 +1,5 @@
 ﻿using Educon.Data.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Educon.Models;
 
 namespace Educon.Data
@@ -34,8 +30,7 @@ namespace Educon.Data
 
         public User GetUserByName(string ANamUser)
         {
-            throw new NotImplementedException();
-            //return UserRepository.GetUserByName(FContext, ANamUser);
+            return UserRepository.GetUserByName(FContext, ANamUser);
         }
     }
 }

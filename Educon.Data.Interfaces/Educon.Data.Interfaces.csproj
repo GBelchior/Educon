@@ -45,6 +45,7 @@
     <Compile Include="IMultiplayerRepository.cs" />
     <Compile Include="IPortalRepository.cs" />
     <Compile Include="IQuestionRepository.cs" />
+    <Compile Include="IQuizRepository.cs" />
     <Compile Include="IUserQuestionRepository.cs" />
     <Compile Include="IUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

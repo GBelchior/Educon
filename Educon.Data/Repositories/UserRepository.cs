@@ -38,7 +38,12 @@ namespace Educon.Data
 
         public User GetUserByName(string AUserName)
         {
-            return FContext.Users
+            return GetUserByName(FContext, AUserName); 
+        }
+
+        public static User GetUserByName(EduconContext AContext, string AUserName)
+        {
+            return AContext.Users
                 .SingleOrDefault(u => u.NamUser.Equals(AUserName, StringComparison.InvariantCultureIgnoreCase));
         }
 

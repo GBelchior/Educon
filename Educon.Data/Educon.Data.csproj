@@ -65,6 +65,7 @@
     <Compile Include="Repositories\MultiplayerRepository.cs" />
     <Compile Include="Repositories\PortalRepository.cs" />
     <Compile Include="Repositories\QuestionRepository.cs" />
+    <Compile Include="Repositories\QuizRepository.cs" />
     <Compile Include="Repositories\UserQuestionRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>

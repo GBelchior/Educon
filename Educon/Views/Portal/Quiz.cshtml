@@ -1,5 +1,5 @@
 
-@model Educon.Models.Question
+@model Educon.ViewModels.QuizViewModel
 
 
 @Styles.Render("~/Content/css")
@@ -195,19 +195,18 @@
 
         $.ajax({
                 type: "POST",
-                url: '@Url.Action("Create", "User")',
+                url: '@Url.Action("ValidateAnswer", "Quiz")',
                 data: {
-                    ADesName: LName
+                    ANidUser : 1,
+                    ANidQuestion : @Model.NidQuestion,
+                    ANumAnswer : $(this).attr('id')
                 },
                 dataType: "json",
-                success: function (type) {
-                   
+                success: function (data) {
+                    $(".auxcontainer").text(data.Answer);
                 },
-
                 error: function (err) { alert(err.responseText); }
             });
-
-        alert($(this).attr('id'));
     });
 
 </script>

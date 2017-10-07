@@ -3,16 +3,13 @@
 @RenderSection("scripts", required: false)
 @Styles.Render("~/Content/css")
 @Scripts.Render("~/bundles/modernizr")
-<<<<<<< HEAD
 
-=======
-<script type="text/javascript">
+@*<script type="text/javascript">
     function signOut() {
         window.location = '@Url.Action("SignOut", "User")';
     }
-</script>
-@RenderBody()
->>>>>>> fde6b604390a96bb1dabf07688cbd4b92c00ae34
+</script>*@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -88,7 +85,6 @@
 
         <!--Page Content-->
         <main class="layoutContent mdl-layout__content">
-
             <div class="row">
                 <div class="col-md-10">
                     @RenderBody();
@@ -97,7 +93,6 @@
                     @Html.Partial("_Friends");
                 </div>
             </div>
-
         </main>
     </div>
 

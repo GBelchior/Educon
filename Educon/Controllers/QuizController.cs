@@ -1,9 +1,8 @@
-﻿using Educon.Models;
+﻿using Educon.Core;
+using Educon.Models;
 using Educon.ViewModels;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Educon.Controllers
@@ -11,6 +10,8 @@ namespace Educon.Controllers
     [Authorize]
     public class QuizController : Controller
     {
+        QuizCore Core = new QuizCore(); 
+
         public ActionResult Index()
         {
             return View();
@@ -23,7 +24,7 @@ namespace Educon.Controllers
 
         public ActionResult NextQuestion()
         {
-            List<Question> LQuestions = (List<Question>)Session["Questions"];
+            List<Question> LQuestions = (List<Question>) Session["Questions"];
 
             if (LQuestions.Count == 0)
                 RedirectToAction("EndGame");
@@ -36,5 +37,25 @@ namespace Educon.Controllers
 
             return Json(LReturnedQuestion, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult ValidateAnswer(int ANidUser, int ANidQuestion, int ANumAnswer)
+        {
+            Question LQuestion = Core.GetQuestion(ANidQuestion);
+            QuizAnswerViewModel LAnswer = new QuizAnswerViewModel();
+
+            //LAnswer.Answer = LQuestion.Answer;
+            LAnswer.Answer = "oi tudo bom";
+            LAnswer.NumCorrectAnswer = LQuestion.NumCorrectAnswer;
+            LAnswer.IsCorrect = (LQuestion.NumCorrectAnswer == ANumAnswer);
+                
+            if (LAnswer.IsCorrect)
+            {
+                // Adiciona questao correta no user
+            }
+
+            return Json(LAnswer, JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }

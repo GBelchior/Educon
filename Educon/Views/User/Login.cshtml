@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Educon.Models.User
+@{
     Layout = "~/Views/Shared/_Initial.cshtml";
 }
 <head>
@@ -165,58 +166,25 @@
 </head>
 
 
-<div class="labelborder">
-</div>
-<div class="logo">
-    <img src="~/Content/Images/LOGO2.png" class="demo-card-wide" />
-</div>
-<div id="user" class="data" style="background-color: #66cccc; border-top-left-radius: 10px; border-top-right-radius: 10px;">
-    <input id="usuario" type="text" placeholder="Usuário" />
-</div>
-<div id="pass" class="data" style="background-color: #ff3399; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
-    <input id="senha" type="password" placeholder="Senha" />
-</div>
+@using (Html.BeginForm())
+{
+    <div class="labelborder">
+    </div>
+    <div class="logo">
+        <img src="~/Content/Images/LOGO2.png" class="demo-card-wide" />
+    </div>
+    @Html.ValidationSummary();
+    <div id="user" class="data" style="background-color: #66cccc; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+        @Html.TextBoxFor(u => u.NamUser, new { @placeholder = "Usuário" })
+    </div>
+    <div id="pass" class="data" style="background-color: #ff3399; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+        @Html.PasswordFor(u => u.DesPassword, new { @placeholder = "Senha" })
+    </div>
 
-<div class="btn-container" style="margin-top: 3vh">
-    <button class="btn btn-block custombutton " onclick="btnLogin_Click()" style="height: 100%; background-color: #ffd11a;" type="submit">Entrar!</button>
-</div>
-<div class="btn-container" style="margin-top: 1vh">
-    <button class="btn btn-block custombutton btn-animate " onclick="btnRegister_Click()" style="height: 100%; background-color: #00cc00;" type="submit">Não tenho conta <b>☹</b></button>
-</div>
-
-
-<script>
-    function btnRegister_Click() {
-        window.location.href = '@Url.Action("Register","User")';
-    };
-
-
-    function btnLogin_Click() {
-    var LUserName = $('#usuario').val();
-        var LPassword = $('#senha').val();
-        $.ajax({
-            type: "POST",
-            url: '@Url.Action("SignIn", "User")',
-            data: {
-                AUserName: LUserName,
-                APassword: LPassword
-            },
-            dataType: "json",
-            success: function (user) {
-                //Se o usuário for encontrado
-                if (user != null) {
-
-               window.location.href = '@Url.Action("Index","Portal")';
-
-
-                }
-
-            }
-
-        });
-    }
-
-
-
-
-</script>
+    <div class="btn-container" style="margin-top: 3vh">
+        <button type="submit" class="btn btn-block custombutton" style="height: 100%; background-color: #ffd11a;">Entrar!</button>
+    </div>
+    <div class="btn-container" style="margin-top: 1vh">
+        @Html.ActionLink("Não tenho conta ☹", "Register", "User", new { }, new { @class = "btn btn-block custombutton btn-animate", @style = "height: 100%; background-color: #00cc00;" })
+    </div>
+}

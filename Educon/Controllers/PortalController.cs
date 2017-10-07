@@ -17,8 +17,7 @@ namespace Educon.Controllers
         // GET: Portal
         public ActionResult Index()
         {
-            User LLoggedInUser = AccountHelpers.GetSignedUser();
-            return View(LLoggedInUser);
+            return View();
         }
 
         public ActionResult GetFriendsOfUser()

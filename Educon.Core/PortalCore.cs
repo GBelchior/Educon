@@ -32,7 +32,7 @@ namespace Educon.Core
         public IOrderedEnumerable<User> GetRankingList()
         {
             return FRepository.GetUsers()
-                .OrderBy(u => u.QtdExperience);
+                .OrderByDescending(u => u.QtdExperience);
         }
     }
 }

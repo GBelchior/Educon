@@ -1,13 +1,12 @@
-﻿@Scripts.Render("~/bundles/jquery")
+﻿@{
+    Educon.Models.User LSignedUser = Educon.Helpers.AccountHelpers.GetSignedUser();
+}
+
+@Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
 @RenderSection("scripts", required: false)
 @Styles.Render("~/Content/css")
 @Scripts.Render("~/bundles/modernizr")
-<script type="text/javascript">
-    function signOut() {
-        window.location = '@Url.Action("SignOut", "User")';
-    }
-</script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,70 +22,13 @@
 <body>
 
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-        <header class="mdl-layout__header" style="background-color: white;">
-            <div class="mdl-layout__header-row">
-                <!-- Title -->
-                <span class="mdl-layout-title">Portal</span>
-            </div>
-
-        </header>
-        <!-- Panel Content -->
-        <div class="mdl-layout__drawer" style="overflow-x:hidden; overflow-y:hidden;">
-            @*<div class="row bar"></div>*@
-            <div class="row bar"></div>
-            <div class="row profile">
-
-                <div class="circle"></div>
-                @*<img class="imgIcon" src="~/Content/Images/camera-icon.png" />*@
-                <div class="textBar row">
-
-                    <label id="headerName" class="nameText"></label>
-                    <br />
-                    <label id="headerEmail" class="emailText" style="font-family: 'Segoe UI';"></label>
-                </div>
-            </div>
-            <div class="row bar"></div>
-            <div class="menu">
-                <label class="nameText" id="headerLevel" style="margin-top:40px;"></label>
-            </div>
-            <div class="row bar"></div>
-            <div class="menu">
-
-                @*<div class="row">
-                        <label class="nameText">Pontos</label>
-                    </div>
-                    <div class="row">
-                        <label class="nameText" style="color:black; font-size:2.5em;">15</label>
-                    </div>*@
-                <div class="row">
-                    <button class="textBold buttonSair mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="background-color: #ff3399; font-weight: bold;">
-                        Amigos
-                    </button>
-                </div>
-
-                <div class="row">
-                    <button class="textBold buttonSair mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="background-color:#ffd11a; font-weight: bold;">
-                        Ranking
-                    </button>
-                </div>
-
-                <div class="row">
-                    <button class="textBold buttonSair mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="font-weight: bold;" onclick="signOut()">
-                        Sair
-                    </button>
-                </div>
-            </div>
-
-            <div class="row bar"></div>
-
-        </div>
-
+        @Html.Partial("_UserInfo", LSignedUser)
         <!--Page Content-->
         <main class="layoutContent mdl-layout__content">
 
             <div class="row">
                 <div class="col-md-10">
-                    @RenderBody();
+                    @RenderBody()
                 </div>
                 <div class="col-md-2">
                     @Html.Partial("_Friends");
@@ -95,8 +37,6 @@
 
         </main>
     </div>
-
-
 
 </body>
 </html>

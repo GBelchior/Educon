@@ -234,6 +234,7 @@
     <Content Include="Views\Portal\Quiz.cshtml" />
     <Content Include="Views\Portal\_Friends.cshtml" />
     <Content Include="Views\Portal\Ranking.cshtml" />
+    <Content Include="Views\Shared\_UserInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

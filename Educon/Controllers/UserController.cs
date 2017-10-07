@@ -45,6 +45,12 @@ namespace Educon.Controllers
             return View("Login");
         }
 
+        public ActionResult GetFriendsOfUser()
+        {
+            ICollection<User> LFriends = Core.GetFriendsOfUser(AccountHelpers.GetSignedUser().NidUser);
+            return Json(LFriends, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public ActionResult Create(string ADesName, string ADesUserName, int AAgeGroup, string ADesPassword, string ADesConfirmPassword, string ADesEmail)
         {

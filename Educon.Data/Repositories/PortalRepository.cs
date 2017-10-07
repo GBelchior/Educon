@@ -31,5 +31,11 @@ namespace Educon.Data
         {
             return QuestionRepository.GetQuestions(FContext, ANidUser, AAgeGroup, ANumCategory);
         }
+
+        public User GetUserByName(string ANamUser)
+        {
+            throw new NotImplementedException();
+            //return UserRepository.GetUserByName(FContext, ANamUser);
+        }
     }
 }

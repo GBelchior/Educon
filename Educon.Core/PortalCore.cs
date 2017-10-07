@@ -1,6 +1,7 @@
 ﻿using Educon.Data.Interfaces;
 using Educon.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Educon.Core
 {

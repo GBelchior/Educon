@@ -26,5 +26,11 @@ namespace Educon.Core
         {
             return FRepository.GetQuestion(ANidQuestion);
         }
+
+        public IOrderedEnumerable<User> GetRankingList()
+        {
+            return FRepository.GetUsers()
+                .OrderBy(u => u.QtdExperience);
+        }
     }
 }

@@ -32,5 +32,10 @@ namespace Educon.Controllers
             
             return View(LQuizQuestions);
         }
+
+        public ActionResult Ranking()
+        {
+            return View(Core.GetRankingList());
+        }
     }
 }

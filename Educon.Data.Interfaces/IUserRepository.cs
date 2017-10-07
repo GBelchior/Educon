@@ -13,5 +13,8 @@ namespace Educon.Data.Interfaces
         ICollection<User> SearchUser(string AUserNameSearch);
         User GetUserByEmail(string ADesEmail);
         User GetUserByNamePassword(string AUserName, string ADesPassword);
+        ICollection<User> GetFriendsOfUser(int ANidUser);
+
+
     }
 }

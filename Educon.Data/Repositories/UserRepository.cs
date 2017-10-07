@@ -58,5 +58,10 @@ namespace Educon.Data
                 .Where(u => u.NamUser.Contains(AUserNameSearch) || u.NamPerson.Contains(AUserNameSearch))
                 .ToList();
         }
+
+        public ICollection<User> GetFriendsOfUser(int ANidUser)
+        {
+            return FContext.Users.Where(u => u.NidUser == ANidUser).Include(p => p.Friends).FirstOrDefault().Friends;
+        }
     }
 }

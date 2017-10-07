@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Educon.Helpers;
+using Educon.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +13,8 @@ namespace Educon.Controllers
         // GET: Portal
         public ActionResult Index()
         {
-            return View();
+            User LLoggedInUser = AccountHelpers.GetSignedUser();
+            return View(LLoggedInUser);
         }
     }
 }

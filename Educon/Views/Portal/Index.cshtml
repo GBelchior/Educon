@@ -1,1 +1,16 @@
-﻿
+﻿@model Educon.Models.User
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<script>
+
+    $(document).ready(function () {
+
+        $('#headerName').text('@Model.NamPerson');
+        $('#headerEmail').text('@Model.DesEmail');
+        
+    });
+    
+</script>

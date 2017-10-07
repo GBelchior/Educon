@@ -1,24 +1,222 @@
-﻿@model Educon.Models.User
-@{ 
+﻿@{
     Layout = "~/Views/Shared/_Initial.cshtml";
 }
+<head>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <style>
+        .labelborder {
+            height: 5vh;
+            width: 100%;
+        }
 
-    <br />
-    <center><img src="~/Content/Images/LOGO2.png" style="width:85%; height: 20%;" /></center>
+        .data {
+            height: 10vh;
+            width: 80%;
+            margin-left: 10%;
+        }
 
-    <div class="form" style="top: 375px;">
-        <div class="username">
-            <input type="text" placeholder="Usuário" style="border-radius:10px; margin: 0 auto; margin-top:30px;" />
-        </div>
-        <div class="password" style="margin: 0 auto;">
-            <input type="password" placeholder="Senha" style="border-radius: 10px; margin: 0 auto; margin-top:30px;" />
-        </div>
-        <div class="form-group" style="height:50px;">
-            <button class="botao" id="btnLogin" style="background-color:#ffd11a; border-bottom: 5px solid gold; text-shadow: 0px -2px gold; width:400px; height:130%;" type="submit">Login</button>
-        </div>
-        <div class="form-group" style="height:50px;">
-            <button id="btnRegister" style="background-color:#00cc00; border-bottom: 5px solid #00cc00; text-shadow: 0px -2px #00cc00; width:400px; height:130%; font-size: 3em;  margin: 0 auto;" type="submit">Cadastre-se</button>
-        </div>
+            .data::after {
+                content: "";
+                width: 0px;
+                height: 0px;
+                position: absolute;
+                border-style: solid;
+                border-width: 0.5em 0.469em 0 0.469em;
+                left: 49%;
+                margin-top: 10vh;
+            }
 
-    </div>
+        #user::after {
+            border-color: #66cccc transparent transparent transparent;
+        }
 
+        #pass::after {
+            border-color: #ff3399 transparent transparent transparent;
+        }
+
+        .btn-container {
+            height: 10vh;
+            width: 80%;
+            margin-left: 10%;
+        }
+
+
+        .background {
+            background-image: url(http://imageshack.com/a/img924/9477/OXk9f5.jpg);
+            background-repeat: repeat;
+        }
+
+        .principal {
+            position: fixed;
+            background-color: white;
+            width: 30vw;
+            height: 90vh;
+            left: 35vw;
+            top: 5vh;
+            border-radius: 20px;
+        }
+
+        .logo {
+            height: 30vh;
+        }
+
+            .logo img {
+                margin: 0 auto;
+                display: block;
+                padding: 40px;
+                height: 100%;
+                width: 100%;
+            }
+
+
+        input {
+            height: 70%;
+            width: 80%;
+            margin-left: 10%;
+            margin-top: 2vh;
+            font-size: 2em;
+            text-align: center;
+            border: 0;
+            outline: 0;
+            font-family: "Bebas Neue", Arial;
+            background: transparent;
+            border: 0.033em #fff solid;
+            border-radius: 10px;
+            color: white;
+        }
+
+        .input::before {
+            content: "oi";
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            border-style: solid;
+            background-color: red;
+            left: 49%;
+            margin-top: 10vh;
+        }
+
+        input::placeholder {
+            color: #fff;
+        }
+
+        input::-webkit-input-placeholder {
+            font-size: 25px;
+            -webkit-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+        }
+
+        input:focus::-webkit-input-placeholder {
+            font-size: 14px;
+            transform: translateX(-40%) translateY(-15px);
+            visibility: visible !important;
+        }
+
+
+
+        .custombutton {
+            font-size: 2em;
+            font-family: "Bebas Neue", Arial;
+            color: white;
+            border-radius: 20px;
+            transition: 0.2s all ease;
+        }
+
+            .custombutton:hover {
+                background-color: red;
+                color: white !important;
+                transform: scale(1.05);
+                transition: all 0.2s linear;
+            }
+
+        .btn-animate {
+            -webkit-animation: animbtn 2s infinite linear;
+        }
+
+
+        @@keyframes animbtn {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.02);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @@media all and (max-width: 800px) {
+            .principal {
+                width: 70vw;
+                left: 15vw;
+            }
+        }
+
+        @@media all and (max-width: 600px) {
+            .principal {
+                width: 90vw;
+                left: 5vw;
+            }
+        }
+    </style>
+</head>
+
+
+<div class="labelborder">
+</div>
+<div class="logo">
+    <img src="~/Content/Images/LOGO2.png" class="demo-card-wide" />
+</div>
+<div id="user" class="data" style="background-color: #66cccc; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+    <input id="usuario" type="text" placeholder="Usuário" />
+</div>
+<div id="pass" class="data" style="background-color: #ff3399; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+    <input id="senha" type="password" placeholder="Senha" />
+</div>
+
+<div class="btn-container" style="margin-top: 3vh">
+    <button class="btn btn-block custombutton " onclick="btnLogin_Click()" style="height: 100%; background-color: #ffd11a;" type="submit">Entrar!</button>
+</div>
+<div class="btn-container" style="margin-top: 1vh">
+    <button class="btn btn-block custombutton btn-animate " onclick="btnRegister_Click()" style="height: 100%; background-color: #00cc00;" type="submit">Não tenho conta <b>☹</b></button>
+</div>
+
+
+<script>
+    function btnRegister_Click() {
+        window.location.href = '@Url.Action("Register","User")';
+    };
+
+
+    function btnLogin_Click() {
+    var LUserName = $('#usuario').val();
+        var LPassword = $('#senha').val();
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("SignIn", "User")',
+            data: {
+                AUserName: LUserName,
+                APassword: LPassword
+            },
+            dataType: "json",
+            success: function (user) {
+                //Se o usuário for encontrado
+                if (user != null) {
+
+               window.location.href = '@Url.Action("Index","Portal")';
+
+
+                }
+
+            }
+
+        });
+    }
+
+
+
+
+</script>

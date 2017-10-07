@@ -1,4 +1,5 @@
-﻿using Educon.Core;  
+﻿using Educon.Core;
+using Educon.Helpers;
 using Educon.Models;
 using Educon.Utils;
 using System;
@@ -26,6 +27,12 @@ namespace Educon.Controllers
             return View("Register");
         }
 
+        public ActionResult SignIn(string AUserName, string APassword)
+        {
+            User LUser = Core.GetUserByUserNamePassword(AUserName, APassword);
+            AccountHelpers.SignIn(LUser);
+            return Json(LUser, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult Login()
         {
             return View("Login");

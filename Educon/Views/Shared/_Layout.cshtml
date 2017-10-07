@@ -3,6 +3,11 @@
 @RenderSection("scripts", required: false)
 @Styles.Render("~/Content/css")
 @Scripts.Render("~/bundles/modernizr")
+<script type="text/javascript">
+    function signOut() {
+        window.location = '@Url.Action("SignOut", "User")';
+    }
+</script>
 @RenderBody()
 <!DOCTYPE html>
 <html>
@@ -36,14 +41,14 @@
                 @*<img class="imgIcon" src="~/Content/Images/camera-icon.png" />*@
                 <div class="textBar row">
 
-                    <label class="nameText">Marianne</label>
+                    <label id="headerName" class="nameText"></label>
                     <br />
-                    <label class="emailText" style="font-family: 'Segoe UI';">marikell.silva@gmail.com</label>
+                    <label id="headerEmail" class="emailText" style="font-family: 'Segoe UI';"></label>
                 </div>
             </div>
             <div class="row bar"></div>
             <div class="menu">
-                <label class="nameText" style="margin-top:40px;">Nível 44</label>
+                <label class="nameText" id="headerLevel" style="margin-top:40px;"></label>
             </div>
             <div class="row bar"></div>
             <div class="menu">
@@ -67,12 +72,10 @@
                 </div>
 
                 <div class="row">
-                    <button class="textBold buttonSair mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="font-weight: bold;">
+                    <button class="textBold buttonSair mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="font-weight: bold;" onclick="signOut()">
                         Sair
                     </button>
                 </div>
-
-
             </div>
 
             <div class="row bar"></div>

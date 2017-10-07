@@ -1,3 +1,6 @@
+
+﻿using Educon.Helpers;
+using Educon.Models;
 ﻿using Educon.Core;
 using Educon.Models;
 using Educon.ViewModels;
@@ -9,6 +12,7 @@ using System.Web.Mvc;
 
 namespace Educon.Controllers
 {
+    [Authorize]
     public class PortalController : Controller
     {
         private PortalCore Core = new PortalCore();        
@@ -16,7 +20,8 @@ namespace Educon.Controllers
         // GET: Portal
         public ActionResult Index()
         {
-            return View();
+            User LLoggedInUser = AccountHelpers.GetSignedUser();
+            return View(LLoggedInUser);
         }
 
         public ActionResult Quiz(Category ACategory = Category.Energy, String ANamUser = "alissongiron")

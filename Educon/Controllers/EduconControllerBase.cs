@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Educon.Controllers
 {
-    public class EduconControllerBase<TEntity> : Controller where TEntity : class, new()
+    public abstract class EduconControllerBase<TEntity> : Controller where TEntity : class, new()
     {
         protected readonly EduconCoreBase<TEntity> FCore;
 

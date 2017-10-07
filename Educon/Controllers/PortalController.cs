@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace Educon.Controllers
 {
+    [Authorize]
     public class PortalController : Controller
     {
         private PortalCore Core = new PortalCore();        

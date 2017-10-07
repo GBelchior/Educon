@@ -6,13 +6,12 @@ using System.Web.Mvc;
 
 namespace Educon.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         public ActionResult Index()
         {
             return View();
         }
-
-       
     }
 }

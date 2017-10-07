@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Educon.Controllers
 {
+    [Authorize]
     public class QuizController : Controller
     {
         // GET: Quiz

@@ -43,6 +43,7 @@
     <Compile Include="IEduconCoreBase.cs" />
     <Compile Include="IEduconRepositoryBase.cs" />
     <Compile Include="IMultiplayerRepository.cs" />
+    <Compile Include="IPortalRepository.cs" />
     <Compile Include="IQuestionRepository.cs" />
     <Compile Include="IUserQuestionRepository.cs" />
     <Compile Include="IUserRepository.cs" />

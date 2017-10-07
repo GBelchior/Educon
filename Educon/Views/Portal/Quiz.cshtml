@@ -1,0 +1,215 @@
+
+@model List<Educon.Models.Question>
+@*@model List<Educon.ViewModels.QuizViewModel>*@
+
+
+@Styles.Render("~/Content/css")
+@*@Scripts.Render("~/Content/js")*@
+@Scripts.Render("~/bundles/jquery")
+
+@{
+    Layout = null;
+}
+
+<head>
+
+    <style>
+        .data {
+            height: 15vh;
+            width: 100%;
+        }
+
+        .questioncontainer {
+            padding: 0;
+        }
+
+        .background {
+            background-image: url(http://imageshack.com/a/img924/9477/OXk9f5.jpg);
+            background-repeat: repeat;
+        }
+
+        .principal {
+            position: fixed;
+            background-color: white;
+            width: 90vw;
+            height: 90vh;
+            top: 5vh;
+            left: 5vw;
+            border-radius: 20px;
+        }
+
+        .question {
+            margin-left: -1px;
+            display: flex;
+            align-items: center;
+            height: 100%;
+            background-color: rebeccapurple;
+            border-bottom-left-radius: 20px;
+            border-top-left-radius: 20px;
+            width: 102%;
+            padding: 10%;
+        }
+
+            .question p {
+                margin-top: 25%;
+                width: 100%;
+                height: 100%;
+                font-size: 2em;
+                font-family: "Bebas Neue", Arial;
+                color: white;
+                letter-spacing: 1px;
+                line-height: 35px;
+                text-align: justify;
+            }
+
+        .headerbar {
+            height: 20vh;
+            width: 50vw;
+            background-color: indianred;
+            margin-left: 20vw;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            position: absolute;
+            z-index: 9999;
+        }
+
+            .headerbar p, .headerbar label {
+                font-size: 4.5em;
+                font-family: "Bebas Neue", Arial;
+                color: white;
+                letter-spacing: 1px;
+                line-height: 35px;
+                text-align: justify;
+                margin-top: 45px;
+            }
+
+        .question p::first-letter {
+            font-size: 2em;
+            color: indianred;
+            font-weight: bold;
+        }
+
+
+        .auxcontainer {
+            margin-top: 30%;
+        }
+
+        .answercontainer {
+            margin-top: 25%;
+        }
+
+        .answer {
+            padding: 2%;
+            width: 100%;
+            font-size: 1.5em;
+            font-family: "Bebas Neue", Arial;
+            color: white;
+            height: 100%;
+            line-height: 35px;
+        }
+
+            .answer:hover {
+                border-radius: 20px;
+                cursor: pointer;
+                background-color: red;
+                transform: scale(1.1);
+            }
+
+        @@media all and (max-width: 800px) {
+            .principal {
+                width: 70vw;
+                left: 15vw;
+            }
+        }
+
+        @@media all and (max-width: 600px) {
+            .principal {
+                width: 90vw;
+                left: 5vw;
+            }
+        }
+    </style>
+
+    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
+    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+<body class="background">
+
+    @Html.HiddenFor(m => m.NidQuestion)
+
+    <div class="principal">
+        <div class="headerbar">
+            <div class="col-md-6"><p style="margin-left: 25%;">ENERGIA</p></div>
+            <div class="col-md-4"><label id="currentQuestion">1</label><label>/</label><label id="totalQuestions">15</label></div>
+            <div class="col-md-2"><p id="timer">30</p></div>
+        </div>
+        <div class="col-md-5 questioncontainer">
+
+            <div class="question">
+                <div class="auxcontainer">
+                    <p>
+                        @Model.DesQuestion
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1" style="background-color: #411e64; height: 100%;"></div>
+
+        <div class="col-md-6" style="padding: 20px;">
+            <div class="row answercontainer">
+                <div id="one" class="data" style="background-color: #66cccc; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <p class="answer" id="1">1. @Model.DesAnswerOne</p>
+                </div>
+
+                <div id="two" class="data" style="background-color: #ff3399;">
+                    <p class="answer" id="2">2. @Model.DesAnswerTwo</p>
+                </div>
+
+                <div id="three" class="data" style="background-color: #ffd11a;">
+                    <p class="answer" id="3">3. @Model.DesAnswerThree</p>
+                </div>
+
+                <div id="four" class="data" style="background-color: #00cc00; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+                    <p class="answer" id="4">4. @Model.DesAnswerFour</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    $(document).ready(function () {
+        setInterval(changeTimer, 1000);
+    });
+
+    function changeTimer() {
+        var time = parseInt($("#timer").text());
+        if (time > 0)
+        {
+            time--;
+            $("#timer").text(time);
+        }
+    }
+
+    $('.answer').bind('click', function () {
+
+        $.ajax({
+                type: "POST",
+                url: '@Url.Action("Create", "User")',
+                data: {
+                    ADesName: LName
+                },
+                dataType: "json",
+                success: function (type) {
+                   
+                },
+
+                error: function (err) { alert(err.responseText); }
+            });
+
+        alert($(this).attr('id'));
+    });
+
+</script>

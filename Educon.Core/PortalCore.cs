@@ -1,10 +1,6 @@
 ﻿using Educon.Data.Interfaces;
 using Educon.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Educon.Core
 {
@@ -20,6 +16,11 @@ namespace Educon.Core
         public List<Question> GetQuestions(int ANidUser, AgeGroup AAgeGroup, Category? ANumCategory)
         {
             return FRepository.GetQuestions(ANidUser, AAgeGroup, ANumCategory);
+        }
+
+        public User GetUserByName(string ANamUser)
+        {
+            return FRepository.GetUserByName(ANamUser);
         }
 
         public Question GetQuestion(int ANidQuestion)

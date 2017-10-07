@@ -36,5 +36,11 @@ namespace Educon.Data
         {
             return UserRepository.GetUsers(FContext);
         }
+
+        public User GetUserByName(string ANamUser)
+        {
+            throw new NotImplementedException();
+            //return UserRepository.GetUserByName(FContext, ANamUser);
+        }
     }
 }

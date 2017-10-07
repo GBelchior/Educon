@@ -1,5 +1,9 @@
+
 ﻿using Educon.Helpers;
 using Educon.Models;
+﻿using Educon.Core;
+using Educon.Models;
+using Educon.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +14,22 @@ namespace Educon.Controllers
 {
     public class PortalController : Controller
     {
+        private PortalCore Core = new PortalCore();        
+
         // GET: Portal
         public ActionResult Index()
         {
             User LLoggedInUser = AccountHelpers.GetSignedUser();
             return View(LLoggedInUser);
+        }
+
+        public ActionResult Quiz()
+        {
+            List<Question> LQuizQuestions = Core.GetQuestions(1, AgeGroup.PreTeenager, Category.Energy);
+
+            Session["Questions"] = LQuizQuestions;
+            
+            return View(LQuizQuestions);
         }
     }
 }

@@ -58,6 +58,8 @@ namespace Educon.Core
                     LQuestionsOfAgeGroup.Remove(LQuestion);
                 }
 
+                // TODO: ordenar as questões pelas menos respondidas de cada usuário
+
                 LReturnQuestions.AddRange(LQuestionsOfAgeGroup.Take(ANumQuestions - LReturnQuestions.Count));
             }
 

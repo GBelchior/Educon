@@ -1,14 +1,6 @@
-﻿@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/bootstrap")
-@RenderSection("scripts", required: false)
-@Styles.Render("~/Content/css")
-@Scripts.Render("~/bundles/modernizr")
-
-@*<script type="text/javascript">
-    function signOut() {
-        window.location = '@Url.Action("SignOut", "User")';
-    }
-</script>*@
+﻿@{
+    Educon.Models.User LSignedUser = Educon.Helpers.AccountHelpers.GetSignedUser();
+}
 
 <!DOCTYPE html>
 <html>
@@ -16,87 +8,124 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title Portal</title>
-    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
-    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.indigo-pink.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link href="~/Content/material.min.css" rel="stylesheet" />
 
+    @Scripts.Render("~/bundles/jquery")
+
+    <style>
+        .mdl-dialog {
+            border: none;
+            box-shadow: 0 9px 46px 8px rgba(0, 0, 0, 0.14), 0 11px 15px -7px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.2);
+            width: 280px;
+        }
+        .demo-list-control {
+            width: 300px;
+        }
+
+        .demo-list-radio {
+            display: inline;
+        }
+
+        .mdl-dialog__title {
+            padding: 24px 24px 0;
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        .mdl-dialog__actions {
+            padding: 8px 8px 8px 24px;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-direction: row-reverse;
+            -ms-flex-direction: row-reverse;
+            flex-direction: row-reverse;
+            -webkit-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        }
+
+            .mdl-dialog__actions > * {
+                margin-right: 8px;
+                height: 36px;
+            }
+
+                .mdl-dialog__actions > *:first-child {
+                    margin-right: 0;
+                }
+
+        .mdl-dialog__actions--full-width {
+            padding: 0 0 8px 0;
+        }
+
+            .mdl-dialog__actions--full-width > * {
+                height: 48px;
+                -webkit-flex: 0 0 100%;
+                -ms-flex: 0 0 100%;
+                flex: 0 0 100%;
+                padding-right: 16px;
+                margin-right: 0;
+                text-align: right;
+            }
+
+        .mdl-dialog__content {
+            padding: 20px 24px 24px 24px;
+            color: rgba(0,0,0, 0.54);
+        }
+    </style>
+
+    @Scripts.Render("~/bundles/jquery")
 </head>
 <body>
-
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-        <header class="mdl-layout__header" style="background-color: white;">
-            <div class="mdl-layout__header-row">
-                <!-- Title -->
-                <span class="mdl-layout-title">Portal</span>
-            </div>
-
-        </header>
-        <!-- Panel Content -->
-        <div class="mdl-layout__drawer" style="overflow-x:hidden; overflow-y:hidden;">
-            @*<div class="row bar"></div>*@
-            <div class="row bar"></div>
-            <div class="row profile">
-
-                <div class="circle"></div>
-                @*<img class="imgIcon" src="~/Content/Images/camera-icon.png" />*@
-                <div class="textBar row">
-
-                    <label id="headerName" class="nameText"></label>
-                    <br />
-                    <label id="headerEmail" class="emailText" style="font-family: 'Segoe UI';"></label>
-                </div>
-            </div>
-            <div class="row bar"></div>
-            <div class="menu">
-                <label class="nameText" id="headerLevel" style="margin-top:40px;"></label>
-            </div>
-            <div class="row bar"></div>
-            <div class="menu">
-
-                @*<div class="row">
-                        <label class="nameText">Pontos</label>
-                    </div>
-                    <div class="row">
-                        <label class="nameText" style="color:black; font-size:2.5em;">15</label>
-                    </div>*@
-                <div class="row">
-                    <button class="textBold buttonSair mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="background-color: #ff3399; font-weight: bold;">
-                        Amigos
-                    </button>
-                </div>
-
-                <div class="row">
-                    <button class="textBold buttonSair mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="background-color:#ffd11a; font-weight: bold;">
-                        Ranking
-                    </button>
-                </div>
-
-                <div class="row">
-                    <button class="textBold buttonSair mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="font-weight: bold;" onclick="signOut()">
-                        Sair
-                    </button>
-                </div>
-            </div>
-
-            <div class="row bar"></div>
-
-        </div>
-
+        @Html.Partial("_UserInfo", LSignedUser)
         <!--Page Content-->
-        <main class="layoutContent mdl-layout__content">
+        <main class="layoutContent mdl-layout__content" style="overflow-y:hidden;">
             <div class="row">
-                <div class="col-md-10">
-                    @RenderBody();
+                <div class="col-md-9">
+                    @RenderBody()
                 </div>
-                <div class="col-md-2">
-                    @Html.Partial("_Friends");
+                <div class="col-md-3">
+                    @Html.Partial("_Friends")
                 </div>
             </div>
         </main>
-    </div>
+    </div>  
+
+    <dialog class="mdl-dialog">
+        <h4 class="mdl-dialog__title" style="font-family: 'Bebas Neue'; color:rebeccapurple; margin-right:-200px;">Adicionar Amigo</h4>
+        <div class="mdl-dialog__content">
+           
+            <input id="search" style="background-color: rebeccapurple;" placeholder="Usuário" />
 
 
+        </div>
+        <div class="mdl-dialog__actions">
+            <button type="button" class="mdl-button">Adicionar</button>
+            <button type="button" class="mdl-button close">Voltar</button>
+        </div>
+    </dialog>
 
 </body>
+
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/material")
+@RenderSection("scripts", required: false)
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
 </html>
+
+<script>
+
+    var dialog = document.querySelector('dialog');
+    var showDialogButton = document.querySelector('#show-dialog');
+    if (!dialog.showModal) {
+        dialogPolyfill.registerDialog(dialog);
+    }
+    showDialogButton.addEventListener('click', function () {
+        dialog.showModal();
+    });
+    dialog.querySelector('.close').addEventListener('click', function () {
+        dialog.close();
+    });
+
+</script>

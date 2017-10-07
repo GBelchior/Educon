@@ -16,10 +16,14 @@ namespace Educon.Controllers
 
         public ActionResult Index()
         {
-            User LLoggedInUser = AccountHelpers.GetSignedUser();
-            return View(LLoggedInUser);
+            return View();
         }
 
+        public ActionResult GetFriendsOfUser()
+        {
+            ICollection<User> LFriends = Core.GetFriendsOfUser(AccountHelpers.GetSignedUser().NidUser);
+            return Json(LFriends, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult Quiz(Category ACategory = Category.Energy, String ANamUser = "alissongiron")
         {
             User LUser = Core.GetUserByName(ANamUser);
@@ -36,6 +40,11 @@ namespace Educon.Controllers
             QuizViewModel LReturnedQuestion = new QuizViewModel(LQuestion);
 
             return View(LReturnedQuestion);
+        }
+
+        public ActionResult Ranking()
+        {
+            return View(Core.GetRankingList());
         }
     }
 }

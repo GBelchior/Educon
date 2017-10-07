@@ -1,0 +1,23 @@
+﻿@using Educon.Models
+@model IOrderedEnumerable<User>
+@{
+    ViewBag.Title = "Ranking";
+}
+
+<h2>Ranking</h2>
+
+<ol>
+    @foreach (User LUser in Model)
+    {
+        <li>
+            <div class="row">
+                <div class="col-md-8">
+                    @Html.Label(LUser.NamPerson)
+                </div>
+                <div class="col-md-4">
+                    @Html.Label(LUser.QtdExperience.ToString())
+                </div>
+            </div>
+        </li>
+    }
+</ol>

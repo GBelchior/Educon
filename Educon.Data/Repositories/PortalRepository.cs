@@ -13,6 +13,8 @@ namespace Educon.Data
             FContext = new EduconContext();
         }
 
+    
+
         public void Dispose()
         {
             FContext.Dispose();
@@ -28,9 +30,19 @@ namespace Educon.Data
             return QuestionRepository.GetQuestions(FContext, ANidUser, AAgeGroup, ANumCategory);
         }
 
+        public List<User> GetUsers()
+        {
+            return UserRepository.GetUsers(FContext);
+        }
+
         public User GetUserByName(string ANamUser)
         {
             return UserRepository.GetUserByName(FContext, ANamUser);
+        }
+
+        public ICollection<User> GetFriendsOfUser(int ANidUser)
+        {
+            return UserRepository.GetFriendsOfUser(FContext, ANidUser).Friends;
         }
     }
 }

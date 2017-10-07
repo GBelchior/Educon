@@ -14,7 +14,7 @@ namespace Educon.Data
             return AContext.Users
                 .Include(u => u.Friends)
                 .SingleOrDefault(u => u.NidUser == ANidUser);
-        }
+        }   
 
         internal static void ComputeQuestionCategory(EduconContext AContext, int ANidUser, int ANidQuestion)
         {
@@ -28,6 +28,11 @@ namespace Educon.Data
                 case Category.Environment: LUser.NumEnvironmentAnswers++; break;
                 case Category.Recycling: LUser.NumRecyclingAnswers++; break;
             }
+        }
+
+        public static List<User> GetUsers(EduconContext AContext)
+        {
+            return AContext.Users.ToList();
         }
 
         public User GetUserByNamePassword(string AUserName, string ADesPassword)
@@ -57,6 +62,11 @@ namespace Educon.Data
             return FContext.Users
                 .Where(u => u.NamUser.Contains(AUserNameSearch) || u.NamPerson.Contains(AUserNameSearch))
                 .ToList();
+        }
+
+        public static User GetFriendsOfUser(EduconContext AContext, int ANidUser)
+        {
+            return AContext.Users.Where(u => u.NidUser == ANidUser).Include(p => p.Friends).FirstOrDefault();
         }
     }
 }

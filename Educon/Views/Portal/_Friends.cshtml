@@ -1,66 +1,92 @@
-﻿@{
+﻿﻿@{
     Layout = null;
 }
 
 <head>
     <style>
-        .demo-list-control {
-            width: 300px;
-        }
-
-        .demo-list-radio {
-            display: inline;
-        }
+       
     </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
+﻿<style>
+    .demo-list-control {
+        width: 300px;
+    }
+    .demo-list-radio {
+        display: inline;
+    }
+</style>
 
+<div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width:300px; height:90vh;background-color: white;">
 
-<div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width: 300px; height: 400px; top:120px; background-color: white;">
+    <div class="row" style="height:10%; background-color: rebeccapurple; color:white; font-family:'Bebas Neue'; font-size: 30px;">
+        <center><label style="margin-top:30px;">Lista de Amigos</label></center>
+    </div>
 
-
-    <div class="row" style="height:8%; background-color: rebeccapurple;">
-
-        <div class="col-md-2">
-
-            <button type="button" style="background-color: rebeccapurple; height:100%;">
-                <span class="glyphicon glyphicon-remove" style="background-color: rebeccapurple; color:white;"></span>
+    <div class="row" style="height:10%; background-color: rebeccapurple; color: white; font-family: 'Bebas Neue';">
+        <center>
+            <button id="show-dialog" type="button" style="background-color:rebeccapurple; color:white;">
+                Adicionar Novo Amigo
             </button>
+        </center>
+    </div>
 
+
+    <div class="row" style="height:80%;">
+        <div id="listFriends" class="list-group">
         </div>
-
-
-
     </div>
-
-    <div class="row" height="8%;">
-
-        @*<div class="col-md-10">*@
-            <input type="text" style="border-radius: 20px; background-color: rebeccapurple; width:100px;" />
-        
-        <button type="button" style="background-color:white; border: 0;">
-            <span class="glyphicon glyphicon-search" style="background-color: white; color:rebeccapurple;"></span>
-        </button>    
-    @*</div>
-        <div class="col-md-2">
-
-            <button type="button" style="background-color: white; height:100%;"></button>
-
-        </div>*@
-    </div>
-
-    <div class="row" style="height:84%;">
-        <ul class="demo-list-control mdl-list">
-            <li class="mdl-list__item">
-                <span class="mdl-list__item-primary-content">
-                    Bryan Cranston
-                </span>
-                <span class="mdl-list__item-secondary-action">
-
-                </span>
-            </li>
-
-        </ul>
-
-    </div>
-
 </div>
+
+<script>
+
+    $(document).ready(function () {
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetFriendsOfUser", "Portal")',
+            data: {
+
+            },
+            dataType: "json",
+            success: function (list) {
+
+                list.forEach(function (item) {
+                    var templateOnline =
+                        '<button class="list-group-item" style="width:90%;margin: 0 auto;" data-toggle="collapse" data-target="#divPlay' + item.NamUser + '">' +
+                            '<label style="font-family:Bebas Neue; font-size: 25px;">' +
+                                item.NamPerson +
+                            '</label>' +
+                            '<div style="border-radius:100px; height:10px; width:10px; background-color:green;margin: 0 auto;"></div>' +
+                            '<label>Online</label>' +
+                        '</button>' +
+                        '<div id="divPlay' + item.NamUser + '" class="collapse">' +
+                            '<a href="#" style="font-family:Bebas Neue;font-size:18pt;" class="textBold buttonSair mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Jogar!</a>' +
+                        '</div>';
+
+                    var templateOffline =
+                        '<button class="list-group-item" style="width:90%;margin: 0 auto;" disabled>' +
+                            '<label style="font-family:Bebas Neue; font-size: 25px;">' +
+                                item.NamPerson +
+                            '</label>' +
+                            '<div style="border-radius:100px; height:10px; width:10px; background-color:red; margin: 0 auto;"></div>' +
+                            '<label>Offline</label>' +
+                        '</button>';
+
+                    if (item.IsOnline) {
+                        $('#listFriends').append(templateOnline);
+                    }
+                    else {
+                        $('#listFriends').append(templateOffline);
+                    }
+                });
+
+
+            }
+
+        });
+
+    });
+
+
+</script>

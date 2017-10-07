@@ -24,6 +24,7 @@ namespace Educon.Core
             return Repository.GetUserByNamePassword(AUserName, ADesPassword);
         }
 
+
         public User GetUserByName(string AUserName)
         {
             return Repository.GetUserByName(AUserName);

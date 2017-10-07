@@ -27,11 +27,25 @@ namespace Educon.Controllers
             return View("Register");
         }
 
-        public ActionResult SignIn(string AUserName, string APassword)
+        [HttpGet]
+        public ActionResult Login()
         {
-            User LUser = Core.GetUserByUserNamePassword(AUserName, APassword);
+            return View("Login");
+        }
+
+        [HttpPost]
+        public ActionResult Login(User AUser)
+        {
+            User LUser = Core.GetUserByUserNamePassword(AUser.NamUser, AUser.DesPassword);
+
+            if (LUser == null)
+            {
+                ModelState.AddModelError("User", "Usuário ou Senha incorretos ☹");
+                return View(AUser);
+            }
+
             AccountHelpers.SignIn(LUser);
-            return Json(LUser, JsonRequestBehavior.AllowGet);
+            return RedirectToAction("Index", "Portal");
         }
 
         public ActionResult SignOut()
@@ -39,12 +53,7 @@ namespace Educon.Controllers
             AccountHelpers.SignOut();
             return RedirectToAction("Login");
         }
-
-        public ActionResult Login()
-        {
-            return View("Login");
-        }
-
+       
         [HttpPost]
         public ActionResult Create(string ADesName, string ADesUserName, int AAgeGroup, string ADesPassword, string ADesConfirmPassword, string ADesEmail)
         {

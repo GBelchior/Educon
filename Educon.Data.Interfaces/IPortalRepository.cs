@@ -12,5 +12,6 @@ namespace Educon.Data.Interfaces
         List<Question> GetQuestions(int ANidUser, AgeGroup AAgeGroup, Category? ANidCategory);
         Question GetQuestion(int ANidQuestion);
         User GetUserByName(string ANamUser);
+        List<User> GetUsers();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Educon.Data.Interfaces;
 using Educon.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Educon.Core
 {
@@ -26,6 +27,12 @@ namespace Educon.Core
         public Question GetQuestion(int ANidQuestion)
         {
             return FRepository.GetQuestion(ANidQuestion);
+        }
+
+        public IOrderedEnumerable<User> GetRankingList()
+        {
+            return FRepository.GetUsers()
+                .OrderByDescending(u => u.QtdExperience);
         }
     }
 }

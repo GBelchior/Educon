@@ -30,6 +30,11 @@ namespace Educon.Data
             }
         }
 
+        public static List<User> GetUsers(EduconContext AContext)
+        {
+            return AContext.Users.ToList();
+        }
+
         public User GetUserByNamePassword(string AUserName, string ADesPassword)
         {
             return FContext.Users

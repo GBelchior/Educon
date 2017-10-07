@@ -41,5 +41,10 @@ namespace Educon.Controllers
 
             return View(LReturnedQuestion);
         }
+
+        public ActionResult Ranking()
+        {
+            return View(Core.GetRankingList());
+        }
     }
 }

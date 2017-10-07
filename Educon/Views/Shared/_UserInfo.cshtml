@@ -1,0 +1,54 @@
+﻿@model Educon.Models.User
+
+    <header class="mdl-layout__header" style="background-color: white;">
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">Portal</span>
+        </div>
+
+    </header>
+    <!-- Panel Content -->
+    <div class="mdl-layout__drawer" style="overflow-x:hidden; overflow-y:hidden;">
+        @*<div class="row bar"></div>*@
+        <div class="row bar"></div>
+        <div class="row profile">
+
+            <div class="circle"></div>
+            @*<img class="imgIcon" src="~/Content/Images/camera-icon.png" />*@
+            <div class="textBar row">
+
+                <label id="headerName" class="nameText">@Model.NamPerson</label>
+                <br />
+                <label id="headerEmail" class="emailText" style="font-family: 'Segoe UI';">@Model.DesEmail</label>
+            </div>
+        </div>
+        <div class="row bar"></div>
+        <div class="menu">
+            <label class="nameText" id="headerLevel" style="margin-top:40px;">@Model.NumLevel</label>
+        </div>
+        <div class="row bar"></div>
+        <div class="menu">
+
+            @*<div class="row">
+                    <label class="nameText">Pontos</label>
+                </div>
+                <div class="row">
+                    <label class="nameText" style="color:black; font-size:2.5em;">15</label>
+                </div>*@
+
+            <div class="row">
+                <a href="@Url.Action("Ranking", "Portal")" class="textBold buttonSair mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                    Ranking
+                </a>
+            </div>
+
+            <div class="row">
+                <a href="@Url.Action("SignOut", "User")" class="textBold buttonSair mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="font-weight: bold;">
+                    Sair
+                </a>
+            </div>
+        </div>
+
+        <div class="row bar"></div>
+
+    </div>

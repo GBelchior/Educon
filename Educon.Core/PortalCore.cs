@@ -19,6 +19,11 @@ namespace Educon.Core
             return FRepository.GetQuestions(ANidUser, AAgeGroup, ANumCategory);
         }
 
+        public ICollection<User> GetFriendsOfUser(int ANidUser)
+        {
+            return FRepository.GetFriendsOfUser(ANidUser);
+        }
+
         public User GetUserByName(string ANamUser)
         {
             return FRepository.GetUserByName(ANamUser);

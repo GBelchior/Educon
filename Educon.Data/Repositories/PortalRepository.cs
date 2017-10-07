@@ -17,6 +17,8 @@ namespace Educon.Data
             FContext = new EduconContext();
         }
 
+    
+
         public void Dispose()
         {
             FContext.Dispose();
@@ -41,6 +43,11 @@ namespace Educon.Data
         {
             throw new NotImplementedException();
             //return UserRepository.GetUserByName(FContext, ANamUser);
+        }
+
+        public ICollection<User> GetFriendsOfUser(int ANidUser)
+        {
+            return UserRepository.GetFriendsOfUser(FContext, ANidUser).Friends;
         }
     }
 }

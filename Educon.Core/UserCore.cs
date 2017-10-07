@@ -24,10 +24,6 @@ namespace Educon.Core
             return Repository.GetUserByNamePassword(AUserName, ADesPassword);
         }
 
-        public ICollection<User> GetFriendsOfUser(int ANidUser)
-        {
-            return Repository.GetFriendsOfUser(ANidUser);
-        }
 
         public User GetUserByName(string AUserName)
         {

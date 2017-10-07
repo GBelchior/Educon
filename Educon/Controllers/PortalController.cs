@@ -21,6 +21,11 @@ namespace Educon.Controllers
             return View(LLoggedInUser);
         }
 
+        public ActionResult GetFriendsOfUser()
+        {
+            ICollection<User> LFriends = Core.GetFriendsOfUser(AccountHelpers.GetSignedUser().NidUser);
+            return Json(LFriends, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult Quiz(Category ACategory = Category.Energy, String ANamUser = "alissongiron")
         {
             // TODO: deixar o método GetUserByName estático

@@ -13,5 +13,7 @@ namespace Educon.Data.Interfaces
         Question GetQuestion(int ANidQuestion);
         User GetUserByName(string ANamUser);
         List<User> GetUsers();
+        ICollection<User> GetFriendsOfUser(int ANidUser);
+
     }
 }

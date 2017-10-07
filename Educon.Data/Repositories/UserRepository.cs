@@ -14,7 +14,7 @@ namespace Educon.Data
             return AContext.Users
                 .Include(u => u.Friends)
                 .SingleOrDefault(u => u.NidUser == ANidUser);
-        }
+        }   
 
         internal static void ComputeQuestionCategory(EduconContext AContext, int ANidUser, int ANidQuestion)
         {
@@ -59,9 +59,9 @@ namespace Educon.Data
                 .ToList();
         }
 
-        public ICollection<User> GetFriendsOfUser(int ANidUser)
+        public static User GetFriendsOfUser(EduconContext AContext, int ANidUser)
         {
-            return FContext.Users.Where(u => u.NidUser == ANidUser).Include(p => p.Friends).FirstOrDefault().Friends;
+            return AContext.Users.Where(u => u.NidUser == ANidUser).Include(p => p.Friends).FirstOrDefault();
         }
     }
 }

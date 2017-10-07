@@ -56,14 +56,14 @@
 
 
     <div class="row" style="height:80%;">
-        <div class="list-group">
-            <center>
+        <div id="listFriends" class="list-group">
+            @*<center>
                 <a href="#" class="list-group-item">
                     <label style="font-family: 'Bebas Neue'; font-size: 25px;">First Item</label>
                     <div style="border-radius:100px; height:10px; width:10px; background-color:red; "></div>
                     <label>Offline</label>
                 </a>
-            </center>
+            </center>*@
         </div>
 
     </div>
@@ -72,26 +72,33 @@
 
 <script>
 
-     $.ajax({
+    $(document).ready(function () {
+
+        $.ajax({
             type: "POST",
-            url: '@Url.Action("SignIn", "User")',
+            url: '@Url.Action("GetFriendsOfUser", "Portal")',
             data: {
-                AUserName: LUserName,
-                APassword: LPassword
+
             },
             dataType: "json",
-            success: function (user) {
-                //Se o usuário for encontrado
-                if (user != null) {
+            success: function (list) {
 
-               window.location.href = '@Url.Action("Index","Portal")';
+                list.forEach(function (item) {
+                    var status = (item.IsOnline) ? 'Online' : 'Offline';
+                    var template = '<center><a href="#" class="list-group-item"><label style="font-family:"Bebas Neue"; font-size: 25px;">' + item.NamUser
+                        + '</label><div style="border-radius:100px; height:10px; width:10px; background-color:red;"></div><label>' + status + '</label>';
+
+                    $('#listFriends').append(template);
 
 
-                }
+                });
+
 
             }
 
         });
+
+    });
 
 
 </script>

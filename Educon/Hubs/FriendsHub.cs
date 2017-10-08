@@ -21,7 +21,7 @@ namespace Educon.Hubs
                 LUserCore.SetUserOnline(LUser);
             }
 
-            Clients.All.UserOnline(LUser);
+            Clients.All.UserOnline(LUser.NamUser);
 
             return base.OnConnected();
         }
@@ -36,7 +36,7 @@ namespace Educon.Hubs
                 LUserCore.SetUserOffline(LUser);
             }
 
-            Clients.All.UserOffline(LUser);
+            Clients.All.UserOffline(LUser.NamUser);
 
             return base.OnDisconnected(stopCalled);
         }

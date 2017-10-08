@@ -17,8 +17,9 @@ namespace Educon.Controllers
             return View();
         }
 
-        public ActionResult EndGame()
+        public ActionResult EndGame(bool AWin)
         {
+            ViewBag.Win = AWin;
             return View();
         }
 
@@ -27,7 +28,7 @@ namespace Educon.Controllers
             List<Question> LQuestions = (List<Question>) Session["Questions"];
 
             if (LQuestions.Count == 0)
-                RedirectToAction("EndGame");
+                RedirectToAction("EndGame", new { AWin = true });
 
             Question LQuestion = LQuestions.FirstOrDefault();
             LQuestions.Remove(LQuestion);
@@ -43,7 +44,7 @@ namespace Educon.Controllers
             Question LQuestion = Core.GetQuestion(ANidQuestion);
             QuizAnswerViewModel LAnswer = new QuizAnswerViewModel();
 
-            //LAnswer.Answer = LQuestion.Answer;
+            //LAnswer.Answer = LQuestion.DesAnswer;
             LAnswer.Answer = "oi tudo bom";
             LAnswer.NumCorrectAnswer = LQuestion.NumCorrectAnswer;
             LAnswer.IsCorrect = (LQuestion.NumCorrectAnswer == ANumAnswer);

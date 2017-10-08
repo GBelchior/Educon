@@ -16,6 +16,7 @@ namespace Educon.ViewModels
         public string DesAnswerThree { get; set; }
         public string DesAnswerFour { get; set; }
         public Category Category { get; set; }
+        public int QtyQuestions { get; set; }
 
         public QuizViewModel(Question AQuestion)
         {

@@ -136,8 +136,8 @@
 
     <div class="principal">
         <div class="headerbar">
-            <div class="col-md-6"><p style="margin-left: 25%;">ENERGIA</p></div>
-            <div class="col-md-4"><label id="currentQuestion">1</label><label>/</label><label id="totalQuestions">15</label></div>
+            <div class="col-md-6"><p id="quiztitle" style="margin-left: 25%;">@Model.Category</p></div>
+            <div class="col-md-4"><label id="currentQuestion">1</label><label>/</label><label id="totalQuestions">@Model.QtyQuestions</label></div>
             <div class="col-md-2"><p id="timer">30</p></div>
         </div>
         <div class="col-md-5 questioncontainer">
@@ -169,41 +169,110 @@
                 <div id="four" class="data" style="background-color: #00cc00; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
                     <p class="answer" id="4">4. @Model.DesAnswerFour</p>
                 </div>
+
+                <div id="continuebutton" style="height: 30vh; display: none;">
+                    <div id="continue" style="background-color: #00cc00;">
+                        <p>Continue</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </body>
 
 <script>
+    var continueUrl = "";
+    var continueData = null;
+
     $(document).ready(function () {
         setInterval(changeTimer, 1000);
     });
 
     function changeTimer() {
         var time = parseInt($("#timer").text());
-        if (time > 0)
+        time--;
+        $("#timer").text(time);
+
+        if (time == 0)
         {
-            time--;
-            $("#timer").text(time);
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("EndGame", "Quiz")',
+                data: false
+            });
         }
     }
 
-    $('.answer').bind('click', function () {
+    function updateQuestion()
+    {
+        var question = parseInt($("#currentQuestion").text());
+        question++;
+        $("#currentQuestion").text(question);
+    }
 
+    $('#continue').bind('click', function () {
         $.ajax({
+            type: "POST",
+            url: continueUrl,
+            data = continueData,
+            success: function (data) {
+                $('.answer').each(function () {
+                    $(this).show();
+                });
+
+                $("#continuebutton").hide();
+
+                $("#NidQuestion").val(data.NidQuestion);
+                $(".auxcontainer").text(data.DesQuestion);
+                $("#1").text("1. " + data.DesAnswerOne);
+                $("#2").text("2. " + data.DesAnswerTwo);
+                $("#3").text("3. " + data.DesAnswerThree);
+                $("#4").text("4. " + data.DesAnswerFour);
+                $("#quiztitle").text(data.Category);
+                updateQuestion();
+            },
+            error: function (err) { alert(err.responseText); }
+        });
+    }
+
+    $('.answer').bind('click', function () {
+            $.ajax({
                 type: "POST",
                 url: '@Url.Action("ValidateAnswer", "Quiz")',
                 data: {
-                    ANidUser : 1,
-                    ANidQuestion : @Model.NidQuestion,
-                    ANumAnswer : $(this).attr('id')
+                    ANidUser: 1,
+                    ANidQuestion: @Model.NidQuestion,
+                    ANumAnswer: $(this).attr('id')
                 },
                 dataType: "json",
                 success: function (data) {
-                    $(".auxcontainer").text(data.Answer);
+                    $('.answer').each(function () {
+                        if ($(this).attr('id') != data.NumCorrectAnswer)
+                            $(this).hide();
+                    });
+
+                    $("#continuebutton").show();
+
+                    if (data.isCorrect) {
+                        // mostra "Você acertou!"
+                        $("#quiztitle").text("ACERTOU!");
+                        // botao continuar chama next question
+                        continueUrl = '@Url.Action("NextQuestion", "Quiz")';
+                        continueData = null;
+                    }
+                    else {
+                        // mostra "Você errou!"
+                        $("#quiztitle").text("ERROU :(");
+                        // botao continuar chama endgame
+                        continueUrl = '@Url.Action("EndGame", "Quiz")';
+                        continueData = false;
+                    }
+
+
+                    $(".auxcontainer").text(data.DesAnswer);
                 },
                 error: function (err) { alert(err.responseText); }
             });
-    });
+    }
 
 </script>

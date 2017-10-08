@@ -9,9 +9,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title Portal</title>
 
-    @Scripts.Render("~/bundles/jquery")
-
     <style>
+        dialog {
+            position: fixed;
+            top: 50%;
+            transform: translate(0, -50%);
+        }
+
         .mdl-dialog {
             border: none;
             box-shadow: 0 9px 46px 8px rgba(0, 0, 0, 0.14), 0 11px 15px -7px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.2);
@@ -73,7 +77,7 @@
         }
     </style>
 
-    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/js/site")
 </head>
 <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -89,46 +93,59 @@
                 </div>
             </div>
         </main>
-    </div>  
+    </div>
 
-    <dialog class="mdl-dialog">
+    <dialog id="add-new-friend" class="mdl-dialog">
         <h4 class="mdl-dialog__title" style="font-family: 'Bebas Neue'; color:rebeccapurple; margin-right:-200px;">Adicionar Amigo</h4>
         <div class="mdl-dialog__content">
-           
-            <input id="search" style="background-color: rebeccapurple;" placeholder="Usuário" />
-
-
+            <input id="search" style="background-color: rebeccapurple; margin:0 auto;" placeholder="Usuário" />
+            <br />
+            <br />
+            <center style="font-family: 'Bebas Neue'; font-size:18px;"><label id="lblUser"></label></center>
         </div>
-        <div class="mdl-dialog__actions">
-            <button type="button" class="mdl-button">Adicionar</button>
-            <button type="button" class="mdl-button close">Voltar</button>
-        </div>
+        <center>
+            <div class="mdl-dialog__actions">
+                <button id="btnAddFriend" type="button" onclick="btnAddFriend_Click()" class="mdl-button" style="background-color: #ff3399; font-weight: bold;">Adicionar</button>
+                <button type="button" class="mdl-button close">Voltar</button>
+            </div>
+        </center>
+    </dialog>
+
+    <dialog id="play-request" class="mdl-dialog">
+        bora playar?
     </dialog>
 
 </body>
-
 </html>
-@Scripts.Render("~/bundles/bootstrap")
-@Scripts.Render("~/bundles/material")
 @RenderSection("scripts", required: false)
-@Styles.Render("~/Content/css")
-@Scripts.Render("~/bundles/modernizr")
-@Scripts.Render("~/bundles/signalR")
+@Scripts.Render("~/js/modernizr")
+@Scripts.Render("~/js/signalR")
 <script src="~/signalr/hubs"></script>
-@Scripts.Render("~/bundles/friends")
+@Scripts.Render("~/js/friends")
+@Styles.Render("~/css/site")
 
 <script>
+    $(function () {
+        // Configuração do dialog de adicionar novo amigo
+        var addNewFriendDialog = document.querySelector('#add-new-friend');
 
-    var dialog = document.querySelector('dialog');
-    var showDialogButton = document.querySelector('#show-dialog');
-    if (!dialog.showModal) {
-        dialogPolyfill.registerDialog(dialog);
-    }
-    showDialogButton.addEventListener('click', function () {
-        dialog.showModal();
-    });
-    dialog.querySelector('.close').addEventListener('click', function () {
-        dialog.close();
-    });
+        if (!addNewFriendDialog.showModal) {
+            dialogPolyfill.registerDialog(addNewFriendDialog);
+        }
 
+        $('#show-add-new-friend').on('click', function () {
+            addNewFriendDialog.showModal();
+        });
+
+        $('#add-new-friend').find('.close').on('click', function () {
+            addNewFriendDialog.close();
+        })
+
+        // Configuração do dialog de play request
+        var playRequestDialog = document.querySelector('#play-request');
+
+        if (!playRequestDialog.showModal) {
+            dialogPolyfill.registerDialog(playRequestDialog);
+        }
+    })
 </script>

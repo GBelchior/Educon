@@ -38,7 +38,7 @@ namespace Educon.Controllers
 
             return Json(LReturnedQuestion, JsonRequestBehavior.AllowGet);
         }
-
+         
         public ActionResult ValidateAnswer(int ANidUser, int ANidQuestion, int ANumAnswer)
         {
             Question LQuestion = Core.GetQuestion(ANidQuestion);

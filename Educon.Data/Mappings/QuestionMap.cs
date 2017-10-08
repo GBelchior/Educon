@@ -18,7 +18,7 @@ namespace Educon.Data.Mappings
             Property(q => q.DesAnswerTwo).HasMaxLength(512);
             Property(q => q.DesAnswerThree).HasMaxLength(512);
             Property(q => q.DesAnswerFour).HasMaxLength(512);
-            //Property(q => q.Answer).HasMaxLength(512);
+            Property(q => q.DesAnswer).HasMaxLength(512);
             HasMany(u => u.UserQuestions);
             ToTable("Question");
         }

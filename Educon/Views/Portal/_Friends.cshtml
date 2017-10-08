@@ -15,6 +15,37 @@
     .demo-list-radio {
         display: inline;
     }
+
+    div.user-online {
+        background-color: green;
+        border-radius: 100px;
+        height: 10px;
+        width: 10px;
+        background-color: green;
+        margin: 0 auto;
+    }
+
+    div.user-offline {
+        background-color: red;
+        border-radius: 100px;
+        height: 10px;
+        width: 10px;
+        background-color: red;
+        margin: 0 auto;
+    }
+
+    .status-text {
+        font-family: Bebas Neue;
+        font-size: 16pt;
+    }
+
+    label.user-online::before {
+        content: 'ONLINE';
+    }
+
+    label.user-offline::before {
+        content: 'OFFLINE';
+    }
 </style>
 
 <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width:300px; height:90vh;background-color: white;">
@@ -52,32 +83,31 @@
             success: function (list) {
 
                 list.forEach(function (item) {
-                    var templateOnline =
-                        '<button class="list-group-item" style="width:90%;margin: 0 auto;" data-toggle="collapse" data-target="#divPlay' + item.NamUser + '">' +
+                    var template =
+                        '<button id="btnFriend' + item.NamUser +'" class="list-group-item" style="width:90%;margin: 0 auto;" data-toggle="collapse" data-target="#divPlay' + item.NamUser + '">' +
                             '<label style="font-family:Bebas Neue; font-size: 25px;">' +
                                 item.NamPerson +
                             '</label>' +
-                            '<div style="border-radius:100px; height:10px; width:10px; background-color:green;margin: 0 auto;"></div>' +
-                            '<label>Online</label>' +
+                            '<div class="status-led"></div>' +
+                            '<label class="status-text"></label>' +
                         '</button>' +
                         '<div id="divPlay' + item.NamUser + '" class="collapse">' +
                             '<a href="#" style="font-family:Bebas Neue;font-size:18pt;" class="textBold buttonSair mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Jogar!</a>' +
                         '</div>';
 
-                    var templateOffline =
-                        '<button class="list-group-item" style="width:90%;margin: 0 auto;" disabled>' +
-                            '<label style="font-family:Bebas Neue; font-size: 25px;">' +
-                                item.NamPerson +
-                            '</label>' +
-                            '<div style="border-radius:100px; height:10px; width:10px; background-color:red; margin: 0 auto;"></div>' +
-                            '<label>Offline</label>' +
-                        '</button>';
+                    $('#listFriends').append(template);
+
+                    var newButtonSelector = '#btnFriend' + item.NamUser;
 
                     if (item.IsOnline) {
-                        $('#listFriends').append(templateOnline);
+                        $(newButtonSelector).removeAttr('disabled');
+                        $(newButtonSelector + ' div.status-led').addClass('user-online');
+                        $(newButtonSelector + ' label.status-text').addClass('user-online');
                     }
                     else {
-                        $('#listFriends').append(templateOffline);
+                        $(newButtonSelector).attr('disabled', 'disabled');
+                        $(newButtonSelector + ' div.status-led').addClass('user-offline');
+                        $(newButtonSelector + ' label.status-text').addClass('user-offline');
                     }
                 });
 

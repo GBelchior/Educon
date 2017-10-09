@@ -1,6 +1,7 @@
 ﻿using Educon.Core;
 using Educon.Models;
 using Educon.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -32,10 +33,15 @@ namespace Educon.Controllers
         {
             List<Question> LQuestions = (List<Question>) Session["Questions"];
 
+
+
             if (LQuestions.Count == 0)
                 return Json((new { redirectUrl = Url.Action("EndGame", "Quiz", new { AWin = true, AQtyCorQuestions = AQtyQuestions, AQtyQuestions = AQtyQuestions })}), JsonRequestBehavior.AllowGet);
 
-            Question LQuestion = LQuestions.FirstOrDefault();
+            Random LRandom = new Random();
+            int LIndex = LRandom.Next(LQuestions.Count);
+
+            Question LQuestion = LQuestions.ElementAt(LIndex);
             LQuestions.Remove(LQuestion);
             Session["Questions"] = LQuestions;
 

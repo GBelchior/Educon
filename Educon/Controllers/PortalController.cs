@@ -44,7 +44,10 @@ namespace Educon.Controllers
 
             List<Question> LQuestions = (List<Question>) Session["Questions"];
 
-            Question LQuestion = LQuestions.FirstOrDefault();
+            Random LRandom = new Random();
+            int LIndex = LRandom.Next(LQuestions.Count);
+
+            Question LQuestion = LQuestions.ElementAt(LIndex);
             LQuestions.Remove(LQuestion);
             Session["Questions"] = LQuestions;
             
@@ -71,6 +74,7 @@ namespace Educon.Controllers
             User LUser = Core.GetUserByName(AUserName);
             return (LUser != null) ? true : false;
         }        
+
         public ActionResult Ranking()
         {
             return View(Core.GetRankingList());

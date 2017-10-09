@@ -41,9 +41,14 @@ namespace Educon.Data
 
         public User GetUserByName(string ANamUser)
         {
-            throw new NotImplementedException();
-            //return UserRepository.GetUserByName(FContext, ANamUser);
+            return UserRepository.GetUserByName(FContext, ANamUser);
         }
+
+        public void AddFriend(User AUser, User ANewFriend)
+        {
+            UserRepository.AddFriend(FContext, AUser, ANewFriend);
+        }
+
 
         public ICollection<User> GetFriendsOfUser(int ANidUser)
         {

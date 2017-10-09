@@ -17,6 +17,7 @@
             box-shadow: 0 9px 46px 8px rgba(0, 0, 0, 0.14), 0 11px 15px -7px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.2);
             width: 280px;
         }
+
         .demo-list-control {
             width: 300px;
         }
@@ -89,20 +90,24 @@
                 </div>
             </div>
         </main>
-    </div>  
+    </div>
 
     <dialog class="mdl-dialog">
         <h4 class="mdl-dialog__title" style="font-family: 'Bebas Neue'; color:rebeccapurple; margin-right:-200px;">Adicionar Amigo</h4>
         <div class="mdl-dialog__content">
-           
-            <input id="search" style="background-color: rebeccapurple;" placeholder="Usuário" />
 
+            <input id="search" style="background-color: rebeccapurple; margin:0 auto;" placeholder="Usuário" />
+            <br />
+            <br />
+            <center style="font-family: 'Bebas Neue'; font-size:18px;"><label id="lblUser"></label></center>
 
-        </div>
-        <div class="mdl-dialog__actions">
-            <button type="button" class="mdl-button">Adicionar</button>
-            <button type="button" class="mdl-button close">Voltar</button>
-        </div>
+        </div>+
+        <center>
+            <div class="mdl-dialog__actions">
+                <button id="btnAddFriend" type="button" onclick="btnAddFriend_Click()" class="mdl-button" style="background-color: #ff3399; font-weight: bold;">Adicionar</button>
+                <button type="button" class="mdl-button close">Voltar</button>
+            </div>
+        </center>
     </dialog>
 
 </body>
@@ -115,6 +120,30 @@
 </html>
 
 <script>
+
+    $(document).ready(function () {
+
+        $('#lblUser').hide();
+
+
+    });
+
+    function btnAddFriend_Click() {
+
+        var LSearchFriend = $('#search').val();
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("AddFriend", "Portal")',
+            data: {
+            AUserName: LSearchFriend
+            },
+            dataType: "json",
+            success: function (status) {
+                $('#lblUser').val((status == 'true') ? 'Usuário adicionado com sucesso.' : 'Usuário não foi encontrado');
+            }
+        });
+    }
 
     var dialog = document.querySelector('dialog');
     var showDialogButton = document.querySelector('#show-dialog');

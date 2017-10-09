@@ -14,6 +14,11 @@ namespace Educon.Core
             FRepository = DependencyResolver.Resolve<IPortalRepository>();
         }
 
+        public void AddFriend(User AUser, User ANewFriend)
+        {
+            FRepository.AddFriend(AUser, ANewFriend);
+        }
+
         public List<Question> GetQuestions(int ANidUser, AgeGroup AAgeGroup, Category? ANumCategory)
         {
             return FRepository.GetQuestions(ANidUser, AAgeGroup, ANumCategory);
@@ -33,6 +38,7 @@ namespace Educon.Core
         {
             return FRepository.GetQuestion(ANidQuestion);
         }
+
 
         public IOrderedEnumerable<User> GetRankingList()
         {

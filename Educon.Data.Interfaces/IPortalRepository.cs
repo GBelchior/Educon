@@ -9,13 +9,11 @@ namespace Educon.Data.Interfaces
 {
     public interface IPortalRepository : IDisposable
     {
-        List<Question> GetQuestions(int ANidUser, AgeGroup AAgeGroup, Category? ANidCategory);
+        List<Question> GetQuestions(AgeGroup AAgeGroup, Category? ANidCategory);
         Question GetQuestion(int ANidQuestion);
         User GetUserByName(string ANamUser);
         List<User> GetUsers();
         ICollection<User> GetFriendsOfUser(int ANidUser);
         void AddFriend(User AUser, User ANewFriend);
-
-
     }
 }

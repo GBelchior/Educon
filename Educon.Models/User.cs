@@ -26,7 +26,7 @@ namespace Educon.Models
             get
             {
                 // Fórmula: Nível = 0.5 * raiz(xp)
-                return Convert.ToInt32(Math.Floor((0.5 * Math.Sqrt(QtdExperience))));
+                return Convert.ToInt32(Math.Floor((0.1 * Math.Sqrt(QtdExperience))));
             }
         }
         public virtual ICollection<User> Friends { get; set; }

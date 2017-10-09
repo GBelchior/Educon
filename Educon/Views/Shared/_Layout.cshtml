@@ -163,7 +163,13 @@
                 },
                 dataType: "json",
                 success: function (status) {
-                    $('#lblUser').val((status == 'true') ? 'Usuário adicionado com sucesso.' : 'Usuário não foi encontrado');
+                    $('#lblUser').text((status == true) ? 'Usuário adicionado com sucesso' : 'Usuário não foi encontrado');
+
+                    if (status == true) {
+                        $('#add-new-friend').find('.close').on('click', function () {
+                            location.reload();
+                        });
+                    }
                 }
             });
         }
@@ -183,8 +189,6 @@
         }
 
         $(function () {
-            $('#lblUser').hide();
-
             // Configurar todos os dialogs
             configureDialog('add-new-friend');
             configureDialog('play-request');
@@ -192,6 +196,7 @@
             configureDialog('request-denied');
 
             $('#show-add-new-friend').on('click', function () {
+                $('#lblUser').text('');
                 document.querySelector('#add-new-friend').showModal();
             });
         });

@@ -20,7 +20,7 @@ namespace Educon.Data
             return AContext.Questions.ToList();
         }
 
-        public static List<Question> GetQuestions(EduconContext AContext, int ANidUser, AgeGroup AAgeGroup, Category? ANumCategory)
+        public static List<Question> GetQuestions(EduconContext AContext, AgeGroup AAgeGroup, Category? ANumCategory)
         {
             // Pega todas as questoes da faixa etaria do usuario
             ICollection<Question> LQuestionsOfAgeGroup = GetQuestionsForAgeGroup(AContext, AAgeGroup);

@@ -221,7 +221,7 @@
 
     function changeTimer() {
         if (!ingame) return;
-        
+
         var time = parseInt($("#timer").text());
         time--;
         $("#timer").text(time);
@@ -343,16 +343,42 @@
                     if (data.IsCorrect) {
                         // mostra "Você acertou!"
                         $("#quiztitle").text("ACERTOU!");
-                        // botao continuar chama next question
-                        continueUrl = '@Url.Action("NextQuestion", "Quiz")';
+
+                        @if (ViewBag.MultiPlayer)
+                        {
+                        <text>
+                            // botao continuar chama next MULTIPLAYER question
+                            continueUrl = '/Quiz/NextMultiplayerQuestion?ANamUser1=' + localStorage.NamUser1 + '&ANamUser2=' + localStorage.NamUser2
+                        </text>
+                        }
+                        else
+                        {
+                        <text>
+                            // botao continuar chama next question
+                            continueUrl = '@Url.Action("NextQuestion", "Quiz")';
+                        </text>
+                        }
+
                         continueData = null;
                     }
                     else {
                         // mostra "Você errou!"
                         $("#quiztitle").text("ERROU!");
-                        // botao continuar chama endgame
-                        continueUrl = '@Url.Action("Lose", "Quiz")';
-                        continueData = false;
+
+                        @if (ViewBag.MultiPlayer)
+                        {
+                        <text>
+                            // botao continuar chama next MULTIPLAYER question
+                            continueUrl = '/Quiz/NextMultiplayerQuestion?ANamUser1=' + localStorage.NamUser1 + '&ANamUser2=' + localStorage.NamUser2
+                        </text>
+                        }
+                        else {
+                        <text>
+                            // botao continuar chama endgame
+                            continueUrl = '@Url.Action("EndGame", "Quiz")';
+                            continueData = false;
+                        </text>
+                        }
                     }
 
                     $("#questiontext").text(data.Answer.toString());

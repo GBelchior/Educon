@@ -53,8 +53,8 @@ namespace Educon.Hubs
 
         public void RequestAccepted(string ANamUser)
         {
-            Clients.Caller.StartGameBetween(HttpContext.Current.User.Identity.Name, ANamUser);
-            Clients.User(ANamUser).StartGameBetween(HttpContext.Current.User.Identity.Name, ANamUser);
+            Clients.Caller.StartGameBetween(ANamUser, HttpContext.Current.User.Identity.Name);
+            Clients.User(ANamUser).StartGameBetween(ANamUser, HttpContext.Current.User.Identity.Name);
         }
     }
 }

@@ -12,24 +12,28 @@ namespace Educon.Controllers
     {
         QuizCore Core = new QuizCore(); 
 
-        public ActionResult EndGame(bool AWin)
+        public ActionResult EndGame(bool AWin, int AQtyCorQuestions, int AQtyQuestions)
         {
             ViewBag.Win = AWin;
+            SinglePlayerEndGameViewModel LModel = new SinglePlayerEndGameViewModel();
+            LModel.QtyCorQuestions = AQtyCorQuestions;
+            LModel.QtyQuestions = AQtyQuestions;
+            LModel.QtyExperience = (AQtyCorQuestions * 50);
 
-            return View();
+            return View(LModel);
         }
 
-        public ActionResult Lose()
+        public ActionResult Lose(int AQtyCorQuestions, int AQtyQuestions)
         {
-            return Json((new { redirectUrl = Url.Action("EndGame", "Quiz", new { AWin = false }) }), JsonRequestBehavior.AllowGet);
+            return Json((new { redirectUrl = Url.Action("EndGame", "Quiz", new { AWin = false, AQtyCorQuestions = AQtyCorQuestions - 1, AQtyQuestions = AQtyQuestions }) }), JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult NextQuestion()
+        public ActionResult NextQuestion(int AQtyQuestions)
         {
             List<Question> LQuestions = (List<Question>) Session["Questions"];
 
             if (LQuestions.Count == 0)
-                return Json((new { redirectUrl = Url.Action("EndGame", "Quiz", new { AWin = true })}), JsonRequestBehavior.AllowGet);
+                return Json((new { redirectUrl = Url.Action("EndGame", "Quiz", new { AWin = true, AQtyCorQuestions = AQtyQuestions, AQtyQuestions = AQtyQuestions })}), JsonRequestBehavior.AllowGet);
 
             Question LQuestion = LQuestions.FirstOrDefault();
             LQuestions.Remove(LQuestion);

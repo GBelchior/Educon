@@ -171,7 +171,7 @@
             </div>
         </div>
 
-        <div class="col-md-5 questioncontainer">
+        <div class="col-md-5 questioncontainer" style="padding-left: 0; padding-right: 0;">
             <div class="question">
                 <div class="auxcontainer">
                     <p id="questiontext">
@@ -230,8 +230,18 @@
         {
             $.ajax({
                 type: "POST",
-                url: '@Url.Action("EndGame", "Quiz")',
-                data: AWin = false
+                url: '@Url.Action("Lose", "Quiz")',
+                data: {
+                    AWin: false,
+                    AQtyCorQuestions: $("#currentQuestion").text(),
+                    AQtyQuestions: $("#totalQuestions").text()
+                },
+                success: function (data) {
+                    if (data) {
+                        window.location = data.redirectUrl;
+                    }
+                },
+                error: function (err) { alert(err.responseText); }
             });
         }
     }
@@ -244,13 +254,14 @@
     }
 
     $('#continue').bind('click', function () {
-        ingame = true;
 
-        if (continueData == null)
-        {
+        if (continueData == null) {
             $.ajax({
                 type: "POST",
                 url: continueUrl,
+                data: {
+                    AQtyQuestions: $("#totalQuestions").text()
+                },
                 success: function (data) {
 
                     if (data.redirectUrl) {
@@ -268,7 +279,7 @@
 
                         $("#continuebutton").hide();
                         $("#correctcontainer").hide();
-                        $("#timer").val("30");
+                        $("#timer").text(30);
 
                         $("#NidQuestion").val(data.NidQuestion);
                         $("#questiontext").text(data.DesQuestion);
@@ -288,16 +299,21 @@
             $.ajax({
                 type: "POST",
                 url: continueUrl,
-                data: { AWin: false },
+                data: {
+                    AWin: false,
+                    AQtyCorQuestions: $("#currentQuestion").text(),
+                    AQtyQuestions: $("#totalQuestions").text()
+                },
                 success: function (data) {
                     if (data) {
-                        window.location = data;
+                        window.location = data.redirectUrl;
                     }
                 },
                 error: function (err) { alert(err.responseText); }
             });
         }
         
+        ingame = true;
     });
 
     $('.answer').bind('click', function () {
@@ -340,7 +356,6 @@
                         continueUrl = '@Url.Action("Lose", "Quiz")';
                         continueData = false;
                     }
-
 
                     $("#questiontext").text(data.Answer.toString());
                 },

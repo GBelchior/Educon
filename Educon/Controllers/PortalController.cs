@@ -12,7 +12,8 @@ namespace Educon.Controllers
     [Authorize]
     public class PortalController : Controller
     {
-        private PortalCore Core = new PortalCore();        
+        private PortalCore Core = new PortalCore();
+        private static object FLock = new object();
 
         public ActionResult Index()
         {
@@ -23,7 +24,7 @@ namespace Educon.Controllers
         {
             ICollection<User> LFriends = Core.GetFriendsOfUser(AccountHelpers.GetSignedUser().NidUser);
             ICollection<User> LUserFriends = new List<User>();
-            foreach(User LUser in LFriends)
+            foreach (User LUser in LFriends)
             {
                 LUserFriends.Add(new User { NidUser = LUser.NidUser, NamUser = LUser.NamUser, IsOnline = LUser.IsOnline, QtdExperience = LUser.QtdExperience, NamPerson = LUser.NamPerson });
             }
@@ -34,23 +35,42 @@ namespace Educon.Controllers
         public ActionResult Quiz(Category ACategory = Category.Energy, String ANamUser = "alissongiron")
         {
             User LUser = Core.GetUserByName(ANamUser);
-            List<Question> LQuizQuestions = Core.GetQuestions(LUser.NidUser, LUser.AgeGroup, ACategory);
-
+            List<Question> LQuizQuestions = Core.GetQuestions(LUser.AgeGroup, ACategory);
 
             Session["Questions"] = LQuizQuestions;
 
-            List<Question> LQuestions = (List<Question>) Session["Questions"];
+            List<Question> LQuestions = (List<Question>)Session["Questions"];
 
             Question LQuestion = LQuestions.FirstOrDefault();
             LQuestions.Remove(LQuestion);
             Session["Questions"] = LQuestions;
-            
+
             QuizViewModel LReturnedQuestion = new QuizViewModel(LQuestion);
             LReturnedQuestion.QtyQuestions = (LQuestions.Count() + 1);
 
             return View(LReturnedQuestion);
         }
-               
+
+        public ActionResult StartGameBetween(string ANamUser1, string ANamUser2)
+        {
+            lock (FLock)
+            {
+                if (HttpContext.Application[$"Game-[{ANamUser1}]-{ANamUser2}"] == null)
+                {
+                    HttpContext.Application[$"Game-[{ANamUser1}]-{ANamUser2}"] =
+                        Core.GetQuestionListForMatch(ANamUser1, ANamUser2, 15);
+                }
+
+                Session["NumCurrentQuestion"] = 1;
+
+                Question LFirstQuestion = ((ICollection<Question>)HttpContext.Application[$"Game-[{ANamUser1}]-{ANamUser2}"]).First();
+
+                ViewBag.MultiPlayer = true;
+
+                return View("Quiz", new QuizViewModel(LFirstQuestion));
+            }
+        }
+
         public ActionResult AddFriend(string AUserName)
         {
             bool LCanAddFriend = false;
@@ -65,8 +85,9 @@ namespace Educon.Controllers
         private bool VerifyUser(string AUserName)
         {
             User LUser = Core.GetUserByName(AUserName);
-            return (LUser != null) ? true : false;
-        }        
+            return (LUser != null);
+        }
+
         public ActionResult Ranking()
         {
             return View(Core.GetRankingList());

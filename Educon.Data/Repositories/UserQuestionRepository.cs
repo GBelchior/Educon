@@ -14,7 +14,7 @@ namespace Educon.Data
         {
             User LUser = UserRepository.GetUser(AContext, ANidUser);
             Question LQuestion = QuestionRepository.GetQuestion(AContext, ANidQuestion);
-            UserQuestion LUserQuestion = AContext.UserQuestions.SingleOrDefault(uq => uq.NidUser == LUser.NidUser && uq.NidQuestion == LQuestion.NidQuestion);
+            UserQuestion LUserQuestion = AContext.UserQuestions.ToList().SingleOrDefault(uq => uq.NidUser == LUser.NidUser && uq.NidQuestion == LQuestion.NidQuestion);
 
             if (LUserQuestion == null)
             {

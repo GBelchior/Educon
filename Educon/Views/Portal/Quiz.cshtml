@@ -344,7 +344,7 @@
                         // mostra "Você acertou!"
                         $("#quiztitle").text("ACERTOU!");
 
-                        @if (ViewBag.MultiPlayer)
+                        @if (ViewBag.MultiPlayer != null && ViewBag.MultiPlayer)
                         {
                         <text>
                             // botao continuar chama next MULTIPLAYER question
@@ -365,7 +365,7 @@
                         // mostra "Você errou!"
                         $("#quiztitle").text("ERROU!");
 
-                        @if (ViewBag.MultiPlayer)
+                        @if (ViewBag.MultiPlayer != null && ViewBag.MultiPlayer)
                         {
                         <text>
                             // botao continuar chama next MULTIPLAYER question

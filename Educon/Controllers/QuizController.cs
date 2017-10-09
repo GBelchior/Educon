@@ -1,4 +1,5 @@
 ﻿using Educon.Core;
+using Educon.Helpers;
 using Educon.Models;
 using Educon.ViewModels;
 using System.Collections.Generic;
@@ -63,15 +64,24 @@ namespace Educon.Controllers
             return Json(LAnswer, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult NextMultiplayerQuestion(string ANamUser1, string ANamUser2)
+        public ActionResult NextMultiplayerQuestion(string ANamUser1, string ANamUser2, int AQtyCorQuestions)
         {
             ICollection<Question> LMatchQuestions = ((ICollection<Question>)HttpContext.Application[$"Game-[{ANamUser1}]-{ANamUser2}"]);
             int LNextQuestion = (int)Session["NumCurrentQuestion"];
             Session["NumCurrentQuestion"] = LNextQuestion + 1;
 
-            Question LQuestion = LMatchQuestions.ElementAt(LNextQuestion);
+            Question LQuestion = LMatchQuestions.ElementAtOrDefault(LNextQuestion);
 
-            return Json(new QuizViewModel(LQuestion), JsonRequestBehavior.AllowGet);
+            if (LQuestion == null)
+            {
+                return Json((new { redirectUrl = Url.Action("EndMultiPlayerGame", new { AQtyCorQuestions = AQtyCorQuestions, AQtyQuestions = AQtyCorQuestions }) }), JsonRequestBehavior.AllowGet);
+            }
+
+            QuizViewModel LQuestionViewModel = new QuizViewModel(LQuestion);
+            LQuestionViewModel.NidUser = AccountHelpers.GetSignedUser().NidUser;
+            LQuestionViewModel.QtyQuestions = 15 + 1 - (int)Session["NumCurrentQuestion"];
+
+            return Json(LQuestionViewModel, JsonRequestBehavior.AllowGet);
         }
     }
 }

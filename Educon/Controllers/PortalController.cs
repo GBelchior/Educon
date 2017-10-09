@@ -72,7 +72,11 @@ namespace Educon.Controllers
 
                 ViewBag.MultiPlayer = true;
 
-                return View("Quiz", new QuizViewModel(LFirstQuestion));
+                QuizViewModel LQuestion = new QuizViewModel(LFirstQuestion);
+                LQuestion.NidUser = AccountHelpers.GetSignedUser().NidUser;
+                LQuestion.QtyQuestions = 15 + 1 - (int)Session["NumCurrentQuestion"];
+
+                return View("Quiz", LQuestion);
             }
         }
 

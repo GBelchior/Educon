@@ -52,6 +52,10 @@
     <Compile Include="Migrations\201710032011057_Migration_0310.Designer.cs">
       <DependentUpon>201710032011057_Migration_0310.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710082130585_Adiciona explicacao da questao.cs" />
+    <Compile Include="Migrations\201710082130585_Adiciona explicacao da questao.Designer.cs">
+      <DependentUpon>201710082130585_Adiciona explicacao da questao.cs</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\EduconRepositoryBase.cs" />
     <Compile Include="Mappings\QuestionMap.cs" />
     <Compile Include="Mappings\UserMap.cs" />
@@ -65,6 +69,7 @@
     <Compile Include="Repositories\MultiplayerRepository.cs" />
     <Compile Include="Repositories\PortalRepository.cs" />
     <Compile Include="Repositories\QuestionRepository.cs" />
+    <Compile Include="Repositories\QuizRepository.cs" />
     <Compile Include="Repositories\UserQuestionRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
@@ -92,6 +97,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710032011057_Migration_0310.resx">
       <DependentUpon>201710032011057_Migration_0310.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710082130585_Adiciona explicacao da questao.resx">
+      <DependentUpon>201710082130585_Adiciona explicacao da questao.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

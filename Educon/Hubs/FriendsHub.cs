@@ -21,7 +21,7 @@ namespace Educon.Hubs
                 LUserCore.SetUserOnline(LUser);
             }
 
-            Clients.All.UserOnline(LUser);
+            Clients.All.UserOnline(LUser.NamUser);
 
             return base.OnConnected();
         }
@@ -36,9 +36,25 @@ namespace Educon.Hubs
                 LUserCore.SetUserOffline(LUser);
             }
 
-            Clients.All.UserOffline(LUser);
+            Clients.All.UserOffline(LUser.NamUser);
 
             return base.OnDisconnected(stopCalled);
+        }
+
+        public void PlayRequest(string ANamUser)
+        {
+            Clients.User(ANamUser).ReceivePlayRequest(HttpContext.Current.User.Identity.Name);
+        }
+
+        public void RequestDenied(string ANamUser)
+        {
+            Clients.User(ANamUser).RequestDenied();
+        }
+
+        public void RequestAccepted(string ANamUser)
+        {
+            Clients.Caller.StartGameBetween(HttpContext.Current.User.Identity.Name, ANamUser);
+            Clients.User(ANamUser).StartGameBetween(HttpContext.Current.User.Identity.Name, ANamUser);
         }
     }
 }

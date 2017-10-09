@@ -14,7 +14,6 @@ namespace Educon.Controllers
     {
         private PortalCore Core = new PortalCore();        
 
-        // GET: Portal
         public ActionResult Index()
         {
             return View();
@@ -31,14 +30,13 @@ namespace Educon.Controllers
 
             return Json(LUserFriends, JsonRequestBehavior.AllowGet);
         }
+
         public ActionResult Quiz(Category ACategory = Category.Energy, String ANamUser = "alissongiron")
         {
-            // TODO: deixar o método GetUserByName estático
-            
-            //User LUser = Core.GetUserByName("ANamUser");
-            //List<Question> LQuizQuestions = Core.GetQuestions(LUser.NidUser, LUser.AgeGroup, ACategory);
+            User LUser = Core.GetUserByName(ANamUser);
+            List<Question> LQuizQuestions = Core.GetQuestions(LUser.NidUser, LUser.AgeGroup, ACategory);
 
-            List<Question> LQuizQuestions = Core.GetQuestions(1, AgeGroup.PreTeenager, ACategory);
+
             Session["Questions"] = LQuizQuestions;
 
             List<Question> LQuestions = (List<Question>) Session["Questions"];
@@ -48,6 +46,7 @@ namespace Educon.Controllers
             Session["Questions"] = LQuestions;
             
             QuizViewModel LReturnedQuestion = new QuizViewModel(LQuestion);
+            LReturnedQuestion.QtyQuestions = (LQuestions.Count() + 1);
 
             return View(LReturnedQuestion);
         }

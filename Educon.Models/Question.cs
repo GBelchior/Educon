@@ -17,6 +17,7 @@ namespace Educon.Models
         public string DesAnswerFour { get; set; }
         public int NumCorrectAnswer { get; set; }
         public Category Category { get; set; }
+        public string DesAnswer { get; set; }
         public virtual ICollection<UserQuestion> UserQuestions { get; set; }
     }
 }

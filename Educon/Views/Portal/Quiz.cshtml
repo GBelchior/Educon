@@ -1,11 +1,4 @@
-
-@model Educon.Models.Question
-
-
-@Styles.Render("~/Content/css")
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/material")
-
+@model Educon.ViewModels.QuizViewModel
 @{
     Layout = null;
 }
@@ -49,17 +42,17 @@
             padding: 10%;
         }
 
-            .question p {
-                margin-top: 25%;
-                width: 100%;
-                height: 100%;
-                font-size: 2em;
-                font-family: "Bebas Neue", Arial;
-                color: white;
-                letter-spacing: 1px;
-                line-height: 35px;
-                text-align: justify;
-            }
+        .question p {
+            margin-top: 25%;
+            width: 100%;
+            height: 100%;
+            font-size: 2em;
+            font-family: "Bebas Neue", Arial;
+            color: white;
+            letter-spacing: 1px;
+            line-height: 35px;
+            text-align: justify;
+        }
 
         .headerbar {
             height: 20vh;
@@ -72,22 +65,21 @@
             z-index: 9999;
         }
 
-            .headerbar p, .headerbar label {
-                font-size: 4.5em;
-                font-family: "Bebas Neue", Arial;
-                color: white;
-                letter-spacing: 1px;
-                line-height: 35px;
-                text-align: justify;
-                margin-top: 45px;
-            }
+        .headerbar p, .headerbar label {
+            font-size: 4.5em;
+            font-family: "Bebas Neue", Arial;
+            color: white;
+            letter-spacing: 1px;
+            line-height: 35px;
+            text-align: justify;
+            margin-top: 45px;
+        }
 
         .question p::first-letter {
             font-size: 2em;
             color: indianred;
             font-weight: bold;
         }
-
 
         .auxcontainer {
             margin-top: 30%;
@@ -107,13 +99,42 @@
             line-height: 35px;
         }
 
-            .answer:hover {
-                border-radius: 20px;
-                cursor: pointer;
-                background-color: red;
-                transform: scale(1.1);
+        .answer:hover {
+            border-radius: 20px;
+            cursor: pointer;
+            background-color: red;
+            transform: scale(1.1);
+        }
+
+        #continuebutton {
+            height: 15vh;
+            width: 15vw;
+            margin-left: 72vw;
+            position: absolute;
+            z-index: 9999;
+        }
+
+        #continue {
+            height: 100%;
+            line-height: 300px;
+            text-align: center;
+            font-size: 10em;
+            font-family: "Bebas Neue", Arial;
+            color: white;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+        }
+
+            #continue p {
+                font-size: 0.4em;
+                line-height: 14vh;
             }
 
+        #continue:hover {
+            cursor: pointer;
+            background-color: red;
+        }
+        
         @@media all and (max-width: 800px) {
             .principal {
                 width: 70vw;
@@ -128,6 +149,9 @@
             }
         }
     </style>
+
+    @Styles.Render("~/css/site")
+    @Scripts.Render("~/js/site")
 </head>
 
 <body class="background">
@@ -136,15 +160,21 @@
 
     <div class="principal">
         <div class="headerbar">
-            <div class="col-md-6"><p style="margin-left: 25%;">ENERGIA</p></div>
-            <div class="col-md-4"><label id="currentQuestion">1</label><label>/</label><label id="totalQuestions">15</label></div>
+            <div class="col-md-6"><p id="quiztitle" style="margin-left: 25%;">@Model.Category</p></div>
+            <div class="col-md-4"><label id="currentQuestion">1</label><label>/</label><label id="totalQuestions">@Model.QtyQuestions</label></div>
             <div class="col-md-2"><p id="timer">30</p></div>
         </div>
-        <div class="col-md-5 questioncontainer">
 
+        <div id="continuebutton" style="display: none;">
+            <div id="continue" style="background-color: #00cc00;">
+                <p>Continue</p>
+            </div>
+        </div>
+
+        <div class="col-md-5 questioncontainer">
             <div class="question">
                 <div class="auxcontainer">
-                    <p>
+                    <p id="questiontext">
                         @Model.DesQuestion
                     </p>
                 </div>
@@ -152,8 +182,12 @@
         </div>
         <div class="col-md-1" style="background-color: #411e64; height: 100%;"></div>
 
+       
+
         <div class="col-md-6" style="padding: 20px;">
             <div class="row answercontainer">
+
+
                 <div id="one" class="data" style="background-color: #66cccc; border-top-left-radius: 10px; border-top-right-radius: 10px;">
                     <p class="answer" id="1">1. @Model.DesAnswerOne</p>
                 </div>
@@ -169,42 +203,149 @@
                 <div id="four" class="data" style="background-color: #00cc00; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
                     <p class="answer" id="4">4. @Model.DesAnswerFour</p>
                 </div>
+
+               
             </div>
         </div>
     </div>
 </body>
 
 <script>
+    var continueUrl = "";
+    var continueData = null;
+    var ingame = true;
+
     $(document).ready(function () {
         setInterval(changeTimer, 1000);
     });
 
     function changeTimer() {
+        if (!ingame) return;
+        
         var time = parseInt($("#timer").text());
-        if (time > 0)
+        time--;
+        $("#timer").text(time);
+
+        if (time == 0)
         {
-            time--;
-            $("#timer").text(time);
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("EndGame", "Quiz")',
+                data: AWin = false
+            });
         }
     }
 
-    $('.answer').bind('click', function () {
+    function updateQuestion()
+    {
+        var question = parseInt($("#currentQuestion").text());
+        question++;
+        $("#currentQuestion").text(question);
+    }
 
-        $.ajax({
+    $('#continue').bind('click', function () {
+        ingame = true;
+
+        if (continueData == null)
+        {
+            $.ajax({
                 type: "POST",
-                url: '@Url.Action("Create", "User")',
-                data: {
-                    ADesName: LName
-                },
-                dataType: "json",
-                success: function (type) {
-                   
-                },
+                url: continueUrl,
+                success: function (data) {
 
+                    if (data.redirectUrl) {
+                        window.location = data.redirectUrl;
+                    }
+                    else {
+                        $('.answer').each(function () {
+                            $(this).parent().show();
+                        });
+
+                        $("#1").css('background-color', '');
+                        $("#2").css('background-color', '');
+                        $("#3").css('background-color', '');
+                        $("#4").css('background-color', '');
+
+                        $("#continuebutton").hide();
+                        $("#correctcontainer").hide();
+                        $("#timer").val("30");
+
+                        $("#NidQuestion").val(data.NidQuestion);
+                        $("#questiontext").text(data.DesQuestion);
+                        $("#1").text("1. " + data.DesAnswerOne);
+                        $("#2").text("2. " + data.DesAnswerTwo);
+                        $("#3").text("3. " + data.DesAnswerThree);
+                        $("#4").text("4. " + data.DesAnswerFour);
+                        $("#quiztitle").text(data.Category);
+                        updateQuestion();
+                    }
+                },
                 error: function (err) { alert(err.responseText); }
             });
-
-        alert($(this).attr('id'));
+        }
+        else
+        {
+            $.ajax({
+                type: "POST",
+                url: continueUrl,
+                data: { AWin: false },
+                success: function (data) {
+                    if (data) {
+                        window.location = data;
+                    }
+                },
+                error: function (err) { alert(err.responseText); }
+            });
+        }
+        
     });
+
+    $('.answer').bind('click', function () {
+
+            if (!ingame) return;
+
+            ingame = false;
+
+            var id = $(this).attr('id');
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ValidateAnswer", "Quiz")',
+                data: {
+                    ANidUser: 1,
+                    ANidQuestion: $("#NidQuestion").val(),
+                    ANumAnswer: id
+                },
+                dataType: "json",
+                success: function (data) {
+
+                    $(".answer").css('background-color', 'lightgrey')
+                    $("#" + id).css('background-color', 'red')
+                    $("#" + data.NumCorrectAnswer).css('background-color', 'green')
+
+
+                    $("#continuebutton").show();
+                    //$("#correctcontainer").show();
+
+                    if (data.IsCorrect) {
+                        // mostra "Você acertou!"
+                        $("#quiztitle").text("ACERTOU!");
+                        // botao continuar chama next question
+                        continueUrl = '@Url.Action("NextQuestion", "Quiz")';
+                        continueData = null;
+                    }
+                    else {
+                        // mostra "Você errou!"
+                        $("#quiztitle").text("ERROU!");
+                        // botao continuar chama endgame
+                        continueUrl = '@Url.Action("EndGame", "Quiz")';
+                        continueData = false;
+                    }
+
+
+                    $("#questiontext").text(data.Answer.toString());
+                },
+                error: function (err) { alert(err.responseText); }
+            });
+    })
 
 </script>

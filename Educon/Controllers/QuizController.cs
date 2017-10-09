@@ -1,9 +1,8 @@
-﻿using Educon.Models;
+﻿using Educon.Core;
+using Educon.Models;
 using Educon.ViewModels;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Educon.Controllers
@@ -11,22 +10,21 @@ namespace Educon.Controllers
     [Authorize]
     public class QuizController : Controller
     {
-        public ActionResult Index()
-        {
-            return View();
-        }
+        QuizCore Core = new QuizCore(); 
 
-        public ActionResult EndGame()
+        public ActionResult EndGame(bool AWin)
         {
-            return View();
+            ViewBag.Win = AWin;
+
+            return Json(Url.Action("EndGame", "Quiz", new { AWin = AWin }), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult NextQuestion()
         {
-            List<Question> LQuestions = (List<Question>)Session["Questions"];
+            List<Question> LQuestions = (List<Question>) Session["Questions"];
 
             if (LQuestions.Count == 0)
-                RedirectToAction("EndGame");
+                return Json((new { redirectUrl = Url.Action("EndGame", "Quiz", new { AWin = true })}), JsonRequestBehavior.AllowGet);
 
             Question LQuestion = LQuestions.FirstOrDefault();
             LQuestions.Remove(LQuestion);
@@ -36,5 +34,24 @@ namespace Educon.Controllers
 
             return Json(LReturnedQuestion, JsonRequestBehavior.AllowGet);
         }
+         
+        public ActionResult ValidateAnswer(int ANidUser, int ANidQuestion, int ANumAnswer)
+        {
+            Question LQuestion = Core.GetQuestion(ANidQuestion);
+            QuizAnswerViewModel LAnswer = new QuizAnswerViewModel();
+
+            LAnswer.Answer = LQuestion.DesAnswer;
+            LAnswer.NumCorrectAnswer = LQuestion.NumCorrectAnswer;
+            LAnswer.IsCorrect = (LQuestion.NumCorrectAnswer == ANumAnswer);
+                
+            if (LAnswer.IsCorrect)
+            {
+                // Adiciona questao correta no user
+            }
+
+            return Json(LAnswer, JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }

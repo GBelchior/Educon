@@ -44,13 +44,16 @@ namespace Educon.Data
 
         public User GetUserByName(string AUserName)
         {
+
             return GetUserByName(FContext, AUserName);
+
         }
 
         public static User GetUserByName(EduconContext AContext, string AUserName)
         {
             return AContext.Users
                .SingleOrDefault(u => u.NamUser.Equals(AUserName, StringComparison.InvariantCultureIgnoreCase));
+
         }
 
         public User GetUserByEmail(string ADesEmail)

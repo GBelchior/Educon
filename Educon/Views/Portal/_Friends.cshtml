@@ -43,7 +43,7 @@
     }
 </style>
 
-<div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width:300px; height:90vh;background-color: white;">
+<div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width:300px; margin-top:-20px; height:90vh;background-color: white;">
 
     <div class="row" style="height:10%; background-color: rebeccapurple; color:white; font-family:'Bebas Neue'; font-size: 30px;">
         <center><label style="margin-top:30px;">Lista de Amigos</label></center>
@@ -63,50 +63,3 @@
         </div>
     </div>
 </div>
-
-<script>
-
-    // Listagem de amigos
-    $(document).ready(function () {
-
-        $.ajax({
-            type: "POST",
-            url: '@Url.Action("GetFriendsOfUser", "Portal")',
-            data: {
-
-            },
-            dataType: "json",
-            success: function (list) {
-
-                list.forEach(function (item) {
-                    var template =
-                        '<button id="btnFriend' + item.NamUser +'" class="list-group-item" style="width:90%;margin: 0 auto;" data-toggle="collapse" data-target="#divPlay' + item.NamUser + '">' +
-                            '<label style="font-family:Bebas Neue; font-size: 25px;">' +
-                                item.NamPerson +
-                            '</label>' +
-                            '<div class="status-led"></div>' +
-                            '<label class="status-text"></label>' +
-                        '</button>' +
-                        '<div id="divPlay' + item.NamUser + '" class="collapse">' +
-                        '<a href="#" style="font-family:Bebas Neue;font-size:18pt;" class="textBold buttonSair mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="playRequest(\'' + item.NamUser +'\', \'' + item.NamPerson + '\')">Jogar!</a>' +
-                        '</div>';
-
-                    $('#listFriends').append(template);
-
-                    var newButtonSelector = '#btnFriend' + item.NamUser;
-
-                    if (item.IsOnline) {
-                        $(newButtonSelector).removeAttr('disabled');
-                        $(newButtonSelector + ' div.status-led').addClass('user-online');
-                        $(newButtonSelector + ' label.status-text').addClass('user-online');
-                    }
-                    else {
-                        $(newButtonSelector).attr('disabled', 'disabled');
-                        $(newButtonSelector + ' div.status-led').addClass('user-offline');
-                        $(newButtonSelector + ' label.status-text').addClass('user-offline');
-                    }
-                });
-            }
-        });
-    });
-</script>

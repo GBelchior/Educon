@@ -40,6 +40,12 @@ namespace Educon.Data
             return UserRepository.GetUserByName(FContext, ANamUser);
         }
 
+        public void AddFriend(User AUser, User ANewFriend)
+        {
+            UserRepository.AddFriend(FContext, AUser, ANewFriend);
+        }
+
+
         public ICollection<User> GetFriendsOfUser(int ANidUser)
         {
             return UserRepository.GetFriendsOfUser(FContext, ANidUser).Friends;

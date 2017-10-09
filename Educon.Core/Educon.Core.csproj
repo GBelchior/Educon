@@ -61,7 +61,6 @@
   <ItemGroup>
     <Compile Include="DependencyResolver.cs" />
     <Compile Include="EduconCoreBase.cs" />
-    <Compile Include="MultiplayerCore.cs" />
     <Compile Include="PortalCore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuizCore.cs" />

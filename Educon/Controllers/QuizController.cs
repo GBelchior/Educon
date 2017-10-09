@@ -61,6 +61,28 @@ namespace Educon.Controllers
             return Json(LAnswer, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult StartGameBetween(string ANamUser1, string ANamUser2)
+        {
+            if (HttpContext.Application[$"Game-[{ANamUser1}]-{ANamUser2}"] == null)
+            {
+                HttpContext.Application[$"Game-[{ANamUser1}]-{ANamUser2}"] =
+                    Core.GetQuestionListForMatch(ANamUser1, ANamUser2, 15);
+            }
 
+            Session["NumCurrentQuestion"] = 0;
+
+            return RedirectToAction("NextMultiplayerQuestion");
+        }
+
+        public ActionResult NextMultiplayerQuestion(string ANamUser1, string ANamUser2)
+        {
+            ICollection<Question> LMatchQuestions = ((ICollection<Question>)HttpContext.Application[$"Game-[{ANamUser1}]-{ANamUser2}"]);
+            int LNextQuestion = (int)Session["NumCurrentQuestion"];
+            Session["NumCurrentQuestion"] = LNextQuestion + 1;
+
+            Question LQuestion = LMatchQuestions.ElementAt(LNextQuestion);
+
+            return Json(LQuestion, JsonRequestBehavior.AllowGet);
+        }
     }
 }

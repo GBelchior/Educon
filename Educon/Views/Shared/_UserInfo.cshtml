@@ -24,7 +24,7 @@
     </div>
     <div class="row bar"></div>
     <div class="menu">
-        <label class="nameText" id="headerLevel" style="margin-top:40px;">@Model.NumLevel</label>
+        <label class="nameText" id="headerLevel" style="margin-top:40px;">Nível @Model.NumLevel</label>
     </div>
     <div class="row bar"></div>
     <div class="menu">
@@ -36,16 +36,20 @@
                 <label class="nameText" style="color:black; font-size:2.5em;">15</label>
             </div>*@
 
-        <div class="row">
+        @*<div class="row">
             <a href="@Url.Action("Ranking", "Portal")" class="textBold buttonSair mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
                 Ranking
             </a>
-        </div>
+        </div>*@
 
-        <div class="row">
-            <a href="@Url.Action("SignOut", "User")" class="textBold buttonSair mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="font-weight: bold;" onclick="onLogout()">
-                Sair
-            </a>
+        <div class="row" style="height:100%;">
+            <br />
+            <br />  
+            <center>
+                <a href="@Url.Action("SignOut", "User")" class="textBold buttonSair mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style=" border-radius:20px; width:150px; margin:0 auto; font-size:35px; color:white; font-family: 'Bebas Neue';" onclick="onLogout()">
+                    Sair
+                </a>
+            </center>
         </div>
     </div>
 

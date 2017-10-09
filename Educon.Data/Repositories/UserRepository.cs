@@ -31,6 +31,17 @@ namespace Educon.Data
             }
         }
 
+        public static void IncreaseUserExperience(EduconContext AContext, int ANidUser, int AExperience)
+        {
+            User LUser = AContext.Users.Where(p => p.NidUser == ANidUser).FirstOrDefault();
+
+            if (LUser != null)
+            {
+                LUser.QtdExperience += AExperience;
+                AContext.SaveChanges();
+            }
+        }
+
         public static List<User> GetUsers(EduconContext AContext)
         {
             return AContext.Users.ToList();

@@ -1,0 +1,99 @@
+﻿
+<style>
+    .category {
+        height: 50vh;
+        width: 15vw;
+        margin-left: 4%;
+        margin-top: 25vh;
+        float: left;
+        background-color: white;
+        border-radius: 20px;
+        transition: all 0.5s ease;
+        transform: scale(1);
+    }
+
+    .category:hover {
+        transition: all 0.5s ease;
+        cursor: pointer;
+        transform: scale(1.2);
+    }
+
+    .title {
+        position: absolute;
+        height: 10vh;
+        width: 50vw;
+        left: 25vw;
+        background-color: indianred;
+        border-bottom-left-radius: 50px;
+        border-bottom-right-radius: 50px;
+        font-size: 2em;
+        font-family: "Bebas Neue", Arial;
+        color: white;
+        text-align: center;
+    }
+
+    .categorylabel {
+        font-size: 2em;
+        font-family: "Bebas Neue", Arial;
+        color: dimgrey;
+        text-align: center;
+    }
+</style>
+
+<div class="row">
+
+    <div class="title"><br>Selecione uma categoria para jogar!</div>
+
+    <div class="category">
+        <a style="text-decoration: none;" href="@Url.Action("Quiz", "Portal")">
+            <div style="height: 80%;">
+                <img src="~/Content/Images/random.png" class="demo-card-wide" style="width:80%; margin-left: 10%; margin-top: 30%;" />
+            </div>
+            <hr>
+            <p class="categorylabel">Aleatório</p>
+        </a>
+    </div>
+
+    <div class="category">
+        <a style="text-decoration: none;" href="@Url.Action("Quiz", "Portal", new { ACategory = 0 })">
+            <div style="height: 80%;">
+                <img src="~/Content/Images/water.png" class="demo-card-wide" style="width:80%; margin-left: 10%; margin-top: 30%;" />
+            </div>
+            <hr>
+            <p class="categorylabel">Água</p>
+        </a>
+    </div>
+
+    <div class="category">
+        <a style="text-decoration: none;" href="@Url.Action("Quiz", "Portal", new { ACategory = 2 })">
+            <div style="height: 80%;">
+                <img src="~/Content/Images/environment.png" class="demo-card-wide" style="width:80%; margin-left: 10%; margin-top: 30%;" />
+            </div>
+            <hr>
+            <p class="categorylabel">Meio Ambiente</p>
+        </a>
+    </div>
+
+    <div class="category">
+        <a style="text-decoration: none;" href="@Url.Action("Quiz", "Portal", new { ACategory = 1 })">
+            <div style="height: 80%;">
+                <img src="~/Content/Images/energy.png" class="demo-card-wide" style="width:80%; margin-left: 10%; margin-top: 30%;" />
+            </div>
+            <hr>
+            <p class="categorylabel">Energia</p>
+        </a>
+    </div>
+
+    <div class="category">
+        <a style="text-decoration: none;" href="@Url.Action("Quiz", "Portal", new { ACategory = 3 })">
+            <div style="height: 80%;">
+                <img src="~/Content/Images/recycle.png" class="demo-card-wide" style="width:80%; margin-left: 10%; margin-top: 30%;" />
+            </div>
+            <hr>
+            <p class="categorylabel">Reciclagem</p>
+        </a>
+    </div>
+
+</div>
+
+

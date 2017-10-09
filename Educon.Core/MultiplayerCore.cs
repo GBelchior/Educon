@@ -34,6 +34,7 @@ namespace Educon.Core
                     !q.UserQuestions.Any(u => u.NidUser == AUser1.NidUser) ||
                     !q.UserQuestions.Any(u => u.NidUser == AUser2.NidUser)
                 )
+                .OrderBy(q => q.UserQuestions.Select(u => u.QtdAnswers))
                 .ToList();
 
             // Questões que vou retornar
@@ -58,7 +59,7 @@ namespace Educon.Core
                     LQuestionsOfAgeGroup.Remove(LQuestion);
                 }
 
-                // TODO: ordenar as questões pelas menos respondidas de cada usuário
+                LQuestionsOfAgeGroup.OrderBy(q => q.UserQuestions.Select(u => u.QtdAnswers));
 
                 LReturnQuestions.AddRange(LQuestionsOfAgeGroup.Take(ANumQuestions - LReturnQuestions.Count));
             }

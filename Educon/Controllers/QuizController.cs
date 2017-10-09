@@ -12,11 +12,6 @@ namespace Educon.Controllers
     {
         QuizCore Core = new QuizCore(); 
 
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         public ActionResult EndGame(bool AWin)
         {
             ViewBag.Win = AWin;

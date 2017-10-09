@@ -21,7 +21,8 @@ namespace Educon
                 "~/Scripts/bootstrap.js",
                 "~/Scripts/respond.js",
                 "~/Scripts/suite.js",
-                "~/Scripts/dialog-polyfill.js"
+                "~/Scripts/dialog-polyfill.js",
+                "~/Scripts/modernizr-*"
             ));
 
             bundles.Add(new ScriptBundle("~/js/signalR").Include(
@@ -30,10 +31,6 @@ namespace Educon
 
             bundles.Add(new ScriptBundle("~/js/friends").Include(
                 "~/Scripts/friends.js"
-            ));
-
-            bundles.Add(new ScriptBundle("~/js/modernizr").Include(
-                "~/Scripts/modernizr-*"
             ));
         }
 

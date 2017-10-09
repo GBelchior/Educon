@@ -164,7 +164,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\EduconControllerBase.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PortalController.cs" />
@@ -185,6 +184,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\dialog-polyfill.css" />
     <Content Include="Content\material.icons.css" />
     <Content Include="Content\material.min.css" />
     <Content Include="Content\portal.css" />
@@ -205,6 +205,7 @@
     <Content Include="fonts\MaterialIcons-Regular.ttf" />
     <Content Include="fonts\MaterialIcons-Regular.woff" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\dialog-polyfill.js" />
     <Content Include="Scripts\friends.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -219,6 +220,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\suite.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -232,20 +234,17 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Portal\Index.cshtml" />
-    <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
-    <Content Include="Views\Shared\_Initial.cshtml" />
     <Content Include="Views\Portal\Quiz.cshtml" />
     <Content Include="Views\Portal\_Friends.cshtml" />
     <Content Include="Views\Portal\Ranking.cshtml" />
     <Content Include="Views\Shared\_UserInfo.cshtml" />
     <Content Include="Scripts\material.min.js.map" />
     <Content Include="Views\Quiz\EndGame.cshtml" />
+    <Content Include="Views\Shared\_Initial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

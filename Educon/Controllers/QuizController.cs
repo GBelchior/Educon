@@ -21,7 +21,12 @@ namespace Educon.Controllers
         {
             ViewBag.Win = AWin;
 
-            return Json(Url.Action("EndGame", "Quiz", new { AWin = AWin }), JsonRequestBehavior.AllowGet);
+            return View();
+        }
+
+        public ActionResult Lose()
+        {
+            return Json((new { redirectUrl = Url.Action("EndGame", "Quiz", new { AWin = false }) }), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult NextQuestion()

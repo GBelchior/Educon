@@ -39,7 +39,7 @@ namespace Educon.Controllers
         public ActionResult Quiz(Category? ACategory)
         {
             User LUser = AccountHelpers.GetSignedUser();
-            List<Question> LQuizQuestions = Core.GetQuestions(LUser.NidUser, LUser.AgeGroup, ACategory);
+            List<Question> LQuizQuestions = Core.GetQuestions(LUser.AgeGroup, ACategory);
             
             Session["Questions"] = LQuizQuestions;
 

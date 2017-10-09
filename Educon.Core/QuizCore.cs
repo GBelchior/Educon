@@ -32,5 +32,10 @@ namespace Educon.Core
         {
             FRepository.ComputeAnswer(ANidUser, ANidQuestion);
         }
+
+        public User GetUserByName(string ANamUser)
+        {
+            return FRepository.GetUserByName(ANamUser);
+        }
     }
 }

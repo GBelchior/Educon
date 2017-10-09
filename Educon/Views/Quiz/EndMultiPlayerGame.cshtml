@@ -1,0 +1,231 @@
+﻿@model Educon.ViewModels.MultiPlayerEndGameViewModel
+@{
+    Layout = null;
+    ViewBag.Title = "EndMultiPlayerGame";
+}
+
+
+<head>
+
+    <style>
+        .data {
+            height: 15vh;
+            width: 100%;
+        }
+
+        .questioncontainer {
+            padding: 0;
+        }
+
+        .background {
+            background-image: url(http://imageshack.com/a/img924/9477/OXk9f5.jpg);
+            background-repeat: repeat;
+        }
+
+        .principal {
+            position: fixed;
+            background-color: white;
+            width: 90vw;
+            height: 90vh;
+            top: 5vh;
+            left: 5vw;
+            border-radius: 20px;
+        }
+
+        .question {
+            margin-left: -1px;
+            display: flex;
+            align-items: center;
+            height: 100%;
+            background-color: rebeccapurple;
+            border-bottom-left-radius: 20px;
+            border-top-left-radius: 20px;
+            width: 102%;
+            padding: 10%;
+        }
+
+            .question p {
+                margin-top: 25%;
+                width: 100%;
+                height: 100%;
+                font-size: 2em;
+                font-family: "Bebas Neue", Arial;
+                color: white;
+                letter-spacing: 1px;
+                line-height: 35px;
+                text-align: justify;
+            }
+
+        .headerbar {
+            height: 20vh;
+            width: 50vw;
+            background-color: indianred;
+            margin-left: 20vw;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            position: absolute;
+            z-index: 9999;
+        }
+
+        .headerbar p, .headerbar label {
+            font-size: 4.5em;
+            font-family: "Bebas Neue", Arial;
+            color: white;
+            letter-spacing: 1px;
+            line-height: 35px;
+            text-align: justify;
+            margin-top: 45px;
+        }
+
+        .qtdlabel {
+            font-size: 14em;
+            font-family: "Bebas Neue", Arial;
+            color: white;
+            letter-spacing: 1px;
+            line-height: 35px;
+            text-align: justify;
+            margin-top: 45px;
+        }
+
+        .portal {
+            padding: 2%;
+            width: 80%;
+            font-size: 5em;
+            font-family: "Bebas Neue", Arial;
+            color: white;
+            height: 15vh;
+            margin-top: 20%;
+            margin-left: 10%;
+            text-align: center;
+            line-height: 11vh !important;
+            background-color: forestgreen;
+            border-radius: 50px;
+        }
+
+        .portal:hover {
+            cursor: pointer;
+            background-color: red;
+            transform: scale(1.1);
+        }
+
+
+        .portal a {
+            color: white;
+        }
+
+        .portal:hover a{
+            text-decoration: none;
+            color: white;
+        } 
+            
+        @@media all and (max-width: 800px) {
+            .principal {
+            width: 70vw;
+            left: 15vw;
+        }
+    }
+
+        @@media all and (max-width: 600px) {
+            .principal {
+                width: 90vw;
+                left: 5vw;
+            }
+        }
+    </style>
+
+    @Styles.Render("~/css/site")
+    @Scripts.Render("~/js/site")
+    @Scripts.Render("~/js/signalR")
+    <script src="~/signalr/hubs"></script>
+</head>
+
+<body class="background">
+    <div class="principal">
+        <div class="headerbar">
+            @if (Model.BothFinishedGame)
+            {
+                if (Model.QtyCorQuestions > Model.QtyCorQuestionsOpponent)
+                {
+                    <div class="col-md-12"><p id="quiztitle" style="margin-left: 25%;">Você Venceu!</p></div>
+                }
+                else if (Model.QtyCorQuestions < Model.QtyCorQuestionsOpponent)
+                {
+                    <div class="col-md-12"><p id="quiztitle" style="margin-left: 25%;">Você Perdeu!</p></div>
+                }
+                else
+                {
+                    <div class="col-md-12"><p id="quiztitle" style="margin-left: 25%;">Empate!</p></div>
+                }
+            }
+            else
+            {
+                <div class="col-md-12"><p id="quiztitle" style="margin-left: 25%;">Aguardando oponente...</p></div>
+            }
+        </div>
+
+        <div class="col-md-5 questioncontainer" style="padding-left: 0; padding-right: 0;">
+            <div class="question">
+                <div class="auxcontainer">
+                    <label class="qtdlabel" style="font-size:10em;">Acertos</label><br>
+                    <div class="col-md-12" style="margin-top: 20%; margin-left: 10%;"><label class="qtdlabel">@Model.QtyCorQuestions</label><label class="qtdlabel">/</label><label class="qtdlabel">@Model.QtyQuestions</label></div>
+                    <!--
+                    TODO:
+                    SÓ FALTA COLOCAR AS QUESTÕES QUE O OPONENTE ACERTOU
+                    QUE AQUI VEM NO MODEL QtyCorQuestionsOpponent
+                    PRECISA CHECAR SE A FLAG BothFinishedGame DO MODEL ESTÁ TRUE
+                    SE ESTIVER, PODE LISTAR OS DADOS
+                    SE NÃO, USA A FUNÇÃO LÁ EM BAIXO PRA LISTAR
+                    -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-1" style="background-color: #411e64; height: 100%;"></div>
+
+        <div class="col-md-6" style="padding: 20px;">
+            <div class="row answercontainer">
+                
+
+                <label class="qtdlabel" style="margin-top: 35%; margin-left: 20%;font-size:10em; color: rebeccapurple;">+@Model.QtyExperience xp</label><br>
+
+                <p class="portal"><a href='@Url.Action("Index", "Portal")'>Tela Inicial</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+
+@if (!Model.BothFinishedGame)
+{
+<script type="text/javascript">
+    $(function () {
+        $('p.portal').hide();
+
+        var hub = $.connection.multiplayerHub;
+
+        hub.client.opponentFinished = function (ANumCorrectAnswers) {
+            if (ANumCorrectAnswers > @Model.QtyCorQuestions) {
+                $('#quiztitle').text('Você Perdeu!');
+            }
+            else if (ANumCorrectAnswers < @Model.QtyCorQuestions) {
+                $('#quiztitle').text('Você Venceu!');
+            }
+            else {
+                $('#quiztitle').text('Empate!');
+            }
+
+            /*
+            TODO:
+            SÓ FALTA COLOCAR AS QUESTÕES QUE O OPONENTE ACERTOU
+            QUE É ESSE ANumCorrectAnswers
+            ESSA FUNÇÃO EXECUTA ASSIM QUE O OPONENTE TERMINAR O JOGO DELE
+            */
+
+            $('p.portal').show();
+        }
+
+        $.connection.hub.start();
+    });
+</script>
+}
+
+

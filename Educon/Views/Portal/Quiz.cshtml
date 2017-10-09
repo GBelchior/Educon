@@ -42,17 +42,17 @@
             padding: 10%;
         }
 
-        .question p {
-            margin-top: 25%;
-            width: 100%;
-            height: 100%;
-            font-size: 2em;
-            font-family: "Bebas Neue", Arial;
-            color: white;
-            letter-spacing: 1px;
-            line-height: 35px;
-            text-align: justify;
-        }
+            .question p {
+                margin-top: 25%;
+                width: 100%;
+                height: 100%;
+                font-size: 2em;
+                font-family: "Bebas Neue", Arial;
+                color: white;
+                letter-spacing: 1px;
+                line-height: 35px;
+                text-align: justify;
+            }
 
         .headerbar {
             height: 20vh;
@@ -65,15 +65,15 @@
             z-index: 9999;
         }
 
-        .headerbar p, .headerbar label {
-            font-size: 4.5em;
-            font-family: "Bebas Neue", Arial;
-            color: white;
-            letter-spacing: 1px;
-            line-height: 35px;
-            text-align: justify;
-            margin-top: 45px;
-        }
+            .headerbar p, .headerbar label {
+                font-size: 4.5em;
+                font-family: "Bebas Neue", Arial;
+                color: white;
+                letter-spacing: 1px;
+                line-height: 35px;
+                text-align: justify;
+                margin-top: 45px;
+            }
 
         .question p::first-letter {
             font-size: 2em;
@@ -99,12 +99,12 @@
             line-height: 35px;
         }
 
-        .answer:hover {
-            border-radius: 20px;
-            cursor: pointer;
-            background-color: red;
-            transform: scale(1.1);
-        }
+            .answer:hover {
+                border-radius: 20px;
+                cursor: pointer;
+                background-color: red;
+                transform: scale(1.1);
+            }
 
         #continuebutton {
             height: 15vh;
@@ -130,11 +130,11 @@
                 line-height: 14vh;
             }
 
-        #continue:hover {
-            cursor: pointer;
-            background-color: red;
-        }
-        
+            #continue:hover {
+                cursor: pointer;
+                background-color: red;
+            }
+
         @@media all and (max-width: 800px) {
             .principal {
                 width: 70vw;
@@ -182,7 +182,7 @@
         </div>
         <div class="col-md-1" style="background-color: #411e64; height: 100%;"></div>
 
-       
+
 
         <div class="col-md-6" style="padding: 20px;">
             <div class="row answercontainer">
@@ -204,7 +204,7 @@
                     <p class="answer" id="4">4. @Model.DesAnswerFour</p>
                 </div>
 
-               
+
             </div>
         </div>
     </div>
@@ -228,21 +228,58 @@
 
         if (time == 0)
         {
-            $.ajax({
-                type: "POST",
-                url: '@Url.Action("Lose", "Quiz")',
-                data: {
-                    AWin: false,
-                    AQtyCorQuestions: $("#currentQuestion").text(),
-                    AQtyQuestions: $("#totalQuestions").text()
-                },
-                success: function (data) {
-                    if (data) {
-                        window.location = data.redirectUrl;
-                    }
-                },
-                error: function (err) { alert(err.responseText); }
-            });
+            @if (ViewBag.MultiPlayer != null && ViewBag.MultiPlayer)
+            {
+            <text>
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("ValidateAnswer", "Quiz")',
+                    data: {
+                        ANidUser: @Model.NidUser,
+                        ANidQuestion: $("#NidQuestion").val(),
+                        ANumAnswer: 0
+                    },
+                    dataType: "json",
+                    success: function (data) {
+
+                        $(".answer").css('background-color', 'lightgrey')
+                        $("#" + data.NumCorrectAnswer).css('background-color', 'green')
+
+                        $("#continuebutton").show();
+
+                        // mostra "Você errou!"
+                        $("#quiztitle").text("ERROU!");
+
+                        // botao continuar chama next MULTIPLAYER question
+                        continueUrl = '/Quiz/NextMultiplayerQuestion?ANamUser1=' + localStorage.NamUser1 + '&ANamUser2=' + localStorage.NamUser2
+
+                        $("#questiontext").text(data.Answer.toString());
+                    },
+                    error: function (err) { alert(err.responseText); }
+                });
+                ingame = false;
+            </text>
+            }
+            else
+            {
+            <text>
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Lose", "Quiz")',
+                    data: {
+                        AWin: false,
+                        AQtyCorQuestions: $("#currentQuestion").text(),
+                        AQtyQuestions: $("#totalQuestions").text()
+                    },
+                    success: function (data) {
+                        if (data) {
+                            window.location = data.redirectUrl;
+                        }
+                    },
+                    error: function (err) { alert(err.responseText); }
+                });
+            </text>
+            }
         }
     }
 

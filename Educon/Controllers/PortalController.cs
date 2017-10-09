@@ -40,7 +40,7 @@ namespace Educon.Controllers
         {
             User LUser = AccountHelpers.GetSignedUser();
             List<Question> LQuizQuestions = Core.GetQuestions(LUser.AgeGroup, ACategory);
-            
+
             Session["Questions"] = LQuizQuestions;
 
             List<Question> LQuestions = (List<Question>)Session["Questions"];
@@ -63,11 +63,14 @@ namespace Educon.Controllers
         {
             lock (FLock)
             {
-                if (HttpContext.Application[$"Game-[{ANamUser1}]-{ANamUser2}"] == null)
-                {
-                    HttpContext.Application[$"Game-[{ANamUser1}]-{ANamUser2}"] =
-                        Core.GetQuestionListForMatch(ANamUser1, ANamUser2, 15);
-                }
+                HttpContext.Application[$"Game-[{ANamUser1}]-{ANamUser2}"] =
+                    Core.GetQuestionListForMatch(ANamUser1, ANamUser2, 15);
+
+                HttpContext.Application["EndGame" + ANamUser1] = null;
+                HttpContext.Application["EndGame" + ANamUser2] = null;
+
+                HttpContext.Application["QtyCorAnswers" + ANamUser1] = 0;
+                HttpContext.Application["QtyCorAnswers" + ANamUser2] = 0;
 
                 Session["NumCurrentQuestion"] = 1;
 

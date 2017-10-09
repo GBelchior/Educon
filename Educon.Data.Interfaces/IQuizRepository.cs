@@ -1,4 +1,5 @@
-﻿using Educon.Models;
+﻿using System.Collections.Generic;
+using Educon.Models;
 
 namespace Educon.Data.Interfaces
 {
@@ -6,5 +7,7 @@ namespace Educon.Data.Interfaces
     {
         Question GetQuestion(int ANidQuestion);
         void ComputeAnswer(int ANidUser, int ANidQuestion);
+        User GetUserByName(string ANamUser);
+        ICollection<Question> GetQuestionsForAgeGroup(AgeGroup AAgeGroup);
     }
 }

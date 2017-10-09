@@ -253,6 +253,7 @@
     <Content Include="Views\Quiz\EndGame.cshtml" />
     <Content Include="Views\Shared\_Initial.cshtml" />
     <Content Include="Views\Portal\CategorySelection.cshtml" />
+    <Content Include="Views\Shared\_LayoutCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

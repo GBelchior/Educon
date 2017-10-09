@@ -175,10 +175,10 @@
     </div>
     @Html.ValidationSummary();
     <div id="user" class="data" style="background-color: #66cccc; border-top-left-radius: 10px; border-top-right-radius: 10px;">
-        @Html.TextBoxFor(u => u.NamUser, new { @placeholder = "Usuário" })
+        @Html.TextBoxFor(u => u.NamUser, new { @placeholder = "Usuário", @style= "margin-left: 0; margin-top: 2vh;" })
     </div>
     <div id="pass" class="data" style="background-color: #ff3399; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
-        @Html.PasswordFor(u => u.DesPassword, new { @placeholder = "Senha" })
+        @Html.PasswordFor(u => u.DesPassword, new { @placeholder = "Senha", @style = "margin-left: 0; margin-top: 2vh;" })
     </div>
 
     <div class="btn-container" style="margin-top: 3vh">

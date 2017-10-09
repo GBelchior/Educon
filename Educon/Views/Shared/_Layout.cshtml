@@ -99,22 +99,12 @@
     <dialog id="add-new-friend" class="mdl-dialog">
         <h4 class="mdl-dialog__title" style="font-family: 'Bebas Neue'; color:rebeccapurple; margin-right:-200px;">Adicionar Amigo</h4>
         <div class="mdl-dialog__content">
+
             <input id="search" style="background-color: rebeccapurple; margin:0 auto;" placeholder="Usuário" />
             <br />
             <br />
             <center style="font-family: 'Bebas Neue'; font-size:18px;"><label id="lblUser"></label></center>
 
-        </div>
-        <center>
-            <div class="mdl-dialog__actions">
-                <button id="btnAddFriend" type="button" onclick="btnAddFriend_Click()" class="mdl-button" style="background-color: #ff3399; font-weight: bold;">Adicionar</button>
-                <button type="button" class="mdl-button close">Voltar</button>
-            </div>
-        </center>
-            <input id="search" style="background-color: rebeccapurple; margin:0 auto;" placeholder="Usuário" />
-            <br />
-            <br />
-            <center style="font-family: 'Bebas Neue'; font-size:18px;"><label id="lblUser"></label></center>
         </div>
         <center>
             <div class="mdl-dialog__actions">
@@ -154,33 +144,22 @@
         </div>
     </dialog>
 
-</body>
-</html>
-@RenderSection("scripts", required: false)
-@Scripts.Render("~/js/signalR")
-<script src="~/signalr/hubs"></script>
-@Scripts.Render("~/js/friends")
-@Styles.Render("~/css/site")
 
-<script>
-    function configureDialog(ADialogId) {
-        var dialog = document.querySelector('#' + ADialogId);
-        $(document).ready(function () {
+    @Scripts.Render("~/js/signalR")
+    <script src="~/signalr/hubs"></script>
+    @Scripts.Render("~/js/friends")
+    @RenderSection("scripts", required: false)
+    @Styles.Render("~/css/site")
 
-            $('#lblUser').hide();
-
-
-        });
-
+    <script>
         function btnAddFriend_Click() {
-
             var LSearchFriend = $('#search').val();
 
             $.ajax({
                 type: "POST",
                 url: '@Url.Action("AddFriend", "Portal")',
                 data: {
-                    AUserName: LSearchFriend
+                AUserName: LSearchFriend
                 },
                 dataType: "json",
                 success: function (status) {
@@ -189,10 +168,9 @@
             });
         }
 
-        var dialog = document.querySelector('dialog');
-        var showDialogButton = document.querySelector('#show-dialog');
-        if (!dialog.showModal) {
-            dialogPolyfill.registerDialog(dialog);
+        function configureDialog(ADialogId) {
+            var dialog = document.querySelector('#' + ADialogId);
+
             if (!dialog.showModal) {
                 dialogPolyfill.registerDialog(dialog);
             }
@@ -205,6 +183,8 @@
         }
 
         $(function () {
+            $('#lblUser').hide();
+
             // Configurar todos os dialogs
             configureDialog('add-new-friend');
             configureDialog('play-request');
@@ -214,6 +194,52 @@
             $('#show-add-new-friend').on('click', function () {
                 document.querySelector('#add-new-friend').showModal();
             });
+        });
+    </script>
+    <script type="text/javascript">
+        // Listagem de amigos
+        $(document).ready(function () {
 
-    }
-</script>
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetFriendsOfUser", "Portal")',
+                data: {
+
+                },
+                dataType: "json",
+                success: function (list) {
+
+                    list.forEach(function (item) {
+                        var template =
+                            '<button id="btnFriend' + item.NamUser +'" class="list-group-item" style="width:90%;margin: 0 auto;" data-toggle="collapse" data-target="#divPlay' + item.NamUser + '">' +
+                                '<label style="font-family:Bebas Neue; font-size: 25px;">' +
+                                    item.NamPerson +
+                                '</label>' +
+                                '<div class="status-led"></div>' +
+                                '<label class="status-text"></label>' +
+                            '</button>' +
+                            '<div id="divPlay' + item.NamUser + '" class="collapse">' +
+                            '<a href="#" style="font-family:Bebas Neue;font-size:18pt;" class="textBold buttonSair mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="playRequest(\'' + item.NamUser +'\', \'' + item.NamPerson + '\')">Jogar!</a>' +
+                            '</div>';
+
+                        $('#listFriends').append(template);
+
+                        var newButtonSelector = '#btnFriend' + item.NamUser;
+
+                        if (item.IsOnline) {
+                            $(newButtonSelector).removeAttr('disabled');
+                            $(newButtonSelector + ' div.status-led').addClass('user-online');
+                            $(newButtonSelector + ' label.status-text').addClass('user-online');
+                        }
+                        else {
+                            $(newButtonSelector).attr('disabled', 'disabled');
+                            $(newButtonSelector + ' div.status-led').addClass('user-offline');
+                            $(newButtonSelector + ' label.status-text').addClass('user-offline');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

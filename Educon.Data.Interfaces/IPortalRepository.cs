@@ -14,6 +14,8 @@ namespace Educon.Data.Interfaces
         User GetUserByName(string ANamUser);
         List<User> GetUsers();
         ICollection<User> GetFriendsOfUser(int ANidUser);
+        void AddFriend(User AUser, User ANewFriend);
+
 
     }
 }

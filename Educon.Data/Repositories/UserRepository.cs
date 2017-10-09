@@ -16,6 +16,7 @@ namespace Educon.Data
                 .SingleOrDefault(u => u.NidUser == ANidUser);
         }   
 
+       
         internal static void ComputeQuestionCategory(EduconContext AContext, int ANidUser, int ANidQuestion)
         {
             Question LQuestion = QuestionRepository.GetQuestion(AContext, ANidQuestion);
@@ -43,13 +44,16 @@ namespace Educon.Data
 
         public User GetUserByName(string AUserName)
         {
-            return GetUserByName(FContext, AUserName); 
+
+            return GetUserByName(FContext, AUserName);
+
         }
 
         public static User GetUserByName(EduconContext AContext, string AUserName)
         {
             return AContext.Users
-                .SingleOrDefault(u => u.NamUser.Equals(AUserName, StringComparison.InvariantCultureIgnoreCase));
+               .SingleOrDefault(u => u.NamUser.Equals(AUserName, StringComparison.InvariantCultureIgnoreCase));
+
         }
 
         public User GetUserByEmail(string ADesEmail)
@@ -67,6 +71,18 @@ namespace Educon.Data
         public static User GetFriendsOfUser(EduconContext AContext, int ANidUser)
         {
             return AContext.Users.Where(u => u.NidUser == ANidUser).Include(p => p.Friends).FirstOrDefault();
+            
         }
+
+        public static void AddFriend(EduconContext AContext,User AUser, User ANewFriend)
+        {
+            User LUser = GetUserByName(AContext, AUser.NamUser);
+            User LNewFriend = GetUserByName(AContext, ANewFriend.NamUser);
+            LUser.Friends.Add(LNewFriend);
+            LNewFriend.Friends.Add(LUser);
+            AContext.SaveChanges();
+        }
+
+     
     }
 }

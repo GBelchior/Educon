@@ -18,6 +18,10 @@ namespace Educon.Controllers
         {
             return View();
         }
+        public ActionResult CategorySelection()
+        {
+            return View();
+        }
 
         public ActionResult GetFriendsOfUser()
         {
@@ -31,12 +35,11 @@ namespace Educon.Controllers
             return Json(LUserFriends, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Quiz(Category ACategory = Category.Energy, String ANamUser = "alissongiron")
+        public ActionResult Quiz(Category? ACategory)
         {
-            User LUser = Core.GetUserByName(ANamUser);
+            User LUser = AccountHelpers.GetSignedUser();
             List<Question> LQuizQuestions = Core.GetQuestions(LUser.NidUser, LUser.AgeGroup, ACategory);
-
-
+            
             Session["Questions"] = LQuizQuestions;
 
             List<Question> LQuestions = (List<Question>) Session["Questions"];
@@ -47,6 +50,7 @@ namespace Educon.Controllers
             
             QuizViewModel LReturnedQuestion = new QuizViewModel(LQuestion);
             LReturnedQuestion.QtyQuestions = (LQuestions.Count() + 1);
+            LReturnedQuestion.NidUser = LUser.NidUser;
 
             return View(LReturnedQuestion);
         }

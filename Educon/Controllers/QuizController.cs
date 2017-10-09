@@ -52,11 +52,13 @@ namespace Educon.Controllers
             LAnswer.Answer = LQuestion.DesAnswer;
             LAnswer.NumCorrectAnswer = LQuestion.NumCorrectAnswer;
             LAnswer.IsCorrect = (LQuestion.NumCorrectAnswer == ANumAnswer);
-                
+
             if (LAnswer.IsCorrect)
             {
-                // Adiciona questao correta no user
+                Core.IncreaseUserExperience(50, ANidUser);
             }
+
+            Core.ComputeAnswer(ANidUser, ANidQuestion);
 
             return Json(LAnswer, JsonRequestBehavior.AllowGet);
         }

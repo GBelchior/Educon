@@ -30,5 +30,10 @@ namespace Educon.Data
         {
             return UserRepository.GetUserByName(FContext, ANamUser);
         }
+
+        public void IncreaseUserExperience(int AExperience, int ANidUser)
+        {
+            UserRepository.IncreaseUserExperience(FContext, ANidUser, AExperience);
+        }
     }
 }

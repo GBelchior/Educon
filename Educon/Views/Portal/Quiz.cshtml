@@ -254,7 +254,6 @@
     }
 
     $('#continue').bind('click', function () {
-
         if (continueData == null) {
             $.ajax({
                 type: "POST",
@@ -289,6 +288,7 @@
                         $("#4").text("4. " + data.DesAnswerFour);
                         $("#quiztitle").text(data.Category);
                         updateQuestion();
+                        ingame = true;
                     }
                 },
                 error: function (err) { alert(err.responseText); }
@@ -312,8 +312,6 @@
                 error: function (err) { alert(err.responseText); }
             });
         }
-        
-        ingame = true;
     });
 
     $('.answer').bind('click', function () {
@@ -327,7 +325,7 @@
                 type: "POST",
                 url: '@Url.Action("ValidateAnswer", "Quiz")',
                 data: {
-                    ANidUser: 1,
+                    ANidUser: @Model.NidUser,
                     ANidQuestion: $("#NidQuestion").val(),
                     ANumAnswer: id
                 },

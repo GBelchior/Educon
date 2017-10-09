@@ -76,5 +76,16 @@ namespace Educon.Core
 
             return LReturnQuestions;
         }
+
+        public void IncreaseUserExperience(int AExperience, int ANidUser)
+        {
+            FRepository.IncreaseUserExperience(AExperience, ANidUser);
+        }
+
+
+        public void ComputeAnswer(int ANidUser, int ANidQuestion)
+        {
+            FRepository.ComputeAnswer(ANidUser, ANidQuestion);
+        }
     }
 }

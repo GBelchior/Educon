@@ -8,6 +8,7 @@ namespace Educon.ViewModels
 {
     public class QuizViewModel
     {
+        public int NidUser { get; set; }
         public int NidQuestion { get; set; }
         public string DesQuestion { get; set; }
         public AgeGroup AgeGroup { get; set; }

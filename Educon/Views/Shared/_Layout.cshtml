@@ -21,6 +21,7 @@
             box-shadow: 0 9px 46px 8px rgba(0, 0, 0, 0.14), 0 11px 15px -7px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.2);
             width: 280px;
         }
+
         .demo-list-control {
             width: 300px;
         }
@@ -112,40 +113,67 @@
     </dialog>
 
     <dialog id="play-request" class="mdl-dialog">
-        bora playar?
+        <div class="mdl-dialog__content">
+            <span id="request-user-name" style="font-weight: bold"></span> deseja jogar com você!
+        </div>
+        <div class="mdl-dialog__actions">
+            <button id="btnAcceptPlayRequest" type="button" class="mdl-button" style="background-color: #ff3399; font-weight: bold;">Aceitar!</button>
+            <button type="button" class="mdl-button close">Rejeitar</button>
+        </div>
+    </dialog>
+
+    <dialog id="wait-for-approval" class="mdl-dialog">
+        <div class="mdl-dialog__content row">
+            <div class="col-md-2">
+                <div class="mdl-spinner mdl-js-spinner is-active"></div>
+            </div>
+            <div class="col-md-10">
+                Aguarde até que <span class="friend-name" style="font-weight: bold"></span> aceite...
+            </div>
+        </div>
+    </dialog>
+
+    <dialog id="request-denied" class="mdl-dialog" style="background-color: red;">
+        <div class="mdl-dialog__content" style="background-color: red;">
+            <span style="font-family: Bebas Neue; font-weight: bold; font-size: 20pt; color:white;">Solicitação negada</span>
+        </div>
+        <div class="mdl-dialog__actions">
+            <button type="button" class="mdl-button close" style="background-color: white; opacity: 0.9;">OK</button>
+        </div>
     </dialog>
 
 </body>
 </html>
 @RenderSection("scripts", required: false)
-@Scripts.Render("~/js/modernizr")
 @Scripts.Render("~/js/signalR")
 <script src="~/signalr/hubs"></script>
 @Scripts.Render("~/js/friends")
 @Styles.Render("~/css/site")
 
 <script>
-    $(function () {
-        // Configuração do dialog de adicionar novo amigo
-        var addNewFriendDialog = document.querySelector('#add-new-friend');
+    function configureDialog(ADialogId) {
+        var dialog = document.querySelector('#' + ADialogId);
 
-        if (!addNewFriendDialog.showModal) {
-            dialogPolyfill.registerDialog(addNewFriendDialog);
+        if (!dialog.showModal) {
+            dialogPolyfill.registerDialog(dialog);
         }
+
+        if ($('#' + ADialogId).find('.close').length > 0) {
+            $('#' + ADialogId).find('.close').on('click', function () {
+                document.querySelector('#' + ADialogId).close();
+            });
+        }
+    }
+
+    $(function () {
+        // Configurar todos os dialogs
+        configureDialog('add-new-friend');
+        configureDialog('play-request');
+        configureDialog('wait-for-approval');
+        configureDialog('request-denied');
 
         $('#show-add-new-friend').on('click', function () {
             addNewFriendDialog.showModal();
         });
-
-        $('#add-new-friend').find('.close').on('click', function () {
-            addNewFriendDialog.close();
-        })
-
-        // Configuração do dialog de play request
-        var playRequestDialog = document.querySelector('#play-request');
-
-        if (!playRequestDialog.showModal) {
-            dialogPolyfill.registerDialog(playRequestDialog);
-        }
     })
 </script>

@@ -88,7 +88,7 @@
                             '<label class="status-text"></label>' +
                         '</button>' +
                         '<div id="divPlay' + item.NamUser + '" class="collapse">' +
-                            '<a href="#" style="font-family:Bebas Neue;font-size:18pt;" class="textBold buttonSair mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Jogar!</a>' +
+                        '<a href="#" style="font-family:Bebas Neue;font-size:18pt;" class="textBold buttonSair mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="playRequest(\'' + item.NamUser +'\', \'' + item.NamPerson + '\')">Jogar!</a>' +
                         '</div>';
 
                     $('#listFriends').append(template);

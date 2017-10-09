@@ -20,7 +20,8 @@ namespace Educon.Controllers
         public ActionResult EndGame(bool AWin)
         {
             ViewBag.Win = AWin;
-            return View();
+
+            return Json(Url.Action("EndGame", "Quiz", new { AWin = AWin }), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult NextQuestion()
@@ -28,7 +29,7 @@ namespace Educon.Controllers
             List<Question> LQuestions = (List<Question>) Session["Questions"];
 
             if (LQuestions.Count == 0)
-                RedirectToAction("EndGame", new { AWin = true });
+                return Json((new { redirectUrl = Url.Action("EndGame", "Quiz", new { AWin = true })}), JsonRequestBehavior.AllowGet);
 
             Question LQuestion = LQuestions.FirstOrDefault();
             LQuestions.Remove(LQuestion);
@@ -44,8 +45,7 @@ namespace Educon.Controllers
             Question LQuestion = Core.GetQuestion(ANidQuestion);
             QuizAnswerViewModel LAnswer = new QuizAnswerViewModel();
 
-            //LAnswer.Answer = LQuestion.DesAnswer;
-            LAnswer.Answer = "oi tudo bom";
+            LAnswer.Answer = LQuestion.DesAnswer;
             LAnswer.NumCorrectAnswer = LQuestion.NumCorrectAnswer;
             LAnswer.IsCorrect = (LQuestion.NumCorrectAnswer == ANumAnswer);
                 

@@ -15,7 +15,7 @@ namespace Educon.ViewModels
         public string DesAnswerTwo { get; set; }
         public string DesAnswerThree { get; set; }
         public string DesAnswerFour { get; set; }
-        public Category Category { get; set; }
+        public String Category { get; set; }
         public int QtyQuestions { get; set; }
 
         public QuizViewModel(Question AQuestion)
@@ -27,7 +27,23 @@ namespace Educon.ViewModels
             DesAnswerTwo = AQuestion.DesAnswerTwo;
             DesAnswerThree = AQuestion.DesAnswerThree;
             DesAnswerFour = AQuestion.DesAnswerFour;
-            Category = AQuestion.Category;
+
+            switch(AQuestion.Category)
+            {
+                case Models.Category.Energy:
+                    Category = "ENERGIA";
+                    break;
+                case Models.Category.Environment:
+                    Category = "MEIO AMBIENTE";
+                    break;
+                case Models.Category.Recycling:
+                    Category = "RECICLAGEM";
+                    break;
+                case Models.Category.Water:
+                    Category = "ÁGUA";
+                    break;
+            }
+            
         }
     }
 }

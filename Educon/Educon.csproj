@@ -180,6 +180,7 @@
     <Compile Include="Utils\GeneralUtils.cs" />
     <Compile Include="ViewModels\QuizAnswerViewModel.cs" />
     <Compile Include="ViewModels\QuizViewModel.cs" />
+    <Compile Include="ViewModels\SinglePlayerEndGameViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -244,10 +245,10 @@
     <Content Include="Views\Portal\Ranking.cshtml" />
     <Content Include="Views\Shared\_UserInfo.cshtml" />
     <Content Include="Scripts\material.min.js.map" />
+    <Content Include="Views\Quiz\EndGame.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Quiz\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

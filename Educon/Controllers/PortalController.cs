@@ -24,10 +24,12 @@ namespace Educon.Controllers
             ICollection<User> LFriends = Core.GetFriendsOfUser(AccountHelpers.GetSignedUser().NidUser);
             return Json(LFriends, JsonRequestBehavior.AllowGet);
         }
+
         public ActionResult Quiz(Category ACategory = Category.Energy, String ANamUser = "alissongiron")
         {
             User LUser = Core.GetUserByName(ANamUser);
             List<Question> LQuizQuestions = Core.GetQuestions(LUser.NidUser, LUser.AgeGroup, ACategory);
+
 
             Session["Questions"] = LQuizQuestions;
 
@@ -38,6 +40,7 @@ namespace Educon.Controllers
             Session["Questions"] = LQuestions;
             
             QuizViewModel LReturnedQuestion = new QuizViewModel(LQuestion);
+            LReturnedQuestion.QtyQuestions = (LQuestions.Count() + 1);
 
             return View(LReturnedQuestion);
         }
